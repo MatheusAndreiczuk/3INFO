@@ -124,7 +124,6 @@ public class Desenho {
         desenho.addElement(new Ponto(11, 9, false));
 
         // Incógnitas
-        
         //linha de A
         desenho.addElement(new Ponto(11, 9.5, true));
         desenho.addElement(new Ponto(6, 9.5, false));
@@ -143,7 +142,7 @@ public class Desenho {
         desenho.addElement(new Ponto(9.5, 6, true));
         desenho.addElement(new Ponto(9.5, 6.48, false));
         arco(9.5, 6.1, 0.1, 4.72, 7.9);
-        arco(9.5, 6.34, 0.14, 4.72, 7.918); 
+        arco(9.5, 6.34, 0.14, 4.72, 7.918);
         // C
         arco(7, 6.2, 0.2, 1.6, 4.6);
         // M
@@ -164,9 +163,51 @@ public class Desenho {
         desenho.addElement(new Ponto(8.23, 7.4, true));
         desenho.addElement(new Ponto(8.23, 7.5, false));
         // 2
-        arco(13, 7, 0.08, 4.5, 7.1);
-        desenho.addElement(new Ponto(13.05, 7.05, true));
-        desenho.addElement(new Ponto(13, 7.1, false));
+        //arco(13, 7, 0.08, 4.5, 7.1);
+        // desenho.addElement(new Ponto(13.054, 7.05, true));
+        //desenho.addElement(new Ponto(12.98, 7.15, false));
+        //desenho.addElement(new Ponto(13.1, 7.15, false));
+
+        // equações
+        //pitagoras
+        //A ao quadrado
+        desenho.addElement(new Ponto(12.8, 6, true));
+        desenho.addElement(new Ponto(12.65, 6.5, false));
+        desenho.addElement(new Ponto(12.8, 6, true));
+        desenho.addElement(new Ponto(12.95, 6.5, false));
+        desenho.addElement(new Ponto(12.71, 6.3, true));
+        desenho.addElement(new Ponto(12.89, 6.3, false));
+        //
+        arco(13, 6, 0.08, 4.5, 7.1);
+        desenho.addElement(new Ponto(13.054, 6.05, true));
+        desenho.addElement(new Ponto(12.98, 6.15, false));
+        desenho.addElement(new Ponto(13.1, 6.15, false));
+        // =
+        desenho.addElement(new Ponto(13.2, 6.3, true));
+        desenho.addElement(new Ponto(13.4, 6.3, false));
+        desenho.addElement(new Ponto(13.2, 6.4, true));
+        desenho.addElement(new Ponto(13.4, 6.4, false));
+        // B ao quadrado 
+        desenho.addElement(new Ponto(13.6, 6, true));
+        desenho.addElement(new Ponto(13.6, 6.48, false));
+        arco(13.6, 6.1, 0.1, 4.72, 7.9);
+        arco(13.6, 6.34, 0.14, 4.72, 7.918);
+        //
+        arco(13.8, 6, 0.08, 4.5, 7.1);
+        desenho.addElement(new Ponto(13.854, 6.05, true));
+        desenho.addElement(new Ponto(13.78, 6.15, false));
+        desenho.addElement(new Ponto(13.9, 6.15, false));
+        // +
+        desenho.addElement(new Ponto(14.05, 6.3, true));
+        desenho.addElement(new Ponto(14.2, 6.3, false));
+        desenho.addElement(new Ponto(14.127, 6.18, true));
+        desenho.addElement(new Ponto(14.127, 6.42, false));
+        // C ao quadrado
+        arco(14.55, 6.25, 0.2, 1.6, 4.6);
+        arco(14.64, 6, 0.08, 4.5, 7.1);
+        desenho.addElement(new Ponto(14.703, 6.05, true));
+        desenho.addElement(new Ponto(14.62, 6.15, false));
+        desenho.addElement(new Ponto(14.74, 6.15, false));
     }
 
     public void estrela() {
