@@ -169,6 +169,7 @@ public class Desenho {
         //desenho.addElement(new Ponto(13.1, 7.15, false));
 
         // equações
+        
         //pitagoras
         //A ao quadrado
         desenho.addElement(new Ponto(12.8, 6, true));
@@ -208,6 +209,82 @@ public class Desenho {
         desenho.addElement(new Ponto(14.703, 6.05, true));
         desenho.addElement(new Ponto(14.62, 6.15, false));
         desenho.addElement(new Ponto(14.74, 6.15, false));
+        
+        // c2 = a.m
+        // C ao quadrado
+        arco(12.85, 7.4, 0.2, 1.6, 4.6);
+        arco(12.94, 7.15, 0.08, 4.5, 7.1);
+        desenho.addElement(new Ponto(12.99, 7.21, true));
+        desenho.addElement(new Ponto(12.9, 7.31, false));
+        desenho.addElement(new Ponto(13.03, 7.31, false));
+        // = 
+        desenho.addElement(new Ponto(13.1, 7.4, true));
+        desenho.addElement(new Ponto(13.3, 7.4, false));
+        desenho.addElement(new Ponto(13.1, 7.5, true));
+        desenho.addElement(new Ponto(13.3, 7.5, false));
+        // A
+        desenho.addElement(new Ponto(13.6, 7.1, true));
+        desenho.addElement(new Ponto(13.45, 7.6, false));
+        desenho.addElement(new Ponto(13.6, 7.1, true));
+        desenho.addElement(new Ponto(13.75, 7.6, false));
+        desenho.addElement(new Ponto(13.51, 7.4, true));
+        desenho.addElement(new Ponto(13.69, 7.4, false));
+        // .
+        desenho.addElement(new Ponto(13.9, 7.45, true));
+        desenho.addElement(new Ponto(13.95, 7.45, false));
+        desenho.addElement(new Ponto(13.9, 7.55, true));
+        desenho.addElement(new Ponto(13.95, 7.55, false));
+        desenho.addElement(new Ponto(13.9, 7.45, true));
+        desenho.addElement(new Ponto(13.9, 7.55, false));
+        desenho.addElement(new Ponto(13.95, 7.45, true));
+        desenho.addElement(new Ponto(13.95, 7.55, false));
+        // M
+        desenho.addElement(new Ponto(14.1, 7.58, true));
+        desenho.addElement(new Ponto(14.18, 7.18, false));
+        desenho.addElement(new Ponto(14.23, 7.48, false));
+        desenho.addElement(new Ponto(14.28, 7.18, false));
+        desenho.addElement(new Ponto(14.35, 7.58, false));
+        
+        // b2 = a.n
+        // B ao quadrado
+        desenho.addElement(new Ponto(12.7, 8.2, true));
+        desenho.addElement(new Ponto(12.7, 8.68, false));
+        arco(12.7, 8.3, 0.1, 4.72, 7.9);
+        arco(12.7, 8.54, 0.14, 4.72, 7.918);
+        // 2
+        arco(12.9, 8.05, 0.08, 4.5, 7.1);
+        desenho.addElement(new Ponto(12.954, 8.1, true));
+        desenho.addElement(new Ponto(12.88, 8.2, false));
+        desenho.addElement(new Ponto(13, 8.2, false));
+        // =
+        desenho.addElement(new Ponto(13.1, 8.5, true));
+        desenho.addElement(new Ponto(13.3, 8.5, false));
+        desenho.addElement(new Ponto(13.1, 8.6, true));
+        desenho.addElement(new Ponto(13.3, 8.6, false));    
+        // A
+        desenho.addElement(new Ponto(13.6, 8.2, true));
+        desenho.addElement(new Ponto(13.45, 8.7, false));
+        desenho.addElement(new Ponto(13.6, 8.2, true));
+        desenho.addElement(new Ponto(13.75, 8.7, false));
+        desenho.addElement(new Ponto(13.51, 8.5, true));
+        desenho.addElement(new Ponto(13.69, 8.5, false));
+        // .
+        desenho.addElement(new Ponto(13.9, 8.55, true));
+        desenho.addElement(new Ponto(13.95, 8.55, false));
+        desenho.addElement(new Ponto(13.9, 8.65, true));
+        desenho.addElement(new Ponto(13.95, 8.65, false));
+        desenho.addElement(new Ponto(13.9, 8.55, true));
+        desenho.addElement(new Ponto(13.9, 8.65, false));
+        desenho.addElement(new Ponto(13.95, 8.55, true));
+        desenho.addElement(new Ponto(13.95, 8.65, false));
+        // N
+        desenho.addElement(new Ponto(14.1, 8.65, true));
+        desenho.addElement(new Ponto(14.1, 8.25, false));
+        desenho.addElement(new Ponto(14.25, 8.65, false));
+        desenho.addElement(new Ponto(14.25, 8.25, false));
+        
+        // h2 = m.n
+        
     }
 
     public void estrela() {
