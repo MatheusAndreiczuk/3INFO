@@ -24,6 +24,7 @@ public class TelaLocalizaBean implements Serializable {
     private DataModel<Movimento> lista;    
     private DataModel<Movimento> listaSaida;
     private DataModel<Movimento> listaEntrada;
+    private DataModel<Movimento> listaData;
     MovimentoDAO md = new MovimentoDAO();
     private Movimento movimento = new Movimento();
 
@@ -52,6 +53,10 @@ public class TelaLocalizaBean implements Serializable {
         listaEntrada = new ListDataModel(md.pesquisaEntradas());
         return "entradas";
     }
+    public String atualizaListaData() {
+        listaData = new ListDataModel(md.pesquisaData());
+        return "extrato_data";
+    }
 
     public DataModel<Movimento> getLista() {
         atualizaLista();
@@ -65,10 +70,13 @@ public class TelaLocalizaBean implements Serializable {
         atualizaListaEntradas();
         return listaEntrada;
     }
+     public DataModel<Movimento> getListaData() {
+        atualizaListaData();
+        return listaData;
+    }
 
     public String novo() {
         setMovimento(new Movimento());
-        System.out.println("deu boa");
         return "cadastro_movimento";
     }
 

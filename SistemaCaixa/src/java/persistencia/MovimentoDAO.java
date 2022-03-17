@@ -42,6 +42,11 @@ public class MovimentoDAO {
         List<Movimento> listaMovimento = q.getResultList();
         return listaMovimento;
     }
+    public List<Movimento> pesquisaData(){
+        Query q = em.createQuery("select m from Movimento m where m.data = m.data");
+        List<Movimento> listaMovimento = q.getResultList();
+        return listaMovimento;
+    }
     public List<Movimento> pesquisaSaidas() {
         Query q = em.createQuery("select m from Movimento m where m.tipo = 'Saída' order by m.data");
         List<Movimento> listaMovimento = q.getResultList();
