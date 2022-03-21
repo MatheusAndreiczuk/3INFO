@@ -13,8 +13,6 @@ import vo.Movimento;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BdMovimento {
 
@@ -80,17 +78,23 @@ public class BdMovimento {
         }
     }
 
-    public List<Date> pesquisaData(Date dataInicio, Date dataFinal) throws SQLException {
-        String sql = "select * from Movimento where data between Date('dataInicio') and Date('dataFinal')";
-        List lista = new ArrayList<>();
+    public List pesquisaData(Date dataInicio, Date dataFinal) throws SQLException {
+        String sql = "select * from Movimento where data between ? and ?";
+        List lista = new ArrayList();
         if (validaData(dataInicio, dataFinal)) {
             PreparedStatement ps = Bd.getCon().prepareStatement(sql);
+            ps.setDate(1, dataInicio);
+            ps.setDate(2, dataFinal);
             ResultSet rs = ps.executeQuery();
             try {
                 while (rs.next()) {
-                    Movimento registro = new Movimento();
-                    registro.setData(dataInicio);
-                    lista.add(registro);
+                Movimento registro = new Movimento();
+                registro.setId(rs.getInt("id"));
+                registro.setDescricao(rs.getString("descricao"));
+                registro.setData(rs.getDate("data"));
+                registro.setTipo(rs.getString("tipo"));
+                registro.setValor(rs.getDouble("valor"));
+                lista.add(registro);
                 }
             } catch (SQLException e) {
                 System.out.println("Erro SQL: " + e.getMessage());
@@ -98,7 +102,7 @@ public class BdMovimento {
         }
         return lista;
     }
-
+     
     public void exclui(int id) {
         String sql = "delete from Movimento where id=?";
         try {
