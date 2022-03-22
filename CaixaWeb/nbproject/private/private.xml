@@ -8,13 +8,9 @@
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/CaixaWeb/web/index.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/CaixaWeb/src/java/vo/Saldo.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/CaixaWeb/src/java/bd/BdMovimento.java</file>
+            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/CaixaWeb/web/extrato.xhtml</file>
+            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/CaixaWeb/src/java/bean/CaixaBean.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/CaixaWeb/src/java/vo/Movimento.java</file>
-        </group>
-        <group name="Projetos">
-            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/CaixaWeb/src/java/bd/Bd.java</file>
-            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/CaixaWeb/src/java/bd/BdSaldo.java</file>
-            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/CaixaWeb/src/java/bd/BdMovimento.java</file>
-            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/CaixaWeb/src/java/bean/TelaLocalizaBean.java</file>
         </group>
     </open-files>
 </project-private>

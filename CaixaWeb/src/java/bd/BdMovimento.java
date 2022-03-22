@@ -13,6 +13,8 @@ import vo.Movimento;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BdMovimento {
 
@@ -88,13 +90,13 @@ public class BdMovimento {
             ResultSet rs = ps.executeQuery();
             try {
                 while (rs.next()) {
-                Movimento registro = new Movimento();
-                registro.setId(rs.getInt("id"));
-                registro.setDescricao(rs.getString("descricao"));
-                registro.setData(rs.getDate("data"));
-                registro.setTipo(rs.getString("tipo"));
-                registro.setValor(rs.getDouble("valor"));
-                lista.add(registro);
+                    Movimento registro = new Movimento();
+                    registro.setId(rs.getInt("id"));
+                    registro.setDescricao(rs.getString("descricao"));
+                    registro.setData(rs.getDate("data"));
+                    registro.setTipo(rs.getString("tipo"));
+                    registro.setValor(rs.getDouble("valor"));
+                    lista.add(registro);
                 }
             } catch (SQLException e) {
                 System.out.println("Erro SQL: " + e.getMessage());
@@ -102,7 +104,44 @@ public class BdMovimento {
         }
         return lista;
     }
-     
+
+    public List pesquisa(String busca) {
+        String sql = "select * from movimento where descricao like ?";
+        List lista = new ArrayList();
+        try {
+            PreparedStatement ps = Bd.getCon().prepareStatement(sql);
+            ps.setString(1, "%" + busca + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Movimento registro = new Movimento();
+                registro.setId(rs.getInt("id"));
+                registro.setDescricao(rs.getString("descricao"));
+                registro.setData(rs.getDate("data"));
+                registro.setTipo(rs.getString("tipo"));
+                registro.setValor(rs.getDouble("valor"));
+                lista.add(registro);
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro SQL: " + e.getMessage());
+        }
+        return lista;
+    }
+
+    public double saldoTotal() {
+        double saldo = 0;
+        String sql = "select SUM(valor) from movimento where tipo = 'Entrada'";
+        try {
+            PreparedStatement ps = Bd.getCon().prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                saldo = rs.getDouble("saldo");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro SQL: " + e.getMessage());
+        }
+        return saldo;
+    }
+
     public void exclui(int id) {
         String sql = "delete from Movimento where id=?";
         try {
