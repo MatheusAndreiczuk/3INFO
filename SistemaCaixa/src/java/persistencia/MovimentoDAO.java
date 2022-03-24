@@ -5,10 +5,12 @@
  */
 package persistencia;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import vo.Movimento;
+import vo.Saldo;
 
 /**
  *
@@ -17,6 +19,7 @@ import vo.Movimento;
 public class MovimentoDAO {
 
     EntityManager em;
+    Saldo sa = new Saldo();
 
     public MovimentoDAO() {
         em = EntityManagerProvider.getEM();
@@ -42,37 +45,46 @@ public class MovimentoDAO {
         List<Movimento> listaMovimento = q.getResultList();
         return listaMovimento;
     }
-    public List<Movimento> pesquisaData(){
-        Query q = em.createQuery("select m from Movimento m where m.data = m.data");
-        List<Movimento> listaMovimento = q.getResultList();
-        return listaMovimento;
+
+    public List<Saldo> pesquisaData(Date inicio, Date fim) {
+        Query q = em.createQuery("select s from Saldo s where m.data between :inicio and :fim");
+        q.setParameter("inicio", inicio);
+        q.setParameter("fim", fim);
+        List<Saldo> listaSaldo = q.getResultList();
+        return listaSaldo;
+
     }
+
     public List<Movimento> pesquisaSaidas() {
         Query q = em.createQuery("select m from Movimento m where m.tipo = 'Saída' order by m.data");
         List<Movimento> listaMovimento = q.getResultList();
         return listaMovimento;
     }
+
     public List<Movimento> pesquisaEntradas() {
         Query q = em.createQuery("select m from Movimento m where m.tipo = 'Entrada' order by m.data");
         List<Movimento> listaMovimento = q.getResultList();
         return listaMovimento;
     }
-    public Double calcularSaldo(){
+
+    public Double calcularSaldo() {
         Double entradas = calcularSaldoEntradas();
         Double saidas = calcularSaldoSaidas();
         Double saldo = entradas - saidas;
         return saldo;
     }
-    public Double calcularSaldoEntradas(){
+
+    public Double calcularSaldoEntradas() {
         Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Entrada'");
         List<Double> lista = q.getResultList();
-        Double saldo = lista.get(0)!=null?lista.get(0):0;
+        Double saldo = lista.get(0) != null ? lista.get(0) : 0;
         return saldo;
     }
-    public Double calcularSaldoSaidas(){
+
+    public Double calcularSaldoSaidas() {
         Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Saida'");
         List<Double> lista = q.getResultList();
-        Double saldo = lista.get(0)!=null?lista.get(0):0;
+        Double saldo = lista.get(0) != null ? lista.get(0) : 0;
         return saldo;
     }
 }

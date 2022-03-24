@@ -11,7 +11,9 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import persistencia.MovimentoDAO;
+import vo.Data;
 import vo.Movimento;
+import vo.Saldo;
 
 /**
  *
@@ -26,6 +28,8 @@ public class TelaLocalizaBean implements Serializable {
     private DataModel<Movimento> listaEntrada;
     private DataModel<Movimento> listaData;
     MovimentoDAO md = new MovimentoDAO();
+    private Saldo sa = new Saldo();
+    private Data data = new Data();
     private Movimento movimento = new Movimento();
 
     public TelaLocalizaBean() {
@@ -54,7 +58,7 @@ public class TelaLocalizaBean implements Serializable {
         return "entradas";
     }
     public String atualizaListaData() {
-        listaData = new ListDataModel(md.pesquisaData());
+        listaData = new ListDataModel(md.pesquisaData(getData().getDataInicio(), getData().getDataFinal()));
         return "extrato_data";
     }
 
@@ -101,5 +105,33 @@ public class TelaLocalizaBean implements Serializable {
      */
     public void setMovimento(Movimento movimento) {
         this.movimento = movimento;
+    }
+
+    /**
+     * @return the sa
+     */
+    public Saldo getSa() {
+        return sa;
+    }
+
+    /**
+     * @param sa the sa to set
+     */
+    public void setSa(Saldo sa) {
+        this.sa = sa;
+    }
+
+    /**
+     * @return the data
+     */
+    public Data getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Data data) {
+        this.data = data;
     }
 }

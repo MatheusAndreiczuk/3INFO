@@ -22,8 +22,10 @@
                     </div>
                     <br/><br/>
                     <h:form>
-                        <p:outputLabel value="Data: " for="itData"/>
-                        <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.movimento.data}" pattern="dd/MM/yyyy" mask="true"
+                        <p:outputLabel value="Data inicial: " for="itData"/>
+                        <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.data.dataInicio}" pattern="dd/MM/yyyy" mask="true"
+                                    required="true" requiredMessage="É obrigatório uma data!" showOn="button"/>
+                         <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.data.dataFinal}" pattern="dd/MM/yyyy" mask="true"
                                     required="true" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>
                         <p:commandButton id="bFiltro" value="Extrato por data" action="#{telaLocalizaBean.atualizaListaData()}" ajax="false" />
                         <p:tooltip id="ttFiltro" for="bFiltro" value="Ver extrato" trackMouse="true" /><br/><br/>

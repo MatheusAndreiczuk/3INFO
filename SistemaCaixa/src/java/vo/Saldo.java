@@ -23,6 +23,10 @@ import javax.persistence.TemporalType;
  */
 @Entity
 public class Saldo implements Serializable{
+    @Temporal(TemporalType.DATE)
+    private Date dataInicio;
+    @Temporal(TemporalType.DATE)
+    private Date dataFinal;
     @Id
     private Integer id = 0;
     @Temporal(TemporalType.DATE)
@@ -69,5 +73,33 @@ public class Saldo implements Serializable{
      */
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    /**
+     * @return the dataInicio
+     */
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    /**
+     * @param dataInicio the dataInicio to set
+     */
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    /**
+     * @return the dataFinal
+     */
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    /**
+     * @param dataFinal the dataFinal to set
+     */
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
 }
