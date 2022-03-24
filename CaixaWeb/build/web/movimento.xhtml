@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+    transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de Alunos</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:outputLabel for="itCodigo" value="Id"/>
+            <p:inputText id="itCodigo" value="#{caixaBean.movimento.id}" readonly="true"/><br/>
+            <p:outputLabel for="itNome" value="Descricao"/>
+            <p:inputText id="itNome" value="#{caixaBean.movimento.descricao}" /><br/>
+            <p:outputLabel for="itSerie" value="Tipo"/>
+            <p:inputText id="itSerie" value="#{caixaBean.movimento.tipo}"/><br/>
+            <p:outputLabel for="itturma" value="Valor"/>
+            <p:inputText id="itturma" value="#{caixaBean.movimento.valor}" /><br/>
+            <p:calendar id="itData" locale="pt" value="#{caixaBean.movimento.data}" pattern="dd/MM/yyyy" mask="true"
+                        required="true" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>
+            <p:commandButton icon="ui-icon-disk" ajax="false" action="#{caixaBean.salva()}"/>
+        </h:form>
+        <h:form>
+            <p:commandButton icon="ui-icon-arrowreturnthick-1-w" action="index"/>
+        </h:form>
+    </h:body>
+</html>

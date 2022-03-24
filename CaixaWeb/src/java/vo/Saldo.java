@@ -10,11 +10,13 @@ package vo;
  * @author 2info2021
  */
 
-import java.util.*;
+import java.sql.Date;
 public class Saldo {
     private int id;
     private Date data;
     private double valor;
+    private Date dataInicio;
+    private Date dataFinal;
 
     /**
      * @return the id
@@ -56,5 +58,33 @@ public class Saldo {
      */
     public void setValor(double valor) {
         this.valor = valor;
+    }
+
+    /**
+     * @return the dataInicio
+     */
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    /**
+     * @param dataInicio the dataInicio to set
+     */
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    /**
+     * @return the dataFinal
+     */
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    /**
+     * @param dataFinal the dataFinal to set
+     */
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
 }

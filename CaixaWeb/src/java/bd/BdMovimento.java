@@ -10,13 +10,14 @@ package bd;
  * @author 2info2021
  */
 import vo.Movimento;
+import vo.Saldo;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class BdMovimento {
+
+    double saldo;
 
     public void insere(Movimento Movimento) {
         String sql = "insert into Movimento(descricao,valor,tipo,data) values(?,?,?,?)";
@@ -116,9 +117,9 @@ public class BdMovimento {
                 Movimento registro = new Movimento();
                 registro.setId(rs.getInt("id"));
                 registro.setDescricao(rs.getString("descricao"));
-                registro.setData(rs.getDate("data"));
                 registro.setTipo(rs.getString("tipo"));
                 registro.setValor(rs.getDouble("valor"));
+                registro.setData(rs.getDate("data"));
                 lista.add(registro);
             }
         } catch (SQLException e) {
@@ -128,28 +129,16 @@ public class BdMovimento {
     }
 
     public double saldoTotal() {
-        double saldo = 0;
         String sql = "select SUM(valor) from movimento where tipo = 'Entrada'";
         try {
             PreparedStatement ps = Bd.getCon().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                saldo = rs.getDouble("saldo");
+                saldo = rs.getDouble("valor");
             }
         } catch (SQLException e) {
             System.out.println("Erro SQL: " + e.getMessage());
         }
         return saldo;
-    }
-
-    public void exclui(int id) {
-        String sql = "delete from Movimento where id=?";
-        try {
-            PreparedStatement ps = Bd.getCon().prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.execute();
-        } catch (SQLException e) {
-            System.out.println("Erro SQL: " + e.getMessage());
-        }
     }
 }

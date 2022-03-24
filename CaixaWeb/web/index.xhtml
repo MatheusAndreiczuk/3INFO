@@ -14,10 +14,10 @@
                 <h1>Controle de caixa</h1>
                 <div style="text-align: center;">
                     <p:outputLabel value="Total: R$"/>
-                    <p:outputLabel value="#{caixaBean.saldo()}"/>
+                    <p:outputLabel value="Saldo"/>
                 </div><br/><br/>
-                <p:outputLabel value="Código: " for="itCodigo" />
-                <p:inputText id="itCodigo" value="#{caixaBean.movimento.id}" /><br/><br/>
+                <p:outputLabel value="ID " for="itCodigo" />
+                <p:inputText id="itCodigo" value="#{caixaBean.movimento.id}" readonly="true"/><br/><br/>
                 <p:outputLabel value="Data: " for="itData"/>
                 <p:calendar id="itData" locale="pt" value="#{caixaBean.movimento.data}" pattern="dd/MM/yyyy" mask="true"
                             required="true" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>

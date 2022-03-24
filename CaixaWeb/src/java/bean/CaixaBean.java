@@ -12,26 +12,26 @@ package bean;
 import bd.BdMovimento;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import vo.Movimento;
+import vo.Saldo;
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class CaixaBean {
-    public Date dataInicio;
-    public Date dataFinal;
-    CaixaBean cb = new CaixaBean();
-    
+
+    private Saldo s = new Saldo();
+
     private Movimento movimento;
-    private final BdMovimento bda = new BdMovimento();
+    private BdMovimento bda = new BdMovimento();
     private DataModel<Movimento> lista;
 
-    public CaixaBean() throws SQLException {
+
+        public CaixaBean() throws SQLException {
         atualizaLista();
     }
 
@@ -41,15 +41,8 @@ public class CaixaBean {
         return "index";
     }
 
-    public final void atualizaLista() throws SQLException {
-            lista = new ListDataModel(bda.pesquisaData(cb.getDataInicio(), cb.getDataFinal()));
-    }
-
-    public String exclui() throws SQLException {
-        movimento = lista.getRowData();
-        bda.exclui(movimento.getId());
-        atualizaLista();
-        return "";
+    public void atualizaLista() {
+        lista = new ListDataModel(bda.pesquisa(""));
     }
 
     public String novo() {
@@ -57,9 +50,8 @@ public class CaixaBean {
         return "movimento";
     }
 
-    public String edita() {
-        movimento = lista.getRowData();
-        return "movimento";
+    public String cancela() {
+        return "index";
     }
 
     /**
@@ -77,6 +69,34 @@ public class CaixaBean {
     }
 
     /**
+     * @return the s
+     */
+    public Saldo getS() {
+        return s;
+    }
+
+    /**
+     * @param s the s to set
+     */
+    public void setS(Saldo s) {
+        this.s = s;
+    }
+
+    /**
+     * @return the bda
+     */
+    public BdMovimento getBda() {
+        return bda;
+    }
+
+    /**
+     * @param bda the bda to set
+     */
+    public void setBda(BdMovimento bda) {
+        this.bda = bda;
+    }
+
+    /**
      * @return the lista
      */
     public DataModel<Movimento> getLista() {
@@ -89,33 +109,4 @@ public class CaixaBean {
     public void setLista(DataModel<Movimento> lista) {
         this.lista = lista;
     }
-
-    /**
-     * @return the dataInicio
-     */
-    public Date getDataInicio() {
-        return dataInicio;
-    }
-
-    /**
-     * @param dataInicio the dataInicio to set
-     */
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
-    /**
-     * @return the dataFinal
-     */
-    public Date getDataFinal() {
-        return dataFinal;
-    }
-
-    /**
-     * @param dataFinal the dataFinal to set
-     */
-    public void setDataFinal(Date dataFinal) {
-        this.dataFinal = dataFinal;
-    }
-
 }
