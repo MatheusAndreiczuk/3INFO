@@ -15,8 +15,8 @@
                 <div style="text-align: center;">
                     <p:outputLabel value="Saldo: R$"/>
                 </div><br/><br/>
-                <p:outputLabel value="Código: " for="itCodigo" />
-                <p:inputText id="itCodigo" value="#{telaLocalizaBean.movimento.id}" /><br/><br/>
+                <p:outputLabel value="ID " for="itId" />
+                <p:inputText id="itId" value="#{telaLocalizaBean.movimento.id}" /><br/><br/>
                 <p:outputLabel value="Data: " for="itData"/>
                 <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.movimento.data}" pattern="dd/MM/yyyy" mask="true"
                             required="true" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>

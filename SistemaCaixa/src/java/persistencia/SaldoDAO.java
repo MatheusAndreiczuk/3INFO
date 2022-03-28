@@ -12,6 +12,7 @@ package persistencia;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import vo.Movimento;
 import vo.Saldo;
 
 public class SaldoDAO {
@@ -36,6 +37,12 @@ public class SaldoDAO {
     public Saldo localiza(int id) {
         Saldo s = em.find(Saldo.class, id);
         return s;
+    }
+    
+    public List<Saldo> pesquisa() {
+        Query q = em.createQuery("select s from Saldo s order by s.data");
+        List<Saldo> listaSaldo = q.getResultList();
+        return listaSaldo;
     }
 
     public Double calcularSaldo() {
