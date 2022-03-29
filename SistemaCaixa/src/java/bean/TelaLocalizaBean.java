@@ -38,7 +38,7 @@ public class TelaLocalizaBean implements Serializable {
     public TelaLocalizaBean() {
     }
 
-    /*public Double saldo(){
+    public Double saldo(){
         return md.calcularSaldo();
     }
     public Double saldoEntradas(){
@@ -47,14 +47,14 @@ public class TelaLocalizaBean implements Serializable {
     public Double saldoSaidas(){
         return md.calcularSaldoSaidas();
     }
-    */
+    
     
     public String atualizaLista() {
         lista = new ListDataModel(md.pesquisa());
         return "index";
     }
     
-    /*
+    
     public String atualizaListaSaidas() {
         listaSaida = new ListDataModel(md.pesquisaSaidas());
         return "saidas";
@@ -63,7 +63,7 @@ public class TelaLocalizaBean implements Serializable {
         listaEntrada = new ListDataModel(md.pesquisaEntradas());
         return "entradas";
     }
-    */
+    
     
     
     public String atualizaListaData() {
@@ -76,7 +76,7 @@ public class TelaLocalizaBean implements Serializable {
         return lista;
     }
     
-    /*
+    
     public DataModel<Movimento> getListaSaida() {
         atualizaListaSaidas();
         return listaSaida;
@@ -85,7 +85,7 @@ public class TelaLocalizaBean implements Serializable {
         atualizaListaEntradas();
         return listaEntrada;
     }
-    */
+    
     
     
      public DataModel<Movimento> getListaData() {

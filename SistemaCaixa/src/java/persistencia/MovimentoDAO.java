@@ -52,11 +52,9 @@ public class MovimentoDAO {
         q.setParameter("fim", dataFinal);
         List<Movimento> listaMovimento = q.getResultList();             
         return listaMovimento;
-
     }
-
     
-    /*public List<Movimento> pesquisaSaidas() {
+    public List<Movimento> pesquisaSaidas() {
         Query q = em.createQuery("select m from Movimento m where m.tipo = 'Saída' order by m.data");
         List<Movimento> listaMovimento = q.getResultList();
         return listaMovimento;
@@ -87,6 +85,6 @@ public class MovimentoDAO {
         List<Double> lista = q.getResultList();
         Double saldo = lista.get(0) != null ? lista.get(0) : 0;
         return saldo;
-    }*/
+    }
     
 }
