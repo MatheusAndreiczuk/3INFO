@@ -63,9 +63,7 @@ public class TelaLocalizaBean implements Serializable {
         listaEntrada = new ListDataModel(md.pesquisaEntradas());
         return "entradas";
     }
-    
-    
-    
+       
     public String atualizaListaData() {
         listaData = new ListDataModel(md.pesquisaData(getData().getDataInicio(), getData().getDataFinal()));
         return "extrato_data";
@@ -98,9 +96,14 @@ public class TelaLocalizaBean implements Serializable {
         return "cadastro_movimento";
     }
 
+    
     public String salva() {
         md.salva(getMovimento());
+        sa.setDatasaldo(movimento.getData());
+        sa.setValor(movimento.getValor());
+        sd.salva(getSa());
         return "index";
+        
     }
 
     public String cancela() {

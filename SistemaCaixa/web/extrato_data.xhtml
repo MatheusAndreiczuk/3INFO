@@ -30,7 +30,7 @@
                         <p:commandButton id="bFiltro" value="Extrato por data" action="#{telaLocalizaBean.atualizaListaData()}" ajax="false" />
                         <p:tooltip id="ttFiltro" for="bFiltro" value="Ver extrato" trackMouse="true" /><br/><br/>
                     </h:form>            
-                    <p:dataTable id="tabela" value="#{telaLocalizaBean.listaData}" var="movimento" >
+                    <p:dataTable id="tabela" value="#{telaLocalizaBean.listaData}" var="movimento">
                         <p:column style="width:10%; text-align: center;">
                             <f:facet name="header">
                                 <h:outputText value="Código" />

@@ -46,41 +46,78 @@ public class SaldoDAO {
         List<Saldo> listaSaldo = q.getResultList();
         return listaSaldo;
     }
-
+    
     public Object saldoFinal() {
         Query q = em.createNativeQuery("select valor from saldo where datasaldo <= ? order by datasaldo desc limit 1");
         q.setParameter(1, m.getData());
         Object saldoFinal = q.getSingleResult();
         return saldoFinal;
     }
-    
-    public Object ultimaData(){
-        Query q = em.createNativeQuery("select data from saldo where data <= ? order by data");
-        q.setParameter(1, m.getData());
-        Object ultimaData = q.getSingleResult();
-        return ultimaData;
-    }
-    public void calcSaldoAnterior(){
-        
+
+    public Object atualizaSaldoAnterior() {
+        try {
+            Query q = em.createNativeQuery("select data from saldo where datasaldo <= ? order by data");
+            q.setParameter(1, m.getData());
+            Object dataFinalSaldo = q.getSingleResult();
+            //
+            Query q2 = em.createNativeQuery("update saldo set valor = ? where datasaldo between ? and ?");
+            q2.setParameter(1, m.getValor());
+            q2.setParameter(2, m.getData());
+            q2.setParameter(3, dataFinalSaldo);
+        } catch (Exception e) {
+            System.out.println("Erro SQL: " + e.getMessage());
+        }
+        return null;
     }
 
-    public Object calcSaldoAtual(Date dataInicio, Date dataFinal, double valor) {
-        if (m.getTipo().equals("Entrada")){
-            Query q = em.createNativeQuery("update saldo set valor = valor +? where data between ? and ?");
+    public void calcSaldoAnterior(Saldo s) {
+        if (sa.getId() == null) {
+            em.persist(s);
+        } else if(m.getTipo().equals("Entrada")) {
+            Query q = em.createNativeQuery("");
+            q.setParameter(1, m.getId());
+            q.setParameter(2, m.getData());
+            q.setParameter(3, m.getValor());
+        }
+    }
+
+    public Object setSaldoAtual(Date dataInicio, Date dataFinal, double valor) {
+        if (m.getTipo().equals("Entrada")) {
+            Query q = em.createNativeQuery("update saldo set valor = valor +? where datasaldo between ? and ?");
             q.setParameter(1, valor);
             q.setParameter(2, dataInicio);
             q.setParameter(3, dataFinal);
             Object saldoAtual = q.getSingleResult();
             return saldoAtual;
-        }if(m.getTipo().equals("Saída")){
-           Query q = em.createNativeQuery("update saldo set valor = valor -? where data between ? and ?");
+        }
+        if (m.getTipo().equals("Saída")) {
+            Query q = em.createNativeQuery("update saldo set valor = valor -? where datasaldo between ? and ?");
             q.setParameter(1, valor);
             q.setParameter(2, dataInicio);
             q.setParameter(3, dataFinal);
             Object saldoAtual = q.getSingleResult();
-            return saldoAtual; 
+            return saldoAtual;
         }
         return "";
+    }
+    
+    
+    public void SomaSaldoQueJaExiste(Saldo s){
+        Query q = em.createNativeQuery("select datasaldo from saldo where datasaldo=?");
+        q.setParameter(1, m.getData());
+        List <Saldo> listaSaldo = q.getResultList();
+        if(listaSaldo.isEmpty()){
+            //pegador de ultima de data
+            Query pegadorDeUltimoValor = em.createNativeQuery("select valor from saldo where datasaldo<? order by datasaldo desc limit 1");
+            pegadorDeUltimoValor.setParameter(1, m.getData());
+            sa.setValor(m.getValor() + Double.parseDouble(pegadorDeUltimoValor.getSingleResult().toString()));
+            //somador de todas as data mais novas que esta
+            Query somadorDeNovinha = em.createNativeQuery("update saldo set valor=valor+? where datasaldo>=?");
+            somadorDeNovinha.setParameter(1,m.getValor());
+            somadorDeNovinha.setParameter(2,m.getData());
+            //criador de saldo
+            em.persist(s);      
+        }
     }
 
     /*
