@@ -11,6 +11,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import persistencia.MovimentoDAO;
+import persistencia.SaldoDAO;
 import vo.Data;
 import vo.Movimento;
 import vo.Saldo;
@@ -28,9 +29,11 @@ public class TelaLocalizaBean implements Serializable {
     private DataModel<Movimento> listaEntrada;
     private DataModel<Movimento> listaData;
     MovimentoDAO md = new MovimentoDAO();
+    SaldoDAO sd = new SaldoDAO();
     private Saldo sa = new Saldo();
     private Data data = new Data();
     private Movimento movimento = new Movimento();
+    private Saldo saldo = new Saldo();
 
     public TelaLocalizaBean() {
     }
@@ -45,10 +48,13 @@ public class TelaLocalizaBean implements Serializable {
         return md.calcularSaldoSaidas();
     }
     
+    
     public String atualizaLista() {
         lista = new ListDataModel(md.pesquisa());
         return "index";
     }
+    
+    
     public String atualizaListaSaidas() {
         listaSaida = new ListDataModel(md.pesquisaSaidas());
         return "saidas";
@@ -57,6 +63,7 @@ public class TelaLocalizaBean implements Serializable {
         listaEntrada = new ListDataModel(md.pesquisaEntradas());
         return "entradas";
     }
+       
     public String atualizaListaData() {
         listaData = new ListDataModel(md.pesquisaData(getData().getDataInicio(), getData().getDataFinal()));
         return "extrato_data";
@@ -66,6 +73,8 @@ public class TelaLocalizaBean implements Serializable {
         atualizaLista();
         return lista;
     }
+    
+    
     public DataModel<Movimento> getListaSaida() {
         atualizaListaSaidas();
         return listaSaida;
@@ -74,6 +83,9 @@ public class TelaLocalizaBean implements Serializable {
         atualizaListaEntradas();
         return listaEntrada;
     }
+    
+    
+    
      public DataModel<Movimento> getListaData() {
         atualizaListaData();
         return listaData;
@@ -84,15 +96,19 @@ public class TelaLocalizaBean implements Serializable {
         return "cadastro_movimento";
     }
 
+    
     public String salva() {
         md.salva(getMovimento());
+        sa.setDatasaldo(movimento.getData());
+        sa.setValor(movimento.getValor());
+        sd.salva(getSa());
         return "index";
+        
     }
 
     public String cancela() {
         return "index";
-    }
-    
+    }  
     /**
      * @return the movimento
      */
@@ -133,5 +149,19 @@ public class TelaLocalizaBean implements Serializable {
      */
     public void setData(Data data) {
         this.data = data;
+    }
+
+    /**
+     * @return the saldo
+     */
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    /**
+     * @param saldo the saldo to set
+     */
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
     }
 }

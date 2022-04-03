@@ -15,8 +15,8 @@
                 <div style="text-align: center;">
                     <p:outputLabel value="Saldo: R$"/>
                 </div><br/><br/>
-                <p:outputLabel value="Código: " for="itCodigo" />
-                <p:inputText id="itCodigo" value="#{telaLocalizaBean.movimento.id}" /><br/><br/>
+                <p:outputLabel value="ID " for="itId" />
+                <p:inputText id="itId" value="#{telaLocalizaBean.movimento.id}" /><br/><br/>
                 <p:outputLabel value="Data: " for="itData"/>
                 <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.movimento.data}" pattern="dd/MM/yyyy" mask="true"
                             required="true" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>
@@ -24,8 +24,8 @@
                 <p:inputText id="itDescricao" value="#{telaLocalizaBean.movimento.descricao}"/><br/><br/>
                 <p:outputLabel value="Tipo: " for="itTipo"/>
                 <p:selectOneMenu id="itTipo" value="#{telaLocalizaBean.movimento.tipo}" required="true" requiredMessage="É obrigatório um tipo">
-                    <f:selectItem itemLabel="Entrada" itemValue="Entrada"/>
-                    <f:selectItem itemLabel="Saída" itemValue="Saída"/>
+                    <f:selectItem itemLabel="Entrada" itemValue="E"/>
+                    <f:selectItem itemLabel="Saída" itemValue="S"/>
                 </p:selectOneMenu><br/><br/>      
                 <p:outputLabel value="Valor: " for="itValor"/>
                 <p:inputText id="itValor" value="#{telaLocalizaBean.movimento.valor}" /><br/><br/>   

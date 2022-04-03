@@ -24,16 +24,16 @@ public class MovimentoDAO {
     public MovimentoDAO() {
         em = EntityManagerProvider.getEM();
     }
-
+                        
     public void salva(Movimento m) {
         em.getTransaction().begin();
         if (m.getId() == 0) {
             em.persist(m);
-        } else {
-            em.merge(m);
+        } else {                    
+            em.merge(m);        
         }
-        em.getTransaction().commit();
-    }
+        em.getTransaction().commit();           
+    }               
 
     public Movimento localiza(int id) {
         Movimento m = em.find(Movimento.class, id);
@@ -46,15 +46,14 @@ public class MovimentoDAO {
         return listaMovimento;
     }
 
-    public List<Saldo> pesquisaData(Date inicio, Date fim) {
-        Query q = em.createQuery("select s from Saldo s where m.data between :inicio and :fim");
-        q.setParameter("inicio", inicio);
-        q.setParameter("fim", fim);
-        List<Saldo> listaSaldo = q.getResultList();
-        return listaSaldo;
-
+    public List<Movimento> pesquisaData(Date dataInicio, Date dataFinal) {
+        Query q = em.createQuery("select m from Movimento m where m.data between :inicio and :fim");
+        q.setParameter("inicio", dataInicio);
+        q.setParameter("fim", dataFinal);
+        List<Movimento> listaMovimento = q.getResultList();             
+        return listaMovimento;
     }
-
+    
     public List<Movimento> pesquisaSaidas() {
         Query q = em.createQuery("select m from Movimento m where m.tipo = 'Saída' order by m.data");
         List<Movimento> listaMovimento = q.getResultList();
@@ -87,4 +86,5 @@ public class MovimentoDAO {
         Double saldo = lista.get(0) != null ? lista.get(0) : 0;
         return saldo;
     }
+    
 }
