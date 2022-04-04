@@ -14,21 +14,5 @@
             <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/SistemaCaixa/src/java/persistencia/EntityManagerProvider.java</file>
             <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/SistemaCaixa/web/cadastro_movimento.xhtml</file>
         </group>
-        <group>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/java/persistencia/SaldoDAO.java</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/java/vo/Saldo.java</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/web/extrato.xhtml</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/java/persistencia/MovimentoDAO.java</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/java/persistencia/EntityManagerProvider.java</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/web/entrada.xhtml</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/web/extrato_data.xhtml</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/java/vo/Data.java</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/web/cadastro_movimento.xhtml</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/web/index.xhtml</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/conf/persistence.xml</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/java/vo/Movimento.java</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/web/saida.xhtml</file>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/SistemaCaixa/src/java/bean/TelaLocalizaBean.java</file>
-        </group>
     </open-files>
 </project-private>

@@ -5,6 +5,5 @@
     <persistence-unit name="PU" transaction-type="JTA">
         <jta-data-source>jdbc/caixa</jta-data-source>
         <class>vo.Movimento</class>
-        <class>vo.Saldo</class>
     </persistence-unit>
 </persistence>
