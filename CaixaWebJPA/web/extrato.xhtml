@@ -5,7 +5,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Extrato por data</title>
+        <title>Extrato completo</title>
     </h:head>
     <h:body style="background-color: #cccccc;">
 
@@ -15,7 +15,7 @@
                     <p:commandButton id="bVoltar" icon="ui-icon-arrowreturnthick-1-w" action="index" ajax="false" />
                     <p:tooltip id="ttVoltar" for="bVoltar" value="Voltar" trackMouse="true" />
                     <div style="text-align: center;">
-                        <p:outputLabel value="Total: R$"/>
+                        <p:outputLabel value="Saldo atual: R$"/>
                         <p:outputLabel value="#{telaLocalizaBean.saldo()}"/>
                     </div>
                     <br/>
