@@ -25,19 +25,13 @@ public class MovimentoDAO {
     }
 
     public void salva(Movimento m) {
-        emTransaction();
+        em.getTransaction().begin();
         if (m.getId() == 0) {
             em.persist(m);
-        } else {
+        }else{
             em.merge(m);
         }
         em.getTransaction().commit();
-    }
-
-    public void emTransaction() {
-        if (!em.getTransaction().isActive()) {
-            em.getTransaction().begin();
-        }
     }
 
     public Movimento localiza(int id) {

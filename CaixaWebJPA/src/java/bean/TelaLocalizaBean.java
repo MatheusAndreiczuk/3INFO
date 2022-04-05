@@ -87,10 +87,13 @@ public class TelaLocalizaBean implements Serializable {
     }
 
     public String salva() {
+        if(sd.verificaData(getSaldo())){
+            sd.Soma_Subtrai(getSaldo(), getMovimento());
+        }else{
+            sd.SaldoInexistente2(getSaldo(), getMovimento());
+        }
         sd.emTransaction();
         sd.verificaData(getSaldo());
-        sd.SaldoInexistente2(getSaldo(), getMovimento());
-        sd.Soma_Subtrai(getSaldo(), getMovimento());
         sd.salva(getSaldo());
         md.salva(getMovimento());
         return "index";
