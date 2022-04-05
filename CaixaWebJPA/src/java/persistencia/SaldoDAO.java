@@ -18,73 +18,41 @@ import vo.Movimento;
 
 public class SaldoDAO {
 
-    /*
     EntityManager em;
-    Saldo sa = new Saldo();
+
     public SaldoDAO() {
         em = EntityManagerProvider.getEM();
     }
+
     public void salva(Saldo s) {
-        em.getTransaction().begin();
-        if (s.getId() == 0) {
-            em.persist(s);
-        } else {
-            em.merge(s);
-        }
-        em.getTransaction().commit();
-    }
-    public Saldo localiza(int id) {
-        Saldo s = em.find(Saldo.class, id);
-        return s;
-    }
-    public Double calcularSaldo() {
-        Double entradas = calcularSaldoEntradas();
-        Double saidas = calcularSaldoSaidas();
-        Double saldo = entradas - saidas;
-        return saldo;
-    }
-    public Double calcularSaldoEntradas() {
-        Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Entrada'");
-        List<Double> lista = q.getResultList();
-        Double saldo = lista.get(0) != null ? lista.get(0) : 0;
-        return saldo;
-    }
-    public Double calcularSaldoSaidas() {
-        Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Saida'");
-        List<Double> lista = q.getResultList();
-        Double saldo = lista.get(0) != null ? lista.get(0) : 0;
-        return saldo;
-    }
-     */
-    EntityManager em;
-
-    public SaldoDAO() {
-        em = EntityManagerProvider.getEM();
-    }
-
-    public void salva(Saldo s, Movimento m) {
         emTransaction();
-        if (m.getId() == 0) {
+        if (verificaData(s) == false) {
             em.persist(s);
-            em.persist(m);
         } else {
-            em.merge(m);
+            em.find(Saldo.class, 1);
         }
         em.getTransaction().commit();
     }
 
-    public boolean verificaData(Movimento m) {
+    public double saldoAtual() {
+        Query q = em.createNativeQuery("select MAX(datasaldo) from saldo");
+        Date maiorData = (Date) q.getSingleResult();
+        Query q2 = em.createNativeQuery("select valor from saldo where datasaldo = ?");
+        q2.setParameter(1, maiorData);
+        double valorAtual = Double.parseDouble(q2.getSingleResult().toString());
+        return valorAtual;
+    }
+
+    public boolean verificaData(Saldo s) {
         emTransaction();
-        Date dataMov = m.getData();
-        Query q = em.createNativeQuery("select * from saldo where datasaldo = ?", Saldo.class);
-// seleciona tudo quando a data de movimento é igual a data saldo
-        q.setParameter(1, dataMov);
+        Date data = s.getDatasaldo();
+        Query q = em.createNativeQuery("select * from saldo where datasaldo = ?");
+        q.setParameter(1, data);
         List lista = q.getResultList();
         if (!lista.isEmpty()) {
             return true;
         } else {
             return false;
-            //cria um saldo com esse dia que não existe, tem que ajeitar ainda
         }
     }
 
@@ -94,11 +62,14 @@ public class SaldoDAO {
         }
     }
 
-    public void somaSubtraiSaldo(Saldo s, Movimento m) { // vai somar ou subtrair os saldos
+    public void Soma_Subtrai(Saldo s, Movimento m) {
         emTransaction();
-        double valor = m.getValor();// pega valor do movimento
-        s.setDatasaldo(m.getData());//pega data do movimento
-        if (m.getTipo().equals("Entrada")) {
+        double valor = m.getValor();
+        s.setDatasaldo(m.getData());
+        Query q2 = em.createNativeQuery("select * from saldo where datasaldo = ?");
+        q2.setParameter(1, m.getData());
+        if(!q2.getResultList().isEmpty()){
+            if (m.getTipo().equals("Entrada")) {
             Query q = em.createNativeQuery("update saldo set valor = valor+? where datasaldo>=?");
             q.setParameter(1, valor);
             q.setParameter(2, m.getData());
@@ -108,37 +79,58 @@ public class SaldoDAO {
             q.setParameter(1, valor);
             q.setParameter(2, m.getData());
             q.executeUpdate();
-            em.getTransaction().commit();
         }
+        }
+        em.getTransaction().commit();
     }
 
-    public void somaSubtraiSaldo2(Saldo s, Movimento m) {
+    public void SaldoInexistente(Saldo s, Movimento m) {
         emTransaction();
-        s.setDatasaldo(m.getData()); // acho que não precisa dessa linha
-        if (m.getTipo().equals("Saida")) {
-            m.setValor(-m.getValor());
-        }
-        Query q = em.createNativeQuery("update saldo set valor = valor+? where datasaldo>=?");
-        q.setParameter(1, m.getValor());
-        q.setParameter(2, m.getData());
-        q.executeUpdate();
-    }
-
-    public void somaSaldoAusente(Saldo s, Movimento m) {
-        emTransaction();
-        //pegador de valor da ultima data
+        s.setId(m.getId());
+        //
         Query saldo = em.createNativeQuery("select valor from saldo where datasaldo<? order by datasaldo desc limit 1");
         saldo.setParameter(1, m.getData());
         Object valorSaldo = saldo.getSingleResult();
         System.out.println(valorSaldo + "é o ultimo saldo");
+        //
         if (m.getTipo().equals("Entrada")) {
             s.setDatasaldo(m.getData());
             s.setValor(m.getValor() + Double.parseDouble(valorSaldo.toString()));
+        } else {
+            s.setDatasaldo(m.getData());
+            s.setValor(Double.parseDouble(valorSaldo.toString()) - m.getValor());
         }
-        //criador de saldo
+        //
+        Query q = em.createNativeQuery("update saldo set valor = valor+? where datasaldo>?");
+        q.setParameter(1, m.getValor());
+        q.setParameter(2, m.getData());
+        q.executeUpdate();
+        em.getTransaction().commit();
+    }
 
-        //soma todas as datas maiores com a que esta sendo criada
-        Query q = em.createNativeQuery("update saldo set valor = valor-? where datasaldo>?");
+    public void SaldoInexistente2(Saldo s, Movimento m) {
+        emTransaction();
+        s.setDatasaldo(m.getData());
+        if (m.getTipo().equals("Saida")) {
+            m.setValor(-m.getValor());
+        }
+        Query saldoVazio = em.createNativeQuery("select * from saldo where datasaldo<?");
+        saldoVazio.setParameter(1, m.getData());
+        if (!saldoVazio.getResultList().isEmpty()) //
+        {
+            Query saldo = em.createNativeQuery("select valor from saldo where datasaldo<? order by datasaldo desc limit 1");
+            saldo.setParameter(1, m.getData());
+            Object valorSaldo = saldo.getSingleResult();
+            System.out.println(valorSaldo + "é o ultimo saldo");
+            s.setDatasaldo(m.getData());
+            s.setValor(m.getValor() + Double.parseDouble(valorSaldo.toString()));
+        }else{
+            s.setValor(m.getValor());
+        }
+
+
+        //somador de datas mais novas
+        Query q = em.createNativeQuery("update saldo set valor = valor+? where datasaldo>?");
         q.setParameter(1, m.getValor());
         q.setParameter(2, m.getData());
         q.executeUpdate();
@@ -146,22 +138,16 @@ public class SaldoDAO {
     }
 
     public double saldoIni(Date dataInicio, double saldoInicial) {
-        Query q = em.createNativeQuery("select valor from saldo where datasaldo <= ? order by datasaldo desc limit 1");
+        Query q = em.createNativeQuery("select valor from saldo where datasaldo < ? order by datasaldo desc limit 1");
         q.setParameter(1, dataInicio);
         saldoInicial = Double.parseDouble(q.getSingleResult().toString());
         return saldoInicial;
     }
 
     public double saldoFim(Date dataFinal, double saldoFinal) {
-        Query q = em.createNativeQuery("select valor from saldo where datasaldo < ? order by datasaldo desc limit 1");
+        Query q = em.createNativeQuery("select valor from saldo where datasaldo <= ? order by datasaldo desc limit 1");
         q.setParameter(1, dataFinal);
         saldoFinal = Double.parseDouble(q.getSingleResult().toString());
         return saldoFinal;
-    }
-
-    public List<Saldo> pesquisa() {
-        Query q = em.createQuery("select s from Saldo as s order by s.datasaldo");
-        List<Saldo> lista = q.getResultList();
-        return lista;
     }
 }
