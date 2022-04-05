@@ -17,15 +17,15 @@
                     <p:commandButton id="bAtualiza" icon="ui-icon-refresh" action="#{telaLocalizaBean.atualizaListaData}" update="tabela" /><br/>
                     <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true" />
                     <div style="text-align: center;">
-                        <p:outputLabel value="Total: R$"/>
-                        <p:outputLabel value="#{telaLocalizaBean.saldo()}"/>
+                        <p:outputLabel value="Saldo inicial: R$"/>
+                        <p:outputLabel value="#{telaLocalizaBean.saldoIni()}"/>
                     </div>
                     <br/><br/>
                     <h:form>
                         <p:outputLabel value="Data inicial: " for="itDataInicio"/>
                         <p:calendar id="itDataInicio" locale="pt" value="#{telaLocalizaBean.data.dataInicio}" pattern="dd/MM/yyyy" mask="true"
                                     required="false" requiredMessage="É obrigatório uma data!" showOn="button"/>
-                         <p:calendar id="itDataFinal" locale="pt" value="#{telaLocalizaBean.data.dataFinal}" pattern="dd/MM/yyyy" mask="true"
+                        <p:calendar id="itDataFinal" locale="pt" value="#{telaLocalizaBean.data.dataFinal}" pattern="dd/MM/yyyy" mask="true"
                                     required="false" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>
                         <p:commandButton id="bFiltro" value="Extrato por data" action="#{telaLocalizaBean.atualizaListaData()}" ajax="false" />
                         <p:tooltip id="ttFiltro" for="bFiltro" value="Ver extrato" trackMouse="true" /><br/><br/>
@@ -63,7 +63,9 @@
                             </f:facet>
                             <h:outputText value="#{movimento.valor}"/>
                         </p:column>
-                    </p:dataTable>
+                    </p:dataTable><br/><br/>
+                    <div style="text-align: center;">  <p:outputLabel value="Saldo final: R$"/>
+                        <p:outputLabel value="#{telaLocalizaBean.saldoFim()}"/></div>
                 </h:form>
             </p:fieldset>
         </div>

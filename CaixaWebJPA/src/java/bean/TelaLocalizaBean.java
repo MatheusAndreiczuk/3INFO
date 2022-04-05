@@ -8,7 +8,6 @@ package bean;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import persistencia.MovimentoDAO;
@@ -22,7 +21,7 @@ import vo.Saldo;
  * @author 2info2021
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class TelaLocalizaBean implements Serializable {
 
     private DataModel<Movimento> lista;
@@ -69,10 +68,26 @@ public class TelaLocalizaBean implements Serializable {
         if (data.getDataInicio() != null) {
             listaData = new ListDataModel(md.pesquisaData(getData().getDataInicio(), getData().getDataFinal()));
             return "extrato_data";
-        }else{
+        } else {
             lista = new ListDataModel(md.pesquisa());
             return "extrato_data";
         }
+    }
+
+    public double saldoIni() {
+        if (data.getDataInicio() != null) {
+            return sd.saldoIni(getData().getDataInicio(), getData().getSaldoInicial());
+        } else {
+            return 0;
+        }
+    }
+
+    public double saldoFim() {
+        if(data.getDataInicio() != null){
+            return sd.saldoFim(getData().getDataFinal(), getData().getSaldoFinal());
+        }else{
+            return 0;
+        }    
     }
 
     public DataModel<Movimento> getLista() {
@@ -102,7 +117,6 @@ public class TelaLocalizaBean implements Serializable {
 
     public String salva() {
         sd.emTransaction();
-        sd.verificaData(getMovimento());
         sd.somaSaldoAusente(getSaldo(), getMovimento());
         sd.somaSubtraiSaldo(getSaldo(), getMovimento());
         sd.salva(getSaldo(), getMovimento());
@@ -126,6 +140,7 @@ public class TelaLocalizaBean implements Serializable {
     public void setMovimento(Movimento movimento) {
         this.movimento = movimento;
     }
+
     /**
      * @return the data
      */

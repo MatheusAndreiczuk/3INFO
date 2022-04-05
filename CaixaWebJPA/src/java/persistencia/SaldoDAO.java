@@ -18,16 +18,12 @@ import vo.Movimento;
 
 public class SaldoDAO {
 
-    double saldoInicial;
-    double saldoFinal;
     /*
     EntityManager em;
     Saldo sa = new Saldo();
-
     public SaldoDAO() {
         em = EntityManagerProvider.getEM();
     }
-
     public void salva(Saldo s) {
         em.getTransaction().begin();
         if (s.getId() == 0) {
@@ -37,26 +33,22 @@ public class SaldoDAO {
         }
         em.getTransaction().commit();
     }
-
     public Saldo localiza(int id) {
         Saldo s = em.find(Saldo.class, id);
         return s;
     }
-
     public Double calcularSaldo() {
         Double entradas = calcularSaldoEntradas();
         Double saidas = calcularSaldoSaidas();
         Double saldo = entradas - saidas;
         return saldo;
     }
-
     public Double calcularSaldoEntradas() {
         Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Entrada'");
         List<Double> lista = q.getResultList();
         Double saldo = lista.get(0) != null ? lista.get(0) : 0;
         return saldo;
     }
-
     public Double calcularSaldoSaidas() {
         Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Saida'");
         List<Double> lista = q.getResultList();
@@ -72,7 +64,7 @@ public class SaldoDAO {
 
     public void salva(Saldo s, Movimento m) {
         emTransaction();
-        if (!verificaData(m)) {
+        if (m.getId() == 0) {
             em.persist(s);
             em.persist(m);
         } else {
@@ -134,42 +126,39 @@ public class SaldoDAO {
 
     public void somaSaldoAusente(Saldo s, Movimento m) {
         emTransaction();
-        s.setId(m.getId());
-        if (m.getTipo().equals("Saida")) { //verifica se é saida ou entrada
-            m.setValor(-m.getValor());
-        }
         //pegador de valor da ultima data
         Query saldo = em.createNativeQuery("select valor from saldo where datasaldo<? order by datasaldo desc limit 1");
         saldo.setParameter(1, m.getData());
         Object valorSaldo = saldo.getSingleResult();
         System.out.println(valorSaldo + "é o ultimo saldo");
-
+        if (m.getTipo().equals("Entrada")) {
+            s.setDatasaldo(m.getData());
+            s.setValor(m.getValor() + Double.parseDouble(valorSaldo.toString()));
+        }
         //criador de saldo
-        s.setDatasaldo(m.getData());
-        s.setValor(m.getValor() + Double.parseDouble(valorSaldo.toString()));
 
         //soma todas as datas maiores com a que esta sendo criada
-        Query q = em.createNativeQuery("update saldo set valor = valor+? where datasaldo>?");
+        Query q = em.createNativeQuery("update saldo set valor = valor-? where datasaldo>?");
         q.setParameter(1, m.getValor());
         q.setParameter(2, m.getData());
         q.executeUpdate();
         em.getTransaction().commit();
     }
 
-    public String saldoInicial(Date dataInicio){
-        Query q = em.createNativeQuery("select valor from saldo where datasaldo = ?");
+    public double saldoIni(Date dataInicio, double saldoInicial) {
+        Query q = em.createNativeQuery("select valor from saldo where datasaldo <= ? order by datasaldo desc limit 1");
         q.setParameter(1, dataInicio);
-        String saldoinicial = q.getSingleResult().toString();
-        return saldoinicial;
+        saldoInicial = Double.parseDouble(q.getSingleResult().toString());
+        return saldoInicial;
     }
-    
-    public String saldoFinal(Date dataFinal){
-        Query q = em.createNativeQuery("select valor from saldo where datasaldo = ?");
+
+    public double saldoFim(Date dataFinal, double saldoFinal) {
+        Query q = em.createNativeQuery("select valor from saldo where datasaldo < ? order by datasaldo desc limit 1");
         q.setParameter(1, dataFinal);
-        String saldoinicial = q.getSingleResult().toString();
-        return saldoinicial;
+        saldoFinal = Double.parseDouble(q.getSingleResult().toString());
+        return saldoFinal;
     }
-    
+
     public List<Saldo> pesquisa() {
         Query q = em.createQuery("select s from Saldo as s order by s.datasaldo");
         List<Saldo> lista = q.getResultList();
