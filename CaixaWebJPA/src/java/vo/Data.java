@@ -14,6 +14,7 @@ import java.util.Date;
 public class Data {
     private Date dataInicio;
     private Date dataFinal;
+    private double saldoInicial, saldoFinal;
 
     /**
      * @return the dataInicio
@@ -41,5 +42,33 @@ public class Data {
      */
     public void setDataFinal(Date dataFinal) {
         this.dataFinal = dataFinal;
+    }
+
+    /**
+     * @return the saldoInicial
+     */
+    public double getSaldoInicial() {
+        return saldoInicial;
+    }
+
+    /**
+     * @param saldoInicial the saldoInicial to set
+     */
+    public void setSaldoInicial(double saldoInicial) {
+        this.saldoInicial = saldoInicial;
+    }
+
+    /**
+     * @return the saldoFinal
+     */
+    public double getSaldoFinal() {
+        return saldoFinal;
+    }
+
+    /**
+     * @param saldoFinal the saldoFinal to set
+     */
+    public void setSaldoFinal(double saldoFinal) {
+        this.saldoFinal = saldoFinal;
     }
 }

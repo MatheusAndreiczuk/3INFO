@@ -17,8 +17,8 @@
                     <p:commandButton id="bAtualiza" icon="ui-icon-refresh" action="#{telaLocalizaBean.atualizaListaData}" update="tabela" /><br/>
                     <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true" />
                     <div style="text-align: center;">
-                        <p:outputLabel value="Total: R$"/>
-                        <p:outputLabel value="#{telaLocalizaBean.saldo()}"/>
+                        <p:outputLabel value="Saldo inicial: R$"/>
+                        <p:outputLabel value="#{telaLocalizaBean.saldoIni()}"/>
                     </div>
                     <br/><br/>
                     <h:form>
@@ -63,7 +63,9 @@
                             </f:facet>
                             <h:outputText value="#{movimento.valor}"/>
                         </p:column>
-                    </p:dataTable>
+                    </p:dataTable><br/><br/>
+                    <p:outputLabel value="Saldo final: R$"/>
+                    <p:outputLabel value="#{telaLocalizaBean.saldoFim()}"/>
                 </h:form>
             </p:fieldset>
         </div>

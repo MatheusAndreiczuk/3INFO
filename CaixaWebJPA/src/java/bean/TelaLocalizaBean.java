@@ -22,12 +22,10 @@ import vo.Saldo;
  * @author 2info2021
  */
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class TelaLocalizaBean implements Serializable {
 
     private DataModel<Movimento> lista;
-    private DataModel<Movimento> listaSaida;
-    private DataModel<Movimento> listaEntrada;
     private DataModel<Movimento> listaData;
     MovimentoDAO md = new MovimentoDAO();
     SaldoDAO sd = new SaldoDAO();
@@ -39,30 +37,12 @@ public class TelaLocalizaBean implements Serializable {
     }
 
     public Double saldo() {
-        return md.calcularSaldo();
-    }
-
-    public Double saldoEntradas() {
-        return md.calcularSaldoEntradas();
-    }
-
-    public Double saldoSaidas() {
-        return md.calcularSaldoSaidas();
+        return sd.saldoAtual();
     }
 
     public String atualizaLista() {
         lista = new ListDataModel(md.pesquisa());
         return "index";
-    }
-
-    public String atualizaListaSaidas() {
-        listaSaida = new ListDataModel(md.pesquisaSaidas());
-        return "saidas";
-    }
-
-    public String atualizaListaEntradas() {
-        listaEntrada = new ListDataModel(md.pesquisaEntradas());
-        return "entradas";
     }
 
     public String atualizaListaData() {
@@ -74,20 +54,27 @@ public class TelaLocalizaBean implements Serializable {
             return "extrato_data";
         }
     }
-
+    
+    public double saldoIni(){
+        if(data.getDataInicio() != null){
+            return sd.saldoIni(getData().getDataInicio(), getData().getSaldoInicial());
+        }else{
+            return 0;
+        }
+    }
+    
+    public double saldoFim(){
+        if(data.getDataInicio() != null){
+            return sd.saldoFim(getData().getDataFinal(), getData().getSaldoFinal());
+        }else{
+            return 0;
+        }
+    }
+    
+    
     public DataModel<Movimento> getLista() {
         atualizaLista();
         return lista;
-    }
-
-    public DataModel<Movimento> getListaSaida() {
-        atualizaListaSaidas();
-        return listaSaida;
-    }
-
-    public DataModel<Movimento> getListaEntrada() {
-        atualizaListaEntradas();
-        return listaEntrada;
     }
 
     public DataModel<Movimento> getListaData() {
@@ -102,10 +89,11 @@ public class TelaLocalizaBean implements Serializable {
 
     public String salva() {
         sd.emTransaction();
-        sd.verificaData(getMovimento());
-        sd.somaSaldoAusente(getSaldo(), getMovimento());
-        sd.somaSubtraiSaldo(getSaldo(), getMovimento());
-        sd.salva(getSaldo(), getMovimento());
+        sd.verificaData(getSaldo());
+        sd.SaldoInexistente(getSaldo(), getMovimento());
+        sd.Soma_Subtrai(getSaldo(), getMovimento());
+        sd.salva(getSaldo());
+        md.salva(getMovimento());
         return "index";
     }
 

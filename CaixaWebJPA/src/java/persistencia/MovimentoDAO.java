@@ -19,7 +19,6 @@ import vo.Saldo;
 public class MovimentoDAO {
 
     EntityManager em;
-    Saldo sa = new Saldo();
 
     public MovimentoDAO() {
         em = EntityManagerProvider.getEM();
@@ -53,38 +52,5 @@ public class MovimentoDAO {
         q.setParameter("fim", dataFinal);
         List<Saldo> listaSaldo = q.getResultList();
         return listaSaldo;
-    }
-
-    public List<Movimento> pesquisaSaidas() {
-        Query q = em.createQuery("select m from Movimento m where m.tipo = 'Saída' order by m.data");
-        List<Movimento> listaMovimento = q.getResultList();
-        return listaMovimento;
-    }
-
-    public List<Movimento> pesquisaEntradas() {
-        Query q = em.createQuery("select m from Movimento m where m.tipo = 'Entrada' order by m.data");
-        List<Movimento> listaMovimento = q.getResultList();
-        return listaMovimento;
-    }
-
-    public Double calcularSaldo() {
-        Double entradas = calcularSaldoEntradas();
-        Double saidas = calcularSaldoSaidas();
-        Double saldo = entradas - saidas;
-        return saldo;
-    }
-
-    public Double calcularSaldoEntradas() {
-        Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Entrada'");
-        List<Double> lista = q.getResultList();
-        Double saldo = lista.get(0) != null ? lista.get(0) : 0;
-        return saldo;
-    }
-
-    public Double calcularSaldoSaidas() {
-        Query q = em.createNativeQuery("select SUM(valor) from movimento where tipo = 'Saida'");
-        List<Double> lista = q.getResultList();
-        Double saldo = lista.get(0) != null ? lista.get(0) : 0;
-        return saldo;
     }
 }
