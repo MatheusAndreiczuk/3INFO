@@ -25,7 +25,7 @@
                         <p:outputLabel value="Data inicial: " for="itDataInicio"/>
                         <p:calendar id="itDataInicio" locale="pt" value="#{telaLocalizaBean.data.dataInicio}" pattern="dd/MM/yyyy" mask="true"
                                     required="false" requiredMessage="É obrigatório uma data!" showOn="button"/>
-                         <p:calendar id="itDataFinal" locale="pt" value="#{telaLocalizaBean.data.dataFinal}" pattern="dd/MM/yyyy" mask="true"
+                        <p:calendar id="itDataFinal" locale="pt" value="#{telaLocalizaBean.data.dataFinal}" pattern="dd/MM/yyyy" mask="true"
                                     required="false" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>
                         <p:commandButton id="bFiltro" value="Extrato por data" action="#{telaLocalizaBean.atualizaListaData()}" ajax="false" />
                         <p:tooltip id="ttFiltro" for="bFiltro" value="Ver extrato" trackMouse="true" /><br/><br/>
@@ -64,8 +64,8 @@
                             <h:outputText value="#{movimento.valor}"/>
                         </p:column>
                     </p:dataTable><br/><br/>
-                    <p:outputLabel value="Saldo final: R$"/>
-                    <p:outputLabel value="#{telaLocalizaBean.saldoFim()}"/>
+                    <div style="text-align: center;">  <p:outputLabel value="Saldo final: R$"/>
+                        <p:outputLabel value="#{telaLocalizaBean.saldoFim()}"/></div>
                 </h:form>
             </p:fieldset>
         </div>

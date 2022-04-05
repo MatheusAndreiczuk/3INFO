@@ -14,7 +14,8 @@ import java.util.Date;
 public class Data {
     private Date dataInicio;
     private Date dataFinal;
-    private double saldoInicial, saldoFinal;
+    private double saldoInicial;
+    private double saldoFinal;
 
     /**
      * @return the dataInicio

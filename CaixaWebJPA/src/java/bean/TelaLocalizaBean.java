@@ -8,7 +8,6 @@ package bean;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import persistencia.MovimentoDAO;
@@ -90,7 +89,7 @@ public class TelaLocalizaBean implements Serializable {
     public String salva() {
         sd.emTransaction();
         sd.verificaData(getSaldo());
-        sd.SaldoInexistente(getSaldo(), getMovimento());
+        sd.SaldoInexistente2(getSaldo(), getMovimento());
         sd.Soma_Subtrai(getSaldo(), getMovimento());
         sd.salva(getSaldo());
         md.salva(getMovimento());
