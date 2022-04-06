@@ -9,6 +9,7 @@
     </h:head>
     <h:body style="background-color: #cccccc;">         
         <h:form>
+            <p:commandButton icon="ui-icon-info" action="extrato_data" ajax="false"/>
             <p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
                 <h1>Controle de caixa</h1>
@@ -30,7 +31,8 @@
                 </p:selectOneMenu><br/><br/>      
                 <p:outputLabel value="Valor: " for="itValor"/>
                 <p:inputText id="itValor" value="#{telaLocalizaBean.movimento.valor}" /><br/><br/>   
-                <p:commandButton value="Gravar movimento" ajax="false" action="#{telaLocalizaBean.salva()}"/><br/><br/>
+                <p:commandButton value="Gravar movimento" ajax="false" action="#{telaLocalizaBean.salva()}"/>
+                <p:commandButton icon="ui-icon-refresh" ajax="false" action="#{telaLocalizaBean.limpaDados()}"/><br/><br/>
             </div>
         </h:form> 
         <h:form>

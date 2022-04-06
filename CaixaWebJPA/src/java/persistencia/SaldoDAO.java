@@ -87,12 +87,9 @@ public class SaldoDAO {
     public void SaldoInexistente(Saldo s, Movimento m) {
         emTransaction();
         s.setId(m.getId());
-        //
         Query saldo = em.createNativeQuery("select valor from saldo where datasaldo<? order by datasaldo desc limit 1");
         saldo.setParameter(1, m.getData());
         Object valorSaldo = saldo.getSingleResult();
-        System.out.println(valorSaldo + "é o ultimo saldo");
-        //
         if (m.getTipo().equals("Entrada")) {
             s.setDatasaldo(m.getData());
             s.setValor(m.getValor() + Double.parseDouble(valorSaldo.toString()));
@@ -100,7 +97,6 @@ public class SaldoDAO {
             s.setDatasaldo(m.getData());
             s.setValor(Double.parseDouble(valorSaldo.toString()) - m.getValor());
         }
-        //
         Query q = em.createNativeQuery("update saldo set valor = valor+? where datasaldo>?");
         q.setParameter(1, m.getValor());
         q.setParameter(2, m.getData());
@@ -116,12 +112,11 @@ public class SaldoDAO {
         }
         Query saldoVazio = em.createNativeQuery("select * from saldo where datasaldo<?");
         saldoVazio.setParameter(1, m.getData());
-        if (!saldoVazio.getResultList().isEmpty()) //
+        if (!saldoVazio.getResultList().isEmpty()) 
         {
             Query saldo = em.createNativeQuery("select valor from saldo where datasaldo<? order by datasaldo desc limit 1");
             saldo.setParameter(1, m.getData());
             Object valorSaldo = saldo.getSingleResult();
-            System.out.println(valorSaldo + "é o ultimo saldo");
             s.setDatasaldo(m.getData());
             s.setValor(m.getValor() + Double.parseDouble(valorSaldo.toString()));
         } else {

@@ -45,11 +45,11 @@ public class MovimentoDAO {
         return listaMovimento;
     }
 
-    public List<Saldo> pesquisaData(Date dataInicio, Date dataFinal) {
+    public List<Movimento> pesquisaData(Date dataInicio, Date dataFinal) {
         Query q = em.createQuery("select m from Movimento m where m.data between :inicio and :fim");
         q.setParameter("inicio", dataInicio);
         q.setParameter("fim", dataFinal);
-        List<Saldo> listaSaldo = q.getResultList();
+        List<Movimento> listaSaldo = q.getResultList();
         return listaSaldo;
     }
 }
