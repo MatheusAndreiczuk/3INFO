@@ -117,7 +117,7 @@ public class Painel extends JPanel implements ActionListener {
         });
         desenho.setMundo(0, 0, 20, 20);
         desenho.setViewPort(0, 0, 1, 1);
-        desenho.relacoesmetricas();
+        desenho.cenario();
     }
 
     @Override
