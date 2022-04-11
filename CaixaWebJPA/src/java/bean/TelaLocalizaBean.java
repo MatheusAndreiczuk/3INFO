@@ -45,32 +45,26 @@ public class TelaLocalizaBean implements Serializable {
     }
 
     public String atualizaListaData() {
+        listaData = new ListDataModel(md.pesquisaData(getData().getDataInicio(), getData().getDataFinal()));
+        return "extrato_data";
+    }
+
+    public double saldoIni() {
         if (data.getDataInicio() != null) {
-            listaData = new ListDataModel(md.pesquisaData(getData().getDataInicio(), getData().getDataFinal()));
-            return "extrato_data";
-        }else{
-            lista = new ListDataModel(md.pesquisa());
-            return "extrato_data";
-        }
-    }
-    
-    public double saldoIni(){
-        if(data.getDataInicio() != null){
             return sd.saldoIni(getData().getDataInicio(), getData().getSaldoInicial());
-        }else{
+        } else {
             return 0;
         }
     }
-    
-    public double saldoFim(){
-        if(data.getDataInicio() != null){
+
+    public double saldoFim() {
+        if (data.getDataInicio() != null) {
             return sd.saldoFim(getData().getDataFinal(), getData().getSaldoFinal());
-        }else{
+        } else {
             return 0;
         }
     }
-    
-    
+
     public DataModel<Movimento> getLista() {
         atualizaLista();
         return lista;
@@ -87,16 +81,27 @@ public class TelaLocalizaBean implements Serializable {
     }
 
     public String salva() {
+        if (sd.verificaData(getSaldo())) {
+            sd.Soma_Subtrai(getSaldo(), getMovimento());
+        } else {
+            sd.SaldoInexistente2(getSaldo(), getMovimento());
+        }
         sd.emTransaction();
         sd.verificaData(getSaldo());
-        sd.SaldoInexistente2(getSaldo(), getMovimento());
-        sd.Soma_Subtrai(getSaldo(), getMovimento());
         sd.salva(getSaldo());
         md.salva(getMovimento());
         return "index";
     }
 
     public String cancela() {
+        return "index";
+    }
+
+    public String limpaDados() {
+        movimento.setId(0);
+        movimento.setDescricao("");
+        movimento.setData(null);
+        movimento.setValor(0.0);
         return "index";
     }
 
@@ -113,6 +118,7 @@ public class TelaLocalizaBean implements Serializable {
     public void setMovimento(Movimento movimento) {
         this.movimento = movimento;
     }
+
     /**
      * @return the data
      */

@@ -9,28 +9,26 @@
     </h:head>
     <h:body style="background-color: #cccccc;">         
         <h:form>
-            <p:growl id="growl" showDetail="true" sticky="true"/>
+            <p:commandButton icon="ui-icon-info" action="manual.pdf" ajax="false"/></h:form>
+        <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
                 <h1>Controle de caixa</h1>
-                <div style="text-align: center;">
-                    <p:outputLabel value="Saldo total atualmente: "/>
-                    <p:outputLabel value="#{telaLocalizaBean.saldo()}"/>
-                </div><br/><br/>
-                <p:outputLabel value="Código: " for="itCodigo" />
-                <p:inputText id="itCodigo" value="#{telaLocalizaBean.movimento.id}" /><br/><br/>
+                <p:outputLabel value="Código: " for="itCodigo"/>
+                <p:inputText id="itCodigo" value="#{telaLocalizaBean.movimento.id}" readonly="true"/><br/><br/>
                 <p:outputLabel value="Data: " for="itData"/>
                 <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.movimento.data}" pattern="dd/MM/yyyy" mask="true"
                             required="true" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>
                 <p:outputLabel value="Descrição: " for="itDescricao"/>
-                <p:inputText id="itDescricao" value="#{telaLocalizaBean.movimento.descricao}"/><br/><br/>
+                <p:inputText id="itDescricao" value="#{telaLocalizaBean.movimento.descricao}" required="true" requiredMessage="É obrigatório uma descrição!"/><br/><br/>
                 <p:outputLabel value="Tipo: " for="itTipo"/>
                 <p:selectOneMenu id="itTipo" value="#{telaLocalizaBean.movimento.tipo}" required="true" requiredMessage="É obrigatório um tipo">
                     <f:selectItem itemLabel="Entrada" itemValue="Entrada"/>
                     <f:selectItem itemLabel="Saida" itemValue="Saida"/>
                 </p:selectOneMenu><br/><br/>      
                 <p:outputLabel value="Valor: " for="itValor"/>
-                <p:inputText id="itValor" value="#{telaLocalizaBean.movimento.valor}" /><br/><br/>   
-                <p:commandButton value="Gravar movimento" ajax="false" action="#{telaLocalizaBean.salva()}"/><br/><br/>
+                <p:inputText id="itValor" value="#{telaLocalizaBean.movimento.valor}" required="true" requiredMessage="É obrigatório um valor!"/><br/><br/>   
+                <p:commandButton value="Gravar movimento" ajax="false" action="#{telaLocalizaBean.salva()}"/>
+                <p:commandButton icon="ui-icon-refresh" ajax="false" action="#{telaLocalizaBean.limpaDados()}"/><br/><br/>
             </div>
         </h:form> 
         <h:form>
@@ -43,4 +41,3 @@
         </h:form>
     </h:body>
 </html>
-

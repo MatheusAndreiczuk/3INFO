@@ -25,19 +25,13 @@ public class MovimentoDAO {
     }
 
     public void salva(Movimento m) {
-        emTransaction();
+        em.getTransaction().begin();
         if (m.getId() == 0) {
             em.persist(m);
-        } else {
+        }else{
             em.merge(m);
         }
         em.getTransaction().commit();
-    }
-
-    public void emTransaction() {
-        if (!em.getTransaction().isActive()) {
-            em.getTransaction().begin();
-        }
     }
 
     public Movimento localiza(int id) {
@@ -51,11 +45,11 @@ public class MovimentoDAO {
         return listaMovimento;
     }
 
-    public List<Saldo> pesquisaData(Date dataInicio, Date dataFinal) {
+    public List<Movimento> pesquisaData(Date dataInicio, Date dataFinal) {
         Query q = em.createQuery("select m from Movimento m where m.data between :inicio and :fim");
         q.setParameter("inicio", dataInicio);
         q.setParameter("fim", dataFinal);
-        List<Saldo> listaSaldo = q.getResultList();
+        List<Movimento> listaSaldo = q.getResultList();
         return listaSaldo;
     }
 }

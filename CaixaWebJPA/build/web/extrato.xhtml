@@ -14,10 +14,6 @@
                 <h:form>
                     <p:commandButton id="bVoltar" icon="ui-icon-arrowreturnthick-1-w" action="index" ajax="false" />
                     <p:tooltip id="ttVoltar" for="bVoltar" value="Voltar" trackMouse="true" />
-                    <div style="text-align: center;">
-                        <p:outputLabel value="Saldo atual: R$"/>
-                        <p:outputLabel value="#{telaLocalizaBean.saldo()}"/>
-                    </div>
                     <br/>
                     <p:dataTable id="tabela" value="#{telaLocalizaBean.lista}" var="movimento" >
                         <p:column style="width:10%; text-align: center;">
