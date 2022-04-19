@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Cadastro de funcionários</title>
+    </h:head>
+    <h:body style="background-color: #cccccc;">         
+        <h:form>
+            <p:commandButton icon="ui-icon-info" action="manual.pdf" ajax="false"/></h:form>
+        <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
+            <div style="text-align: center;">
+                <h1>Controle de caixa</h1>
+                <p:outputLabel value="Código: " for="itCodigo"/>
+                <p:inputText id="itCodigo" value="#{telaLocalizaBean.movimento.id}" readonly="true"/><br/><br/>
+                <p:outputLabel value="Data: " for="itData"/>
+                <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.movimento.data}" pattern="dd/MM/yyyy" mask="true"
+                            required="true" requiredMessage="É obrigatório uma data!" showOn="button"/><br/><br/>
+                <p:outputLabel value="Descrição: " for="itDescricao"/>
+                <p:inputText id="itDescricao" value="#{telaLocalizaBean.movimento.descricao}" required="true" requiredMessage="É obrigatório uma descrição!"/><br/><br/>
+                <p:outputLabel value="Tipo: " for="itTipo"/>
+                <p:selectOneMenu id="itTipo" value="#{telaLocalizaBean.movimento.tipo}" required="true" requiredMessage="É obrigatório um tipo">
+                    <f:selectItem itemLabel="Entrada" itemValue="Entrada"/>
+                    <f:selectItem itemLabel="Saida" itemValue="Saida"/>
+                </p:selectOneMenu><br/><br/>      
+                <p:outputLabel value="Valor: " for="itValor"/>
+                <p:inputText id="itValor" value="#{telaLocalizaBean.movimento.valor}" required="true" requiredMessage="É obrigatório um valor!"/><br/><br/>   
+                <p:commandButton value="Gravar movimento" ajax="false" action="#{telaLocalizaBean.salva()}"/>
+                <p:commandButton icon="ui-icon-refresh" ajax="false" action="#{telaLocalizaBean.limpaDados()}"/><br/><br/>
+            </div>
+        </h:form> 
+        <h:form>
+            <div style="text-align: center;">
+                <p:commandButton id="bExtrato" value="Extrato completo" action="extrato" ajax="false" />
+                <p:tooltip id="ttExtrato" for="bExtrato" value="Ver extrato" trackMouse="true" /><br/><br/>
+                <p:commandButton id="bData" value="Extrato por data" action="extrato_data" ajax="false" />
+                <p:tooltip id="ttData" for="bData" value="Filtro por data" trackMouse="true" />
+            </div>
+        </h:form>
+    </h:body>
+</html>
