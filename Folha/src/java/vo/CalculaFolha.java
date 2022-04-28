@@ -11,7 +11,6 @@ package vo;
  */
 public class CalculaFolha {
 
-    private Funcionario funcionario;
     private Tabela tabela;
     private double inss;
     private double sf;
@@ -19,31 +18,31 @@ public class CalculaFolha {
     private double salliq;
     private double irrf;
 
-    public void calcula() {
+    public void calcula(Funcionario f) {
         //Cálculo do Vale Transporte  
-        if (funcionario.getVt().equals("S")) {
-            vt = funcionario.getSalario() * 6 / 100;
+        if (f.getVt().equals("S")) {
+            vt = f.getSalario() * 6 / 100;
         } else {
             vt = 0;
         }
         //Cálculo do Salário Família  
-        if (funcionario.getSalario() <= tabela.getTsf()) {
-            sf = funcionario.getDep14() * tabela.getVsf();
+        if (f.getSalario() <= tabela.getTsf()) {
+            sf = f.getDep14() * tabela.getVsf();
         } else {
             sf = 0;
         }
         //Cálculo do INSS  
-        if (funcionario.getSalario() <= tabela.getTinss1()) {
-            inss = funcionario.getSalario() * tabela.getAinss1() / 100;
+        if (f.getSalario() <= tabela.getTinss1()) {
+            inss = f.getSalario() * tabela.getAinss1() / 100;
         } else {
-            if (funcionario.getSalario() <= tabela.getTinss2()) {
-                inss = tabela.getTinss1() * tabela.getAinss1() / 100 + (funcionario.getSalario() - tabela.getTinss1()) * tabela.getAinss2() / 100;
+            if (f.getSalario() <= tabela.getTinss2()) {
+                inss = tabela.getTinss1() * tabela.getAinss1() / 100 + (f.getSalario() - tabela.getTinss1()) * tabela.getAinss2() / 100;
             } else {
-                if (funcionario.getSalario() <= tabela.getTinss3()) {
-                    inss = tabela.getTinss1() * tabela.getAinss1() / 100 + (tabela.getTinss2() - tabela.getTinss1()) * tabela.getAinss2() / 100 + (funcionario.getSalario() - tabela.getTinss2()) * tabela.getAinss3() / 100;
+                if (f.getSalario() <= tabela.getTinss3()) {
+                    inss = tabela.getTinss1() * tabela.getAinss1() / 100 + (tabela.getTinss2() - tabela.getTinss1()) * tabela.getAinss2() / 100 + (f.getSalario() - tabela.getTinss2()) * tabela.getAinss3() / 100;
                 } else {
-                    if (funcionario.getSalario() <= tabela.getTinss4()) {
-                        inss = tabela.getTinss1() * tabela.getAinss1() / 100 + (tabela.getTinss2() - tabela.getTinss1()) * tabela.getAinss2() / 100 + (tabela.getTinss3() - tabela.getTinss2()) * tabela.getAinss3() / 100 + (funcionario.getSalario() - tabela.getTinss3()) * tabela.getAinss4() / 100;
+                    if (f.getSalario() <= tabela.getTinss4()) {
+                        inss = tabela.getTinss1() * tabela.getAinss1() / 100 + (tabela.getTinss2() - tabela.getTinss1()) * tabela.getAinss2() / 100 + (tabela.getTinss3() - tabela.getTinss2()) * tabela.getAinss3() / 100 + (f.getSalario() - tabela.getTinss3()) * tabela.getAinss4() / 100;
                     } else {
                         inss = tabela.getTinss1() * tabela.getAinss1() / 100 + (tabela.getTinss2() - tabela.getTinss1()) * tabela.getAinss2() / 100 + (tabela.getTinss3() - tabela.getTinss2()) * tabela.getAinss3() / 100 + (tabela.getTinss4() - tabela.getTinss3()) * tabela.getAinss4() / 100;
                     }
@@ -51,7 +50,7 @@ public class CalculaFolha {
             }
         }
         //Cálculo do IRRF  
-        double bc = funcionario.getSalario() - inss - (funcionario.getDepir() * tabela.getDedpdep());
+        double bc = f.getSalario() - inss - (f.getDepir() * tabela.getDedpdep());
         if (bc <= tabela.getTirrf1()) {
             irrf = 0;
         } else {
@@ -70,21 +69,7 @@ public class CalculaFolha {
             }
         }
         //Cálculo do Salário Líquido  
-        salliq = funcionario.getSalario() - inss + sf - vt - irrf;
-    }
-
-    /**
-     * @return the funcionario
-     */
-    public Funcionario getFuncionario() {
-        return funcionario;
-    }
-
-    /**
-     * @param funcionario the funcionario to set
-     */
-    public void setFuncionario(Funcionario funcionario) {
-        this.funcionario = funcionario;
+        salliq = f.getSalario() - inss + sf - vt - irrf;
     }
 
     /**

@@ -6,12 +6,15 @@
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/java/vo/Funcionario.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/web/index.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/java/persistencia/FuncionarioDAO.java</file>
+            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/web/holerite.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/conf/persistence.xml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/java/bean/TelaLocalizaBean.java</file>
+            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/web/tabela.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/java/persistencia/TabelaDAO.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/java/vo/Tabela.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/java/persistencia/EntityManagerProvider.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/src/java/vo/CalculaFolha.java</file>
+            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Folha/web/funcionario.xhtml</file>
         </group>
     </open-files>
 </project-private>

@@ -6,13 +6,17 @@
 package vo;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  *
  * @author 2info2021
  */
 
+@Entity
 public class Tabela implements Serializable{
+    @Id
     private double tinss1, tinss2, tinss3, tinss4;
     private double ainss1, ainss2, ainss3, ainss4;
     private double tsf, vsf, dedpdep;

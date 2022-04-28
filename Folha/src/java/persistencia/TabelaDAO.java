@@ -17,26 +17,26 @@ import vo.Tabela;
 public class TabelaDAO {
 
     EntityManager em;
-
+    
     public TabelaDAO() {
         em = EntityManagerProvider.getEM();
     }
-    
-    public void altera(Tabela t){
-        emTransaction();
+
+    public void altera(Tabela t) {
+        em.getTransaction().begin();
         em.merge(t);
         em.getTransaction().commit();
     }
-    
-    public void emTransaction(){
-        if(!em.getTransaction().isActive()){
-            em.getTransaction().begin();
-        }
-    }
-    
-    public List<Tabela> pesquisa(){
+
+    public List<Tabela> pesquisa() {
         Query q = em.createQuery("select t from Tabela t order by t.tinss1");
         List<Tabela> listaTabela = q.getResultList();
         return listaTabela;
+    }
+    
+    public void exclui(Tabela t){
+        em.getTransaction().begin();
+        em.remove(t);
+        em.getTransaction().commit();
     }
 }

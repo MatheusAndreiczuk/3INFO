@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Holerite</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1 align="center">Holerite de #{funcionario.nome}</h1>
+            <h:outputText value="Matrícula: "/><h:outputText value="#{telaLocalizaBean.funcionario.matricula}"/><br/><br/>
+            <h:outputText value="Nome: "/><h:outputText value="#{telaLocalizaBean.funcionario.nome}"/><br/><br/>
+            <h:outputText value="Salário base: "/><h:outputText value="#{telaLocalizaBean.funcionario.salario}"/><br/><br/>
+            <h:outputText value="Valor INSS: "/><h:outputText value="#{telaLocalizaBean.inss}"/><br/><br/>
+            <h:outputText value="Valor IRRF: "/><h:outputText value="#{telaLocalizaBean.irrf}"/><br/><br/>
+            <h:outputText value="Vale transporte: "/><h:outputText value="#{telaLocalizaBean.vt}"/><br/><br/>
+            <h:outputText value="Salário família: "/><h:outputText value="#{telaLocalizaBean.sf}"/><br/><br/>
+            <h:outputText value="Salário líquido: "/><h:outputText value="#{telaLocalizaBean.salliq}"/><br/>
+        </h:form>
+    </h:body>
+</html>
+

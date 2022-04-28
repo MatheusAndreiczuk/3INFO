@@ -22,7 +22,7 @@ public class FuncionarioDAO {
     }
 
     public void salva(Funcionario f) {
-        emTransaction();
+        em.getTransaction().begin();
         if (f.getMatricula() == 0) {
             em.persist(f);
         }else{
@@ -30,7 +30,7 @@ public class FuncionarioDAO {
         }
         em.getTransaction().commit();
     }
-
+ 
     public Funcionario localiza(int matricula) {
         Funcionario f = em.find(Funcionario.class, matricula);
         return f;
