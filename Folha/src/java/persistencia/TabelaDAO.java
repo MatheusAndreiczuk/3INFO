@@ -34,6 +34,9 @@ public class TabelaDAO {
         return listaTabela;
     }
     
+    // localiza
+    // buscar o primeiro registro da tabela e setar no bean
+    
     public void exclui(Tabela t){
         em.getTransaction().begin();
         em.remove(t);

@@ -7,6 +7,7 @@ package bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import vo.CalculaFolha;
@@ -21,21 +22,15 @@ import persistencia.TabelaDAO;
  */
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class TelaLocalizaBean {
     private DataModel<Funcionario> lista;
     private DataModel<Tabela> listaTabela;
     private FuncionarioDAO fd = new FuncionarioDAO();
     private TabelaDAO td = new TabelaDAO();
     private Funcionario funcionario = new Funcionario();
-    private Tabela tabela = new Tabela();
+    private Tabela tabela;
     private CalculaFolha folha = new CalculaFolha();
-
-    private double inss;
-    private double sf;
-    private double vt;
-    private double salliq;
-    private double irrf;
     
     public TelaLocalizaBean(){
         
@@ -98,15 +93,13 @@ public class TelaLocalizaBean {
         return "funcionario";
     }
     
-    public String holerite(){  
+    public String holerite(){
         Funcionario f = funcionarioSelecionado();
         setFuncionario(f);
-        folha.calcula(getFuncionario());
-        inss = folha.getInss();
-        irrf = folha.getIrrf();
-        sf = folha.getSf();
-        vt = folha.getVt();
-        salliq = folha.getSalliq();
+        folha.setFuncionario(f);
+        // tem que passar o tabelaDAO.localiza()
+        // folha.setTabela( passa o localiza aqui);
+        folha.calcula();
         return "holerite";
     }
     
@@ -118,7 +111,7 @@ public class TelaLocalizaBean {
     public String voltar(){
         return "index";
     }
-    
+   
     public FuncionarioDAO getFd() {
         return fd;
     }
@@ -184,75 +177,5 @@ public class TelaLocalizaBean {
      */
     public void setFolha(CalculaFolha folha) {
         this.folha = folha;
-    }
-
-    /**
-     * @return the inss
-     */
-    public double getInss() {
-        return inss;
-    }
-
-    /**
-     * @param inss the inss to set
-     */
-    public void setInss(double inss) {
-        this.inss = inss;
-    }
-
-    /**
-     * @return the sf
-     */
-    public double getSf() {
-        return sf;
-    }
-
-    /**
-     * @param sf the sf to set
-     */
-    public void setSf(double sf) {
-        this.sf = sf;
-    }
-
-    /**
-     * @return the vt
-     */
-    public double getVt() {
-        return vt;
-    }
-
-    /**
-     * @param vt the vt to set
-     */
-    public void setVt(double vt) {
-        this.vt = vt;
-    }
-
-    /**
-     * @return the salliq
-     */
-    public double getSalliq() {
-        return salliq;
-    }
-
-    /**
-     * @param salliq the salliq to set
-     */
-    public void setSalliq(double salliq) {
-        this.salliq = salliq;
-    }
-
-    /**
-     * @return the irrf
-     */
-    public double getIrrf() {
-        return irrf;
-    }
-
-    /**
-     * @param irrf the irrf to set
-     */
-    public void setIrrf(double irrf) {
-        this.irrf = irrf;
     }
 }
