@@ -7,6 +7,8 @@ package vo;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -17,6 +19,8 @@ import javax.persistence.Id;
 @Entity
 public class Tabela implements Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private double tinss1, tinss2, tinss3, tinss4;
     private double ainss1, ainss2, ainss3, ainss4;
     private double tsf, vsf, dedpdep;
@@ -344,5 +348,19 @@ public class Tabela implements Serializable{
      */
     public void setDedpdep(double dedpdep) {
         this.dedpdep = dedpdep;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -29,13 +29,18 @@ public class TabelaDAO {
     }
 
     public List<Tabela> pesquisa() {
-        Query q = em.createQuery("select t from Tabela t order by t.tinss1");
+        Query q = em.createQuery("select t from Tabela t order by t.id");
         List<Tabela> listaTabela = q.getResultList();
         return listaTabela;
     }
     
     // localiza
     // buscar o primeiro registro da tabela e setar no bean
+     public Tabela localiza(int id) {
+        Tabela t = em.find(Tabela.class, id);
+        return t;
+    }
+
     
     public void exclui(Tabela t){
         em.getTransaction().begin();

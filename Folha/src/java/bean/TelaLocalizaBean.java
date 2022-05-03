@@ -84,6 +84,7 @@ public class TelaLocalizaBean {
     }
     
     public String novoTabela(){
+        setTabela(td.localiza(1));
         return "tabela";
     }
     
@@ -97,8 +98,7 @@ public class TelaLocalizaBean {
         Funcionario f = funcionarioSelecionado();
         setFuncionario(f);
         folha.setFuncionario(f);
-        // tem que passar o tabelaDAO.localiza()
-        // folha.setTabela( passa o localiza aqui);
+        folha.setTabela(td.localiza(1));
         folha.calcula();
         return "holerite";
     }
