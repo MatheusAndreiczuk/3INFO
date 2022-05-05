@@ -19,7 +19,7 @@
                         <p:commandButton id="bTabela" icon="pi pi-table" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #68228B;" action="#{telaLocalizaBean.novoTabela()}"/>
                         <p:tooltip id="ttTabela" for="bTabela" value="Ver tabela" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #68228B;" action="#{telaLocalizaBean.at68228BualizaLista}" update="tabela" />
-                        <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true" />
+                        <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
                     </div><br/>
                     <p:dataTable id="tabela" value="#{telaLocalizaBean.lista}" var="funcionario">
                         <p:column style="width:15%; text-align: center; background-color: #68228B; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
