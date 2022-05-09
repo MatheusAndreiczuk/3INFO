@@ -5,13 +5,14 @@
     <h:head>
         <title>Tabela</title>
         <link rel="stylesheet" href="primeflex.css"/>
+        <link rel="stylesheet" href="primeicons.css"/>
     </h:head>
     <h:body style="background-color: #FFFFFF;">
         <h:form>
-            <div class="grid">
-                <div class="col-6" style="text-align: center; background-color: black; color: #ffffff; text-decoration: none; width: 48%;"><h1> Tabela do INSS</h1></div>
-                 <div style="width: 2.5%; background-color: black; padding-top: 25px;"><p:commandButton id="bHome" icon="pi pi-home" style="font-size: 20px; border-radius: 0; padding-right:10px; border-color: black; margin-right:5px; background-color: black;" action="#{telaLocalizaBean.voltar()}"/></div>
-                <div class="col-6" style="text-align: center; align-content: center; background-color: black; color: #ffffff; text-decoration: none; width: 49.5%;"><h1 style="text-align: center;">Tabela IRRF</h1></div>
+            <div class="grid" style="font-family: Helvetica;">
+                <div class="col-6" style="text-align: center; background-color: black; color: #ffffff; text-decoration: none; width: 48%;"><h1> TABELA INSS</h1></div>
+                <div style="width: 2.5%; background-color: black; padding-top: 25px;"><p:commandButton id="bHome" icon="pi pi-home" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: black;" action="#{telaLocalizaBean.voltar()}"/></div>
+                <div class="col-6" style="text-align: center; align-content: center; background-color: black; color: #ffffff; text-decoration: none; width: 49.5%;"><h1 style="text-align: center;">TABELA IRRF</h1></div>
                 <div class="col-3" style="text-align: center; background-color: #c9c9ee; color: black; width: 24%;">Salário de contribuição</div>
                 <div class="col-3" style="text-align: center; background-color: #c9c9ee; color: black; width: 23%;">Alíquota</div>      
                 <div class="col-4" style="text-align: center; background-color: #c9c9ee; color: black; width: 31.66%; padding-left: 5px;">Base de cálculo</div>
@@ -19,70 +20,79 @@
                 <div class="col-1" style="text-align: center; background-color: #c9c9ee; color: black; width: 10.66%;">Dedução</div>               
                 <div class="col-1"><p:inputText style="width: 90%;" value="0"/></div>
                 <div class="col-1" style="text-align: center; padding-top: 20px; padding-right: 10px;">ATÉ</div>
-                <div class="col-1"><p:inputText style="width: 110%;" value="#{telaLocalizaBean.tabela.tinss1}"/></div>
+                <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss1}"/></div>
                 <div class="col-1"></div>
                 <div class="col-1" style="align-content: flex-start;"><p:inputText style="width: 48%; padding-left: 10px;" value="#{telaLocalizaBean.tabela.ainss1}"/></div>
                 <div class="col-1"></div>
-                <div class="col-1"><p:inputText style="width: 90%" value="0"/></div>
-                <div style="padding-top: 20px; margin-left: 50px; margin-right: 52px;">ATÉ</div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf1}" style="width: 120%"/></div>
-                <div class="col-1"><p:inputText value="0" style="width: 55%; margin-left: 105px; margin-right: 50px;"/></div>
-                <div class="col-1"><p:inputText value="0" style="width: 120%; margin-left: 110px;"/></div>
+                <div class="col-1"><p:inputText style="width: 90%; margin-left: 50px;" value="0"/></div>
+                <div style="padding-top: 20px; margin-left: 65px; margin-right: 38px;">ATÉ</div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf1}" style="width: 90%"/></div>
+                <div class="col-1"><p:inputText value="0" style="width: 55%; margin-left: 127px; margin-right: 50px;"/></div>
+                <div class="col-1"><p:inputText value="0" style="width: 80%; margin-left: 155px;"/></div>
                 <div class="col-1"></div>
-                
-                
+
+
                 <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss1}"/></div>
                 <div class="col-1" style="text-align: center; padding-top: 20px; padding-right: 10px;">ATÉ</div>
-                <div class="col-1"><p:inputText style="width: 110%;" value="#{telaLocalizaBean.tabela.tinss2}"/></div>
+                <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss2}"/></div>
                 <div class="col-1"></div>
                 <div class="col-1" style="align-content: flex-start;"><p:inputText style="width: 48%; padding-left: 10px;" value="#{telaLocalizaBean.tabela.ainss2}"/></div>
                 <div class="col-1"></div>
-                <div class="col-1"><p:inputText style="width: 90%" value="#{telaLocalizaBean.tabela.tirrf1}"/></div>
-                <div style="padding-top: 20px; margin-left: 50px; margin-right: 52px;">ATÉ</div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf2}" style="width: 120%"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf2}" style="width: 55%; margin-left: 105px; margin-right: 50px;"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf2}" style="width: 120%; margin-left: 110px;"/></div>
+                <div class="col-1"><p:inputText style="width: 90%; margin-left: 50px;" value="#{telaLocalizaBean.tabela.tirrf1}"/></div>
+                <div style="padding-top: 20px; margin-left: 65px; margin-right: 38px;">ATÉ</div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf2}" style="width: 90%"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf2}" style="width: 55%; margin-left: 127px; margin-right: 50px;"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf2}" style="width: 80%; margin-left: 155px;"/></div>
                 <div class="col-1"></div>
-                
+
                 <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss2}"/></div>
                 <div class="col-1" style="text-align: center; padding-top: 20px; padding-right: 10px;">ATÉ</div>
-                <div class="col-1"><p:inputText style="width: 110%;" value="#{telaLocalizaBean.tabela.tinss3}"/></div>
+                <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss3}"/></div>
                 <div class="col-1"></div>
                 <div class="col-1" style="align-content: flex-start;"><p:inputText style="width: 48%; padding-left: 10px;" value="#{telaLocalizaBean.tabela.ainss3}"/></div>
                 <div class="col-1"></div>
-                <div class="col-1"><p:inputText style="width: 90%" value="#{telaLocalizaBean.tabela.tirrf2}"/></div>
-                <div style="padding-top: 20px; margin-left: 50px; margin-right: 52px;">ATÉ</div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf3}" style="width: 120%"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf3}" style="width: 55%; margin-left: 105px; margin-right: 50px;"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf3}" style="width: 120%; margin-left: 110px;"/></div>
+                <div class="col-1"><p:inputText style="width: 90%; margin-left: 50px;" value="#{telaLocalizaBean.tabela.tirrf2}"/></div>
+                <div style="padding-top: 20px; margin-left: 65px; margin-right: 38px;">ATÉ</div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf3}" style="width: 90%"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf3}" style="width: 55%; margin-left: 127px; margin-right: 50px;"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf3}" style="width: 80%; margin-left: 155px;"/></div>
                 <div class="col-1"></div>
-                
-                 <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss3}"/></div>
+
+                <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss3}"/></div>
                 <div class="col-1" style="text-align: center; padding-top: 20px; padding-right: 10px;">ATÉ</div>
-                <div class="col-1"><p:inputText style="width: 110%;" value="#{telaLocalizaBean.tabela.tinss4}"/></div>
+                <div class="col-1"><p:inputText style="width: 90%;" value="#{telaLocalizaBean.tabela.tinss4}"/></div>
                 <div class="col-1"></div>
                 <div class="col-1" style="align-content: flex-start;"><p:inputText style="width: 48%; padding-left: 10px;" value="#{telaLocalizaBean.tabela.ainss4}"/></div>
                 <div class="col-1"></div>
-                <div class="col-1"><p:inputText style="width: 90%" value="#{telaLocalizaBean.tabela.tirrf3}"/></div>
-                <div style="padding-top: 20px; margin-left: 50px; margin-right: 52px;">ATÉ</div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf4}" style="width: 120%"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf4}" style="width: 55%; margin-left: 105px; margin-right: 50px;"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf4}" style="width: 120%; margin-left: 110px;"/></div>
+                <div class="col-1"><p:inputText style="width: 90%; margin-left: 50px;" value="#{telaLocalizaBean.tabela.tirrf3}"/></div>
+                <div style="padding-top: 20px; margin-left: 65px; margin-right: 38px;">ATÉ</div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf4}" style="width: 90%"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf4}" style="width: 55%; margin-left: 127px; margin-right: 50px;"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf4}" style="width: 80%; margin-left: 155px;"/></div>
                 <div class="col-1"></div>
-                
-                <div class="col-1"></div>
-                <div class="col-1"></div>
-                <div class="col-1"></div>
-                <div class="col-1"></div>
-                <div class="col-1"></div>
-                <div class="col-1"></div>
-                <div class="col-2"><outputText style="width: 90%" value="ACIMA DE"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf4}" style="width: 120%"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf5}" style="width: 55%; margin-left: 105px; margin-right: 50px;"/></div>
-                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf5}" style="width: 120%; margin-left: 110px;"/></div>
-                <div class="col-1"></div>
-                
-                
+
+                <div class="col-6"></div>
+                <div class="col-2" style="margin-top: 11px; margin-left: 88px; margin-right: -100px;">ACIMA DE</div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.tirrf4}" style="width: 90%"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.airrf5}" style="width: 55%; margin-left: 127px; margin-right: 50px;"/></div>
+                <div class="col-1"><p:inputText value="#{telaLocalizaBean.tabela.dirrf5}" style="width: 80%; margin-left: 155px;"/></div>
+                <div class="col-7" style="margin-right: 38px;"></div>
+                <div class="col-3" style="margin-left: -130px; background-color: #f2f2f2; padding-top: 20px;">DEDUÇÃO POR DEPENDENTE</div>
+                <div class="col-2" style="background-color: #f2f2f2; width: 21.9%;"><p:inputText style="margin-left: 233px; width: 29%;" value="#{telaLocalizaBean.tabela.dedpdep}"/></div>       
+                <div class="col-12"></div>
+                <div class="col-12"></div>
+                <div class="col-4"></div>
+                <div class="col-4" style="background-color: black; color: #FFFFFF; text-align: center;">TABELA SALÁRIO FAMÍLIA</div>
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+                <div class="col-2" style="text-align: center; background-color: #c9c9ee;">Salário</div>
+                <div class="col-2" style="text-align: center; background-color: #c9c9ee;">Valor por dependente</div>
+                <div class="col-4"></div>
+                <div class="col-4"></div>
+                <div class="col-1" style="text-align: center; padding-top: 20px;">ATÉ</div>
+                <div class="col-1"><p:inputText style="width:90%" value="#{telaLocalizaBean.tabela.tsf}"/></div>
+                <div class="col-2"><p:inputText style="margin-left: 78px; width: 45%;" value="#{telaLocalizaBean.tabela.vsf}"/></div>
+                <div class="col-4"></div>
             </div>
         </h:form>
     </h:body>

@@ -22,7 +22,7 @@ import persistencia.TabelaDAO;
  */
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class TelaLocalizaBean {
     private DataModel<Funcionario> lista;
     private DataModel<Tabela> listaTabela;

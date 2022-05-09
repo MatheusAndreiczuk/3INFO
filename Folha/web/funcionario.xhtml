@@ -5,16 +5,16 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Controle de caixa</title>
+        <title>Controle de funcionários</title>
     </h:head>
     <h:body style="background-color: #cccccc;">         
         <h:form>
-            <p:commandButton icon="pi pi-undo" action="index.xhtml" ajax="false"/></h:form>
+            <p:commandButton icon="pi pi-arrow-left" action="index.xhtml" ajax="false"/></h:form>
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
-            <div style="text-align: center;">
-                <h1>Cadastro de funcionários</h1>                
+            <div style="text-align: center; font-family: Helvetica;">
+                <h1>Cadastro / alteração de funcionários</h1>                
                 <p:outputLabel value="Matrícula: " for="itMatricula"/>
-                <p:inputText id="itMatricula" value="#{telaLocalizaBean.funcionario.matricula}" readonly="true"/><br/><br/>
+                <p:inputText id="itMatricula" placeholder="Nome" value="#{telaLocalizaBean.funcionario.matricula}" readonly="true"/><br/><br/>
                 <p:outputLabel value="Nome: " for="itNome"/>
                 <p:inputText id="itNome" value="#{telaLocalizaBean.funcionario.nome}" required="true" requiredMessage="É obrigatório um nome!"/><br/><br/>
                 <p:outputLabel value="Setor: " for="itSetor"/>
