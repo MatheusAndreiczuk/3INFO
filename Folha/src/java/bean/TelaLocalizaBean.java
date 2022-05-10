@@ -88,10 +88,19 @@ public class TelaLocalizaBean {
         return "tabela";
     }
     
+    public String cancela(){
+        return "index";
+    }
+    
     public String edita(){
         Funcionario f = funcionarioSelecionado();
         setFuncionario(f);
         return "funcionario";
+    }
+    
+    public String editaTabela(){
+        td.altera(tabela);
+        return "index";
     }
     
     public String holerite(){

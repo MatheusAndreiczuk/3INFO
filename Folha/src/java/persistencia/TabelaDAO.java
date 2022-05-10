@@ -17,13 +17,14 @@ import vo.Tabela;
 public class TabelaDAO {
 
     EntityManager em;
-    
+
     public TabelaDAO() {
         em = EntityManagerProvider.getEM();
     }
 
     public void altera(Tabela t) {
         em.getTransaction().begin();
+        System.out.println(t.getId() + " " + t.getTinss1());
         em.merge(t);
         em.getTransaction().commit();
     }
@@ -33,16 +34,15 @@ public class TabelaDAO {
         List<Tabela> listaTabela = q.getResultList();
         return listaTabela;
     }
-    
+
     // localiza
     // buscar o primeiro registro da tabela e setar no bean
-     public Tabela localiza(int id) {
+    public Tabela localiza(int id) {
         Tabela t = em.find(Tabela.class, id);
         return t;
     }
 
-    
-    public void exclui(Tabela t){
+    public void exclui(Tabela t) {
         em.getTransaction().begin();
         em.remove(t);
         em.getTransaction().commit();

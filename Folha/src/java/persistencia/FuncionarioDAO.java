@@ -22,8 +22,8 @@ public class FuncionarioDAO {
     }
 
     public void salva(Funcionario f) {
-        em.getTransaction().begin();
-        if (f.getMatricula() == 0) {
+        emTransaction();
+        if (f.getMatricula()== 0) {
             em.persist(f);
         }else{
             em.merge(f);

@@ -7,13 +7,12 @@
     <h:head>
         <title>Lista de funcionários</title>
     </h:head>
-    <h:body style="background-color: #FFFFFF;">
-
-
+    <h:body style="background-color: #FFFFFF;">        
         <div class="geral">
             <p:fieldset legend="Funcionários" style="margin-bottom:20px">
-                <h:form>
-                    <div align="center">                   
+                <h:form> 
+                    <p:commandButton style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #68228B; text-align: left;" icon="pi pi-info-circle" action="manual.pdf"/>
+                        <div align="center">
                         <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #68228B;" action="#{telaLocalizaBean.novo()}"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Cadastrar novo funcionário" trackMouse="true"/>
                         <p:commandButton id="bTabela" icon="pi pi-table" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #68228B;" action="#{telaLocalizaBean.novoTabela()}"/>

@@ -1,26 +1,108 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Holerite</title>
+        <link rel="stylesheet" href="primeflex.css"/>
     </h:head>
-    <h:body>
+    <h:body>        
         <h:form>
-            <h1 align="center">Holerite de #{telaLocalizaBean.funcionario.nome}</h1>
-            <h:outputText value="Matrícula: "/>
-            <h:outputText value="#{telaLocalizaBean.funcionario.matricula}"/><br/><br/>
-            <h:outputText value="Nome: "/>
-            <h:outputText value="#{telaLocalizaBean.funcionario.nome}"/><br/><br/>
-            <h:outputText value="Salário base: "/>
-            <h:outputText value="#{telaLocalizaBean.funcionario.salario}"/><br/><br/>
-            
-            <h:outputText value="Começa o holerite"/><br/>
-            <h:outputText value="#{telaLocalizaBean.folha.inss}"/><br/><br/>
-            <h:outputText value="#{telaLocalizaBean.folha.irrf}"/><br/><br/>
-            <h:outputText value="#{telaLocalizaBean.folha.vt}"/><br/><br/>
-            <h:outputText value="#{telaLocalizaBean.folha.sf}"/><br/><br/>
-            <h:outputText value="#{telaLocalizaBean.folha.salliq}"/>
+            <div style="text-align: center; font-family: Helvetica; font-size: 15px;" class="grid">
+                <div class="col-3"></div>
+                <div class="col-6"><h1 style=" color: black; padding-top: 15px; padding-bottom: 15px;">Recibo de pagamento de salário</h1></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3" style="background-color: #99ff99"><p:outputLabel value="NOME DA EMPRESA LTDA"/></div>
+                <div class="col-3" style="background-color: #99ff99;"><p:outputLabel value="JANEIRO/2022"/></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-3" style="background-color: #99ff99; border-bottom: 2px solid black;"><p:outputLabel value="CNPJ: 00.000.000/001-36"/></div>
+                <div class="col-3" style="background-color: #99ff99; border-bottom: 2px solid black;"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-1" style="background-color: #99ff99; border-bottom: 2px solid black;"><p:outputLabel value="Matrícula"/></div>
+                <div class="col-1" style="background-color: #99ff99; border-bottom: 2px solid black;"><p:outputLabel value="Nome"/></div>
+                <div class="col-2" style="background-color: #99ff99; border-bottom: 2px solid black;"></div>
+                <div class="col-1" style="background-color: #99ff99; border-bottom: 2px solid black;"><p:outputLabel value="Setor"/></div>
+                <div class="col-1" style="background-color: #99ff99; border-bottom: 2px solid black;"><p:outputLabel value="Cargo"/></div>
+                <div class="col-3"></div>
+
+                <div class="col-3"></div>
+                <div class="col-1" style="background-color: #99ff99;"><p:outputLabel value="#{telaLocalizaBean.funcionario.matricula}"/></div>
+                <div class="col-1" style="background-color: #99ff99;"><p:outputLabel value="#{telaLocalizaBean.funcionario.nome}"/></div>
+                <div class="col-2" style="background-color: #99ff99;"></div>
+                <div class="col-1" style="background-color: #99ff99;"><p:outputLabel value="#{telaLocalizaBean.funcionario.setor}"/></div>
+                <div class="col-1" style="background-color: #99ff99;"><p:outputLabel value="#{telaLocalizaBean.funcionario.cargo}"/></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-6" style="background-color: #99ff99;"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-6" style="background-color: #99ff99;"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-top: 2px solid black; border-left:  2px solid black;">Cód</div>
+                <div class="col-3" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-top: 2px solid black;">Descrição</div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-top: 2px solid black;">Vencimentos</div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-top: 2px solid black;">Descontos</div>
+                <div class="col-3"></div>
+
+                <div class="col-3"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-left:  2px solid black;">101</div>
+                <div class="col-3" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;">SALARIO</div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"><p:outputLabel value="#{telaLocalizaBean.funcionario.salario}"><f:convertNumber pattern="0.00"/></p:outputLabel></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"></div>
+                <div class="col-3"></div>
+
+                <div class="col-3"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-left: 2px solid black;">973</div>
+                <div class="col-3" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;">INSS</div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"><p:outputLabel value="#{telaLocalizaBean.folha.inss}"><f:convertNumber pattern="0.00"/></p:outputLabel></div>
+                <div class="col-3"></div>
+
+                <div class="col-3"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-left:  2px solid black;">987</div>
+                <div class="col-3" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;">IRRF S.SALARIO</div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"><p:outputLabel value="#{telaLocalizaBean.folha.irrf}"><f:convertNumber pattern="0.00"/></p:outputLabel></div>
+                <div class="col-3"></div>
+
+                <div class="col-3"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-left:  2px solid black;">988</div>
+                <div class="col-3" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;">VALE TRANSPORTE</div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black;"><p:outputLabel value="#{telaLocalizaBean.folha.vt}"><f:convertNumber pattern="0.00"/></p:outputLabel></div>
+                <div class="col-3"></div>
+
+                <div class="col-3"></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-left:  2px solid black; border-bottom: 2px solid black;">989</div>
+                <div class="col-3" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-bottom: 2px solid black;">SALARIO FAMILIA</div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-bottom: 2px solid black;"><p:outputLabel value="#{telaLocalizaBean.folha.sf}"><f:convertNumber pattern="0.00"/></p:outputLabel></div>
+                <div class="col-1" style="text-align: left; background-color: #99ff99; border-right: 2px solid black; border-bottom: 2px solid black;"></div>
+                <div class="col-3"></div>
+                
+                <div class="col-3"></div>
+                <div class="col-6" style="background-color: #99ff99;"></div>
+                <div class="col-3"></div>
+                <div class="col-3"></div>
+                <div class="col-6" style="background-color: #99ff99;"></div>
+                <div class="col-3"></div>
+                
+                <div class="col-3"></div>
+                <div class="col-3" style="text-align: right; background-color: #99ff99; border-bottom: 2px solid black; border-top: 2px solid black;"></div>
+                <div class="col-2" style="text-align: right; background-color: #99ff99; border-bottom: 2px solid black; border-top: 2px solid black;">SALARIO LIQUIDO</div>
+                <div class="col-1" style="text-align: right; background-color: #99ff99; border-bottom: 2px solid black; border-top: 2px solid black;"><p:outputLabel value="#{telaLocalizaBean.folha.salliq}"><f:convertNumber pattern="0.00"/></p:outputLabel></div>
+                <div class="col-3"></div>
+                <div class="col-12"></div>
+                
+                <div class="col-3"></div>
+                <div class="col-3"><p:commandButton value="Voltar" action="#{telaLocalizaBean.voltar()}"/></div>
+                <div class="col-3"><p:commandButton value="Exportar para PDF"/></div>
+            </div>
         </h:form>
     </h:body>
 </html>
