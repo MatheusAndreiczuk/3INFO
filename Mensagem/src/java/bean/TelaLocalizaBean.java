@@ -21,7 +21,7 @@ import vo.Usuario;
  */
 
 @ManagedBean
-@SessionScoped
+@RequestScoped
 public class TelaLocalizaBean {
     private DataModel<Mensagem> lista;
     private DataModel<Usuario> listaUsuario;
@@ -37,18 +37,18 @@ public class TelaLocalizaBean {
     }
     
     public String atualizaListaMensagem(){
-        setLista((DataModel<Mensagem>) new ListDataModel(getMd().pesquisa()));
+        lista = new ListDataModel(getMd().pesquisa());
         return "index";
     }
     
     public String atualizaListaUsuario(){
-        setListaUsuario((DataModel<Usuario>) new ListDataModel(getUd().pesquisa()));
-        return "tabela";
+        listaUsuario = new ListDataModel(getUd().pesquisa());
+        return "admin_page";
     }
     
-    public DataModel<Usuario> getlistaUsuario(){
+    public DataModel<Usuario> listaUsuario(){
         atualizaListaUsuario();
-        return getListaUsuario();
+        return listaUsuario;
     }
     
      public Usuario usuarioSelecionado(){
@@ -71,6 +71,11 @@ public class TelaLocalizaBean {
     
     public String novoUsuario(){
         return "cad_usuario";
+    }
+    
+    public String salva(){
+        ud.salva(getUsuario());
+        return "admin_page";
     }
     
     public String editaUsuario(){
@@ -167,34 +172,6 @@ public class TelaLocalizaBean {
      */
     public void setSenhaAdmin(String senhaAdmin) {
         this.senhaAdmin = senhaAdmin;
-    }
-
-    /**
-     * @return the lista
-     */
-    public DataModel<Mensagem> getLista() {
-        return lista;
-    }
-
-    /**
-     * @param lista the lista to set
-     */
-    public void setLista(DataModel<Mensagem> lista) {
-        this.lista = lista;
-    }
-
-    /**
-     * @return the listaUsuario
-     */
-    public DataModel<Usuario> getListaUsuario() {
-        return listaUsuario;
-    }
-
-    /**
-     * @param listaUsuario the listaUsuario to set
-     */
-    public void setListaUsuario(DataModel<Usuario> listaUsuario) {
-        this.listaUsuario = listaUsuario;
     }
 }
    

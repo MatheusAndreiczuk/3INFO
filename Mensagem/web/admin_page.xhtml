@@ -17,7 +17,7 @@
                         <p:commandButton id="bHome" icon="pi pi-home" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.signOut()}"/>
                         <p:tooltip id="ttTabela" for="bHome" value="Página inicial" trackMouse="true"/>
                     </div><br/>
-                    <p:dataTable id="tabela" value="#{telaLocalizaBean.listaUsuario}" var="usuario">
+                    <p:dataTable id="tabela" value="#{telaLocalizaBean.listaUsuario()}" var="usuario">
                         <p:column style="width:15%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Usuário" style="color: #FFFFFF; font-size: 16px;"/>
