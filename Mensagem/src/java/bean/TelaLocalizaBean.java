@@ -5,6 +5,13 @@
  */
 package bean;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -19,11 +26,11 @@ import vo.Usuario;
  *
  * @author 2info2021
  */
-
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class TelaLocalizaBean {
-    private DataModel<Mensagem> lista;
+
+    private DataModel<Mensagem> listaMensagem;
     private DataModel<Usuario> listaUsuario;
     private UsuarioDAO ud = new UsuarioDAO();
     private MensagemDAO md = new MensagemDAO();
@@ -31,65 +38,99 @@ public class TelaLocalizaBean {
     private String senhaAdmin = "major";
     private Usuario usuario = new Usuario();
     private Mensagem mensagem = new Mensagem();
-    
-    public TelaLocalizaBean(){
-        
+
+    public TelaLocalizaBean() {
+
     }
-    
-    public String atualizaListaMensagem(){
-        lista = new ListDataModel(getMd().pesquisa());
+
+    public String atualizaListaMensagem() {
+        listaMensagem = new ListDataModel(getMd().filtroMensagem(usuario.getUsuario()));
         return "index";
     }
-    
-    public String atualizaListaUsuario(){
+
+    public String atualizaListaUsuario() {
         listaUsuario = new ListDataModel(getUd().pesquisa());
         return "admin_page";
     }
-    
-    public DataModel<Usuario> listaUsuario(){
+
+    public DataModel<Usuario> listaUsuario() {
         atualizaListaUsuario();
         return listaUsuario;
     }
-    
-     public Usuario usuarioSelecionado(){
+
+    public DataModel<Mensagem> listaMensagem() {
+        atualizaListaMensagem();
+        return listaMensagem;
+    }
+
+    public Usuario usuarioSelecionado() {
         Usuario u = listaUsuario.getRowData();
         return u;
     }
-    
-    public String verificaAdmin(){
-        if(usuario.getUsuario().equals(admin) && usuario.getSenha().equals(senhaAdmin)){
+
+    public Mensagem mensagemSelecionada() {
+        Mensagem m = listaMensagem.getRowData();
+        return m;
+    }
+
+    public String verificaAdmin() throws ParseException {
+        if (usuario.getUsuario().equals(admin) && usuario.getSenha().equals(senhaAdmin)) {
             return "admin_page";
-        }else{
-            md.pesquisaMensagem(usuario.getUsuario());
+        } else {
+            listaMensagem();
             return "mensagem";
         }
     }
-    
-    public String signOut(){
+
+    public String signOut() {
+        usuario.setUsuario("");
+        usuario.setSenha("");
         return "index";
     }
-    
-    public String novoUsuario(){
+
+    public String novoUsuario() {
         return "cad_usuario";
     }
-    
-    public String salva(){
+
+    public String voltaMensagem() {
+        listaMensagem();
+        return "mensagem";
+    }
+
+    public String novaMensagem() {
+        mensagem.setData(Calendar.getInstance());
+        mensagem.getData().add(Calendar.HOUR, -3);
+        return "cad_mensagem";
+    }
+
+    public String salva() {
         ud.salva(getUsuario());
         return "admin_page";
     }
-    
-    public String editaUsuario(){
+
+    public String salvaMensagem() {
+        md.salva(getMensagem());
+        return "mensagem";
+    }
+
+    public String editaUsuario() {
         Usuario u = usuarioSelecionado();
         setUsuario(u);
         return "cad_usuario";
     }
-    
-    public String excluiUsuario(){
+
+    public String excluiUsuario() {
         Usuario u = usuarioSelecionado();
         ud.exclui(u);
         return "admin_page";
     }
-    
+
+    public String excluiMensagem() {
+        Mensagem m = mensagemSelecionada();
+        md.exclui(m);
+        return "mensagem";
+    }
+
     /**
      * @return the ud
      */
@@ -174,4 +215,3 @@ public class TelaLocalizaBean {
         this.senhaAdmin = senhaAdmin;
     }
 }
-   

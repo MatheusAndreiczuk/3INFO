@@ -1,12 +1,92 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Mensagens</title>
+        <script type="text/javascript">PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Data Atual',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo Dia'
+            };</script>
     </h:head>
-    <h:body>
-        <h1 align="center">Olá</h1>
+    <h:body style="background-color: #FFFFFF;">        
+        <div class="geral">
+            <p:fieldset legend="Mensagens" style="margin-bottom:20px">
+                <h:form>
+                    <div align="center">
+                        <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.novaMensagem()}"/>
+                        <p:tooltip id="ttNovo" for="bNovo" value="Enviar mensagem" trackMouse="true"/>
+                        <p:commandButton id="bHome" icon="pi pi-home" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.signOut()}"/>
+                        <p:tooltip id="ttTabela" for="bHome" value="Página inicial" trackMouse="true"/>
+                    </div><br/>
+                    <p:dataTable id="tabela" value="#{telaLocalizaBean.listaMensagem()}" var="mensagem">
+                        <p:column style="width:10%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="ID" style="color: #FFFFFF; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{mensagem.id}"/>
+                        </p:column>
+                        <p:column style="width:25%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="Assunto" style="color: #FFFAFA; font-size: 16px;" />
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{mensagem.assunto}"/>
+                        </p:column>
+                        <p:column style="width:60%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
+                            <f:facet name="header">
+                                <h:outputText value="Mensagem" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{mensagem.mensagem}"/>
+                        </p:column>
+                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
+                            <f:facet name="header">
+                                <h:outputText value="Data" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;"  value="#{mensagem.data.time}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
+                            </h:outputText>                           
+                        </p:column>
+                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
+                            <f:facet name="header">
+                                <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluiMensagem()}" update="tabela" >
+                                <p:confirm header="Confirmação" message="Tem certeza que deseja excluir a mensagem #{mensagem.id}?" icon="pi pi-exclamation-triangle" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+                            </p:confirmDialog>
+                            <p:tooltip for="bExclui" value="Excluir mensagem #{mensagem.id}" trackMouse="true" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:fieldset>
+        </div>
     </h:body>
 </html>
-

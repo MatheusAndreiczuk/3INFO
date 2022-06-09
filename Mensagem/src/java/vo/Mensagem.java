@@ -6,7 +6,7 @@
 package vo;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,12 +27,10 @@ public class Mensagem implements Serializable {
     private String remetente;
     private String destinatario;
     private String assunto;
-    @Temporal(TemporalType.DATE)
-    private Date data;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar data;
     private String mensagem;
-
     
-
     /**
      * @return the remetente
      */
@@ -74,21 +72,7 @@ public class Mensagem implements Serializable {
     public void setAssunto(String assunto) {
         this.assunto = assunto;
     }
-
-    /**
-     * @return the data
-     */
-    public Date getData() {
-        return data;
-    }
-
-    /**
-     * @param data the data to set
-     */
-    public void setData(Date data) {
-        this.data = data;
-    }
-
+    
     /**
      * @return the mensagem
      */
@@ -115,5 +99,19 @@ public class Mensagem implements Serializable {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the data
+     */
+    public Calendar getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Calendar data) {
+        this.data = data;
     }
 }

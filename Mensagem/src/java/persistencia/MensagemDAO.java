@@ -28,7 +28,7 @@ public class MensagemDAO {
         }
     }
     
-    public List<Mensagem> pesquisaMensagem(String usuario){
+    public List<Mensagem> filtroMensagem(String usuario){
         Query q = em.createQuery("select m from Mensagem m where m.destinatario like :usuario");
         q.setParameter("usuario", usuario);
         List<Mensagem> listaMensagem = q.getResultList();
