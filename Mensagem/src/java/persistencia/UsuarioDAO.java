@@ -8,6 +8,7 @@ package persistencia;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import vo.Mensagem;
 import vo.Usuario;
 
 /**
@@ -25,6 +26,19 @@ public class UsuarioDAO {
     public void transaction() {
         if (!em.getTransaction().isActive()) {
             em.getTransaction().begin();
+        }
+    }
+    
+    public boolean verificaUsuarioExistente(String usuario){
+        Query q = em.createQuery("select u from Usuario u where u.usuario = :user");
+        q.setParameter("user", usuario);
+        List<Usuario> listaUsuario = q.getResultList();
+        if(!listaUsuario.isEmpty()){
+            System.out.println("Tem usuario");
+            return true;
+        }else{
+            System.out.println("Nao tem usuario");
+            return false;
         }
     }
     

@@ -6,17 +6,15 @@
 package bean;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Locale;
-import java.util.TimeZone;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import org.primefaces.PF;
+import org.primefaces.PrimeFaces;
 import persistencia.MensagemDAO;
 import persistencia.UsuarioDAO;
 import vo.Mensagem;
@@ -77,11 +75,16 @@ public class TelaLocalizaBean {
         if (usuario.getUsuario().equals(admin) && usuario.getSenha().equals(senhaAdmin)) {
             return "admin_page";
         } else {
-            listaMensagem();
-            return "mensagem";
+            if(ud.verificaUsuarioExistente(usuario.getUsuario())){
+                listaMensagem();
+                return "mensagem";
+            }else{
+                PF.current().dialog().openDynamic("dlg2", options, null);
+                return signOut();
+            }
         }
     }
-
+    
     public String signOut() {
         usuario.setUsuario("");
         usuario.setSenha("");
@@ -89,6 +92,9 @@ public class TelaLocalizaBean {
     }
 
     public String novoUsuario() {
+        usuario.setNome("");
+        usuario.setSenha("");
+        usuario.setUsuario("");
         return "cad_usuario";
     }
 
@@ -99,7 +105,10 @@ public class TelaLocalizaBean {
 
     public String novaMensagem() {
         mensagem.setData(Calendar.getInstance());
-        mensagem.getData().add(Calendar.HOUR, -3);
+        // se precisar tirar 3 horas: 
+        // mensagem.getData().add(Calendar.HOUR, -3);
+        String rmt = usuario.getUsuario();
+        mensagem.setRemetente(rmt);
         return "cad_mensagem";
     }
 

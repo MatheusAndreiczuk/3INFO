@@ -43,19 +43,13 @@
                 <h1>Cadastro de mensagens</h1>                
                 <p:outputLabel value="ID: " for="itId"/>
                 <p:inputText id="itId" value="#{telaLocalizaBean.mensagem.id}" readonly="true"/><br/><br/>               
-                <p:outputLabel value="Remetente: " for="itRemetente"/>
-                <p:inputText id="itRemetente" value="#{telaLocalizaBean.mensagem.remetente}" readonly="true"/><br/><br/>
                 <p:outputLabel value="Destinatário: " for="itDestinatario"/>
                 <p:inputText id="itDestinatario" value="#{telaLocalizaBean.mensagem.destinatario}" required="true" requiredMessage="É obrigatório um destinatário!"/><br/><br/>    
                 <p:outputLabel value="Assunto: " for="itAssunto"/>
                 <p:inputText id="itAssunto" value="#{telaLocalizaBean.mensagem.assunto}"/><br/><br/>  
                 <p:outputLabel value="Mensagem: " for="itMensagem"/>
-                <p:inputText id="itMensagem" value="#{telaLocalizaBean.mensagem.mensagem}" required="true" requiredMessage="É obrigatório uma mensagem!"/><br/><br/>  
-                 <p:outputLabel value="Data: " for="itData"/>
-                 <p:inputText id="itData" value="#{telaLocalizaBean.mensagem.data.time}" readonly="true">
-                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss"/>
-                 </p:inputText><br/><br/>
-                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salva()}"/><br/><br/>
+                <p:inputText id="itMensagem" value="#{telaLocalizaBean.mensagem.mensagem}" required="true" requiredMessage="É obrigatório uma mensagem!"/><br/><br/>
+                 <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaMensagem()}"/><br/><br/>
             </div>
         </h:form> 
     </h:body>
