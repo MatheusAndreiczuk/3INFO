@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Controle de usuários</title>
+    </h:head>
+    <h:body style="background-color: #FFFFFF;">         
+        <h:form>
+            <p:commandButton icon="pi pi-arrow-left" action="admin_page.xhtml" ajax="false"/></h:form>
+        <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
+            <div style="text-align: center;">
+                <h1>Cadastro de usuários</h1>                
+                <p:outputLabel value="Usuário: " for="itUsuario"/>
+                <p:inputText id="itUsuario" value="#{telaLocalizaBean.usuario.usuario}" required="true" requiredMessage="É obrigatório um usuário!"/><br/><br/>               
+                <p:outputLabel value="Nome: " for="itNome"/>
+                <p:inputText id="itNome" value="#{telaLocalizaBean.usuario.nome}" required="true" requiredMessage="É obrigatório informar um nome!"/><br/><br/>
+                <p:outputLabel value="Senha " for="itSenha"/>
+                <p:inputText id="itSenha" value="#{telaLocalizaBean.usuario.senha}" required="true" requiredMessage="É obrigatório uma senha!"/><br/><br/>            
+                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salva()}"/><br/><br/>
+            </div>
+        </h:form> 
+    </h:body>
+</html>
