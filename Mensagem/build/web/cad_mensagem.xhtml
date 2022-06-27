@@ -49,7 +49,7 @@
                 <p:inputText id="itAssunto" value="#{telaLocalizaBean.mensagem.assunto}"/><br/><br/>  
                 <p:outputLabel value="Mensagem: " for="itMensagem"/>
                 <p:inputText id="itMensagem" value="#{telaLocalizaBean.mensagem.mensagem}" required="true" requiredMessage="É obrigatório uma mensagem!"/><br/><br/>
-                 <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaMensagem()}"/><br/><br/>
+                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaMensagem()}"/>
             </div>
         </h:form> 
     </h:body>

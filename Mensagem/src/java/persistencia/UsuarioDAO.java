@@ -28,20 +28,31 @@ public class UsuarioDAO {
             em.getTransaction().begin();
         }
     }
-    
-    public boolean verificaUsuarioExistente(String usuario){
+
+    public boolean verificaUsuarioExistente(String usuario) {
         Query q = em.createQuery("select u from Usuario u where u.usuario = :user");
         q.setParameter("user", usuario);
         List<Usuario> listaUsuario = q.getResultList();
-        if(!listaUsuario.isEmpty()){
+        if (!listaUsuario.isEmpty()) {
             System.out.println("Tem usuario");
             return true;
-        }else{
+        } else {
             System.out.println("Nao tem usuario");
             return false;
         }
     }
-    
+
+    public String pegaSenha(String usuario) {
+        if (verificaUsuarioExistente(usuario)) {
+            Query verifyPassword = em.createNativeQuery("select senha from usuario where usuario = ?");
+            verifyPassword.setParameter(1, usuario);
+            String senha = verifyPassword.getSingleResult().toString();
+            return senha;
+        }else{
+            return null;
+        }
+    }
+
     public List<Usuario> pesquisa() {
         Query q = em.createQuery("select u from Usuario u order by u.usuario");
         List<Usuario> listaUsuario = q.getResultList();
