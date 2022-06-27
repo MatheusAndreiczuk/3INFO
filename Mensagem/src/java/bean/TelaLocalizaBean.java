@@ -76,10 +76,12 @@ public class TelaLocalizaBean {
             return "admin_page";
         } else {
             if(ud.verificaUsuarioExistente(usuario.getUsuario())){
-                listaMensagem();
+                if(ud.verificaLogin(usuario.getUsuario(), usuario.getSenha()) != null){
+                    listaMensagem();
+                }
                 return "mensagem";
             }else{
-                PF.current().dialog().openDynamic("dlg2", options, null);
+                //PF.current().dialog().openDynamic("dlg2", options, null);
                 return signOut();
             }
         }
@@ -109,6 +111,9 @@ public class TelaLocalizaBean {
         // mensagem.getData().add(Calendar.HOUR, -3);
         String rmt = usuario.getUsuario();
         mensagem.setRemetente(rmt);
+        mensagem.setAssunto("");
+        mensagem.setDestinatario("");
+        mensagem.setMensagem("");
         return "cad_mensagem";
     }
 

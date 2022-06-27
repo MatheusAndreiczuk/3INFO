@@ -47,6 +47,13 @@ public class UsuarioDAO {
         List<Usuario> listaUsuario = q.getResultList();
         return listaUsuario;
     }
+    
+     public Object verificaLogin(String usuario, String senha){
+        Query q = em.createQuery("select u from Usuario u where u.usuario = :user and u.senha = :senha");
+        q.setParameter("user", usuario);
+        q.setParameter("senha", senha);
+        return q.getResultList();
+    }
 
     public void salva(Usuario u) {
         transaction();
