@@ -8,9 +8,11 @@ package bean;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import org.primefaces.PF;
@@ -84,10 +86,15 @@ public class TelaLocalizaBean {
                     return signOut();
                 }
             } else {
-                //PF.current().dialog().openDynamic("dlg2", options, null);
+                FacesContext context = FacesContext.getCurrentInstance();
+                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Login e/ou senha inválidos"));
                 return signOut();
             }
         }
+    }
+    
+    public String voltaAdmin(){
+        return "admin_page";
     }
 
     public String signOut() {

@@ -39,43 +39,49 @@
             <p:fieldset legend="Mensagens" style="margin-bottom:20px">
                 <h:form>
                     <div align="center">
-                        <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.novaMensagem()}"/>
+                        <p:commandButton id="bNovo" icon="pi pi-send" style="font-size: 20px; padding-right:10px; border-color: #343a40; margin-right:5px; background-color: #343a40;" action="#{telaLocalizaBean.novaMensagem()}"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Enviar mensagem" trackMouse="true"/>
-                        <p:commandButton id="bHome" icon="pi pi-home" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.signOut()}"/>
+                        <p:commandButton id="bHome" icon="pi pi-sign-out" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: #343a40; background-color: #343a40;" action="#{telaLocalizaBean.signOut()}"/>
                         <p:tooltip id="ttTabela" for="bHome" value="Página inicial" trackMouse="true"/>
                     </div><br/>
                     <p:dataTable id="tabela" value="#{telaLocalizaBean.listaMensagem()}" var="mensagem">
-                        <p:column style="width:10%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:5%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
                             <f:facet name="header">
-                                <h:outputText value="ID" style="color: #FFFFFF; font-size: 16px;"/>
+                                <h:outputText value="ID" style="color: #343a40; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{mensagem.id}"/>
+                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{mensagem.id}"/>
                         </p:column>
-                        <p:column style="width:25%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                         <p:column style="width:25%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
                             <f:facet name="header">
-                                <h:outputText value="Assunto" style="color: #FFFAFA; font-size: 16px;" />
+                                <h:outputText value="Remetente" style="color: #343a40; font-size: 16px;" />
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{mensagem.assunto}"/>
+                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{mensagem.remetente}"/>
                         </p:column>
-                        <p:column style="width:60%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
+                        <p:column style="width:35%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
                             <f:facet name="header">
-                                <h:outputText value="Mensagem" style="color: #FFFAFA; font-size: 16px;"/>
+                                <h:outputText value="Assunto" style="color: #343a40; font-size: 16px;" />
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{mensagem.mensagem}"/>
+                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{mensagem.assunto}"/>
                         </p:column>
-                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
+                        <p:column style="width:60%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;" >
                             <f:facet name="header">
-                                <h:outputText value="Data" style="color: #FFFAFA; font-size: 16px;"/>
+                                <h:outputText value="Mensagem" style="color: #343a40; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;"  value="#{mensagem.data.time}">
+                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{mensagem.mensagem}"/>
+                        </p:column>
+                        <p:column style="width:25%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;" >
+                            <f:facet name="header">
+                                <h:outputText value="Data" style="color: #343a40; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #343a40; font-size: 16px;"  value="#{mensagem.data.time}">
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" timeZone="GMT-3"/>
                             </h:outputText>                           
                         </p:column>
-                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
+                        <p:column style="width:10%; text-align: center; border-bottom-color: black; background-color: #e7ecef; font-weight: normal; ">
                             <f:facet name="header">
-                                <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
+                                <h:outputText value="Ações" style="color: #343a40; font-size: 16px;"/>
                             </f:facet>
-                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluiMensagem()}" update="tabela" >
+                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; color: black; background-color: #e7ecef;" action="#{telaLocalizaBean.excluiMensagem()}" update="tabela" >
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja excluir a mensagem #{mensagem.id}?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
                             <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">

@@ -12,13 +12,11 @@
         <h:form>
             <p:commandButton icon="pi pi-info-circle" action="manual.pdf" ajax="false"/></h:form>
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
-            <div style="text-align: center;">
-                <h1>Login</h1>                
-                <p:outputLabel value="Usuário: " for="itUsuario"/>
-                <p:inputText id="itUsuario" value="#{telaLocalizaBean.usuario.usuario}" required="true" requiredMessage="É obrigatório um usuário!"/><br/><br/>
-                <p:outputLabel value="Senha: " for="itSenha"/>
-                <p:inputText id="itSenha" value="#{telaLocalizaBean.usuario.senha}" required="true" requiredMessage="É obrigatório uma senha!"/><br/><br/>                   
-                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.verificaAdmin()}"/><br/><br/>
+            <div id="panel-login" style="text-align: center;">
+                <h1>Login</h1>
+                <p:inputText id="itUsuario" value="#{telaLocalizaBean.usuario.usuario}" required="true" requiredMessage="É obrigatório um usuário!" placeholder="Usuário" style="width: 14%;"/><br/><br/>
+                <p:password toggleMask="true" redisplay="true" id="itSenha" value="#{telaLocalizaBean.usuario.senha}" required="true" requiredMessage="É obrigatório uma senha!" placeholder="Senha"/><br/><br/>                   
+                <p:commandButton value="Entrar" ajax="false" update="panel-login, growl" action="#{telaLocalizaBean.verificaAdmin()}"/><br/><br/>
             </div>
             <div>
                 <p:dialog header="Header" widgetVar="dlg2" minHeight="40" width="350" showEffect="fade" modal="true">

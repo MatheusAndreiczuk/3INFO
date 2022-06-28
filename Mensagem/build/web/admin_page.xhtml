@@ -12,37 +12,37 @@
             <p:fieldset legend="Usuários" style="margin-bottom:20px">
                 <h:form>
                         <div align="center">
-                            <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.novoUsuario()}"/>
+                            <p:commandButton id="bNovo" icon="pi pi-user-plus" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #343a40;" action="#{telaLocalizaBean.novoUsuario()}"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Cadastrar novo usuário" trackMouse="true"/>
-                        <p:commandButton id="bHome" icon="pi pi-home" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.signOut()}"/>
+                        <p:commandButton id="bHome" icon="pi pi-sign-out" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #343a40;" action="#{telaLocalizaBean.signOut()}"/>
                         <p:tooltip id="ttTabela" for="bHome" value="Página inicial" trackMouse="true"/>
                     </div><br/>
                     <p:dataTable id="tabela" value="#{telaLocalizaBean.listaUsuario()}" var="usuario">
-                        <p:column style="width:15%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:15%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
                             <f:facet name="header">
-                                <h:outputText value="Usuário" style="color: #FFFFFF; font-size: 16px;"/>
+                                <h:outputText value="Usuário" style="color: #343a40; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{usuario.usuario}"/>
+                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{usuario.usuario}"/>
                         </p:column>
-                        <p:column style="width:50%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:50%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
                             <f:facet name="header">
-                                <h:outputText value="Nome" style="color: #FFFAFA; font-size: 16px;" />
+                                <h:outputText value="Nome" style="color: #343a40; font-size: 16px;" />
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{usuario.nome}"/>
+                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{usuario.nome}"/>
                         </p:column>
-                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
+                        <p:column style="width:30%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;" >
                             <f:facet name="header">
-                                <h:outputText value="Senha" style="color: #FFFAFA; font-size: 16px;"/>
+                                <h:outputText value="Senha" style="color: #343a40; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{usuario.senha}"/>
+                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{usuario.senha}"/>
                         </p:column>
-                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
+                        <p:column style="width:20%; text-align: center; background-color: #e7ecef; font-weight: normal; border-bottom-color: black;">
                             <f:facet name="header">
-                                <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
+                                <h:outputText value="Ações" style="color: #343a40; font-size: 16px;"/>
                             </f:facet>                 
-                            <p:commandButton id="bEdita" icon="pi pi-pencil" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.editaUsuario()}" />
-                            <p:tooltip for="bEdita" value="Alterar dados do funcionário" trackMouse="true" />
-                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluiUsuario()}" update="tabela" >
+                            <p:commandButton id="bEdita" icon="pi pi-pencil" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.editaUsuario()}" />
+                            <p:tooltip for="bEdita" value="Alterar dados do usuário" trackMouse="true" />
+                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.excluiUsuario()}" update="tabela" >
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja excluir #{usuario.nome}?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
                             <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">

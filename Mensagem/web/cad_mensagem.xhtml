@@ -40,17 +40,15 @@
             <p:commandButton icon="pi pi-arrow-left" action="mensagem.xhtml" ajax="false"/></h:form>
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
-                <h1>Cadastro de mensagens</h1>                
-                <p:outputLabel value="ID: " for="itId"/>
-                <p:inputText id="itId" value="#{telaLocalizaBean.mensagem.id}" readonly="true"/><br/><br/>               
-                <p:outputLabel value="Destinatário: " for="itDestinatario"/>
-                <p:inputText id="itDestinatario" value="#{telaLocalizaBean.mensagem.destinatario}" required="true" requiredMessage="É obrigatório um destinatário!"/><br/><br/>    
-                <p:outputLabel value="Assunto: " for="itAssunto"/>
-                <p:inputText id="itAssunto" value="#{telaLocalizaBean.mensagem.assunto}"/><br/><br/>  
-                <p:outputLabel value="Mensagem: " for="itMensagem"/>
-                <p:inputText id="itMensagem" value="#{telaLocalizaBean.mensagem.mensagem}" required="true" requiredMessage="É obrigatório uma mensagem!"/><br/><br/>
+                <h1>Cadastro de mensagens</h1><br/>
+                <p:inputText id="itDestinatario" value="#{telaLocalizaBean.mensagem.destinatario}" required="true" style="width: 25.5%;" requiredMessage="É obrigatório um destinatário!" placeholder="Destinatário"/><br/><br/>
+                <p:inputText id="itAssunto" value="#{telaLocalizaBean.mensagem.assunto}" placeholder="Assunto" style="width: 25.5%;"/><br/><br/>
+                <p:inputTextarea cols="50" rows="6" id="itMensagem" value="#{telaLocalizaBean.mensagem.mensagem}" required="true" requiredMessage="É obrigatório uma mensagem!" placeholder="Digite sua mensagem aqui"/><br/><br/><br/>
                 <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaMensagem()}"/>
             </div>
         </h:form> 
+        <h:form>
+             <p:commandButton value="Cancelar" action="mensagem.xhtml" ajax="false" style="margin-left: 46.7%; margin-top: 1%; width: 6.6%;"/>
+        </h:form>
     </h:body>
 </html>
