@@ -17,6 +17,10 @@
   margin-top: 0;
 }
 
+.nsei {
+    speak: none;
+}
+
 .grid-nogutter > .col,
 .grid-nogutter > [class*=col-] {
   padding: 0;
