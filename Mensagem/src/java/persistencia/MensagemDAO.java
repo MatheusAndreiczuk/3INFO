@@ -16,6 +16,7 @@ import vo.Mensagem;
  * @author 2info2021
  */
 public class MensagemDAO {
+
     EntityManager em;
 
     public MensagemDAO() {
@@ -27,14 +28,26 @@ public class MensagemDAO {
             em.getTransaction().begin();
         }
     }
-    
-    public List<Mensagem> filtroMensagem(String usuario){
+
+    public List<Mensagem> filtroMensagem(String usuario) {
         Query q = em.createQuery("select m from Mensagem m where m.destinatario like :usuario");
         q.setParameter("usuario", usuario);
         List<Mensagem> listaMensagem = q.getResultList();
         return listaMensagem;
     }
     
+    public boolean verificaMensagem(String destinatario){
+        Query q = em.createNativeQuery("select * from mensagem where destinatario = ?");
+        q.setParameter(1, destinatario);
+        if(!q.getResultList().isEmpty()){
+            System.out.println("Tem mensagem");
+            return true;
+        }else{
+            System.out.println("Não tem mensagem");
+            return false;
+        }
+    }
+
     public List<Usuario> pesquisa() {
         Query q = em.createQuery("select m from Mensagem m order by m.id");
         List<Usuario> listaUsuario = q.getResultList();
