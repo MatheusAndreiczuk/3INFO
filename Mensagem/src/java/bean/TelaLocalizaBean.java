@@ -7,10 +7,8 @@ package bean;
 
 import java.text.ParseException;
 import java.util.Calendar;
-import java.util.Date;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
@@ -92,8 +90,8 @@ public class TelaLocalizaBean {
             }
         }
     }
-    
-    public String voltaAdmin(){
+
+    public String voltaAdmin() {
         return "admin_page";
     }
 
@@ -126,8 +124,21 @@ public class TelaLocalizaBean {
     }
 
     public String salva() {
-        ud.salva(getUsuario());
-        return "admin_page";
+        String usuarioDigitado = usuario.getUsuario();
+        if(usuarioDigitado.equals("mts")){
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário pertence ao administrador do sistema"));
+            return "cad_usuario";
+        }
+        else if (ud.verificaUsuarioExistente(usuarioDigitado)) {
+            System.out.println("Tem usuario");
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário já existente"));
+            return "cad_usuario";
+        } else {
+            ud.salva(getUsuario());
+            return "admin_page";
+        }
     }
 
     public String salvaMensagem() {
@@ -142,10 +153,13 @@ public class TelaLocalizaBean {
     public String editaUsuario() {
         Usuario u = usuarioSelecionado();
         setUsuario(u);
-        return "cad_usuario";
+        return "edita_usuario";
     }
 
     public String excluiUsuario() {
+        if(md.verificaMensagem(mensagem.getDestinatario())){
+            
+        }
         Usuario u = usuarioSelecionado();
         ud.exclui(u);
         return "admin_page";

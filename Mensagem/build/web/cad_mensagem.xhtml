@@ -44,7 +44,7 @@
                 <p:inputText id="itDestinatario" value="#{telaLocalizaBean.mensagem.destinatario}" required="true" style="width: 25.5%;" requiredMessage="É obrigatório um destinatário!" placeholder="Destinatário"/><br/><br/>
                 <p:inputText id="itAssunto" value="#{telaLocalizaBean.mensagem.assunto}" placeholder="Assunto" style="width: 25.5%;"/><br/><br/>
                 <p:inputTextarea cols="50" rows="6" id="itMensagem" value="#{telaLocalizaBean.mensagem.mensagem}" required="true" requiredMessage="É obrigatório uma mensagem!" placeholder="Digite sua mensagem aqui"/><br/><br/><br/>
-                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaMensagem()}"/>
+                <p:commandButton value="Confirmar" ajax="false" update="panel-login, growl" action="#{telaLocalizaBean.salvaMensagem()}"/>
             </div>
         </h:form> 
         <h:form>
