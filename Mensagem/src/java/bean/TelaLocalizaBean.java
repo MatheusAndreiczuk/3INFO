@@ -125,12 +125,11 @@ public class TelaLocalizaBean {
 
     public String salva() {
         String usuarioDigitado = usuario.getUsuario();
-        if(usuarioDigitado.equals("mts")){
+        if (usuarioDigitado.equals("mts")) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário pertence ao administrador do sistema"));
             return "cad_usuario";
-        }
-        else if (ud.verificaUsuarioExistente(usuarioDigitado)) {
+        } else if (ud.verificaUsuarioExistente(usuarioDigitado)) {
             System.out.println("Tem usuario");
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário já existente"));
@@ -144,10 +143,15 @@ public class TelaLocalizaBean {
     public String salvaMensagem() {
         if (ud.verificaUsuarioExistente(mensagem.getDestinatario())) {
             md.salva(getMensagem());
-        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Sua mensagem foi enviada"));
             listaMensagem();
+            return "mensagem";
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Destinatário inexistente"));
+            return "cad_mensagem";
         }
-        return "mensagem";
     }
 
     public String editaUsuario() {
@@ -157,11 +161,13 @@ public class TelaLocalizaBean {
     }
 
     public String excluiUsuario() {
-        if(md.verificaMensagem(mensagem.getDestinatario())){
-            
-        }
         Usuario u = usuarioSelecionado();
-        ud.exclui(u);
+        if (ud.verificaMensagem(u.getUsuario())) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "O usuário tem mensagens"));
+        } else {          
+            ud.exclui(u);
+        }
         return "admin_page";
     }
 
