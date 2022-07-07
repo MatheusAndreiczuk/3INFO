@@ -51,7 +51,7 @@
                             </f:facet>
                             <h:outputText style="color: #343a40; font-size: 16px;" value="#{mensagem.id}"/>
                         </p:column>
-                         <p:column style="width:25%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
+                        <p:column style="width:25%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Remetente" style="color: #343a40; font-size: 16px;" />
                             </f:facet>
@@ -89,6 +89,7 @@
                                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                             </p:confirmDialog>
                             <p:tooltip for="bExclui" value="Excluir mensagem #{mensagem.id}" trackMouse="true" />
+                            <p:commandButton id="bVerMensagem" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; color: black; background-color: #e7ecef;" action="#{telaLocalizaBean.verMensagem()}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

@@ -133,9 +133,13 @@ public class TelaLocalizaBean {
             System.out.println("Tem usuario");
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário já existente"));
-            return "cad_usuario";
-        } else {
+            return "admin_page";
+        } else if(!usuarioDigitado.equals("")){
             ud.salva(getUsuario());
+            return "admin_page";
+        }else{
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Tentativa de cadastro inválida"));
             return "admin_page";
         }
     }
@@ -153,6 +157,12 @@ public class TelaLocalizaBean {
             return "cad_mensagem";
         }
     }
+    
+    public String verMensagem(){
+        Mensagem m = listaMensagem.getRowData();
+        setMensagem(m);
+        return "ver_mensagem";
+    }
 
     public String editaUsuario() {
         Usuario u = usuarioSelecionado();
@@ -165,11 +175,13 @@ public class TelaLocalizaBean {
         if (ud.verificaMensagem(u.getUsuario())) {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "O usuário tem mensagens"));
+            return "admin_page";
         } else {          
             ud.exclui(u);
+            return "admin_page";
         }
-        return "admin_page";
     }
+    
 
     public String excluiMensagem() {
         Mensagem m = mensagemSelecionada();

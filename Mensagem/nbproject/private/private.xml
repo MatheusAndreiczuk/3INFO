@@ -3,7 +3,6 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/src/java/persistencia/UsuarioDAO.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/web/cad_mensagem.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/web/edita_usuario.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/web/admin_page.xhtml</file>
@@ -11,6 +10,7 @@
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/web/cad_usuario.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/src/java/bean/TelaLocalizaBean.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/web/index.xhtml</file>
+            <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/web/ver_mensagem.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/src/java/persistencia/MensagemDAO.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/src/java/persistencia/EntityManagerProvider.java</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Mensagem/web/mensagem.xhtml</file>

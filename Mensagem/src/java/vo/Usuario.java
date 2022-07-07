@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
      * @param usuario the usuario to set
      */
     public void setUsuario(String usuario) {
-        this.usuario = usuario;
+        this.usuario = usuario.trim();
     }
 
     /**
@@ -59,6 +59,6 @@ public class Usuario implements Serializable {
      * @param senha the senha to set
      */
     public void setSenha(String senha) {
-        this.senha = senha;
+        this.senha = senha.trim();
     }
 }
