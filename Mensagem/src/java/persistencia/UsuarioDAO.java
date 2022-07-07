@@ -52,6 +52,18 @@ public class UsuarioDAO {
             return null;
         }
     }
+    
+    public boolean verificaMensagem(String usuario) {
+        Query q = em.createNativeQuery("select * from mensagem where destinatario like ? ");
+        q.setParameter(1, usuario);
+        if (!q.getResultList().isEmpty()) {
+            System.out.println("Tem mensagem");
+            return true;
+        } else {
+            System.out.println("Não tem mensagem");
+            return false;
+        }
+    }
 
     public List<Usuario> pesquisa() {
         Query q = em.createQuery("select u from Usuario u order by u.usuario");

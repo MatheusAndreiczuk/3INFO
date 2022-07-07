@@ -47,7 +47,7 @@
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja excluir #{usuario.nome}?" icon="pi pi-exclamation-triangle" />
                             </p:commandButton>
                             <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="Sim" update="panel-login, growl" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                             </p:confirmDialog>
                             <p:tooltip for="bExclui" value="Excluir usuário #{usuario.nome}" trackMouse="true" />
