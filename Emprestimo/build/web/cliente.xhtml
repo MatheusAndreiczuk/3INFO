@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Lista de clientes</title>
+    </h:head>
+    <h:body style="background-color: #FFFFFF;">        
+        <div class="geral">
+            <p:fieldset legend="Clientes" style="margin-bottom:20px">
+                <h:form> 
+                    <h:form>
+                        <p:commandButton style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80; text-align: left;" icon="pi pi-info-circle" action="manual.pdf" ajax="false"/>
+                    </h:form>
+                        <div align="center">
+                            <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.novo()}"/>
+                        <p:tooltip id="ttNovo" for="bNovo" value="Cadastrar novo funcionário" trackMouse="true"/>
+                        <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #3d5a80;" action="#{telaLocalizaBean.atualizaLista()}" update="cliente" />
+                        <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
+                    </div><br/>
+                    <p:dataTable id="cliente" value="#{telaLocalizaBean.listaCliente}" var="cliente">
+                        <p:column style="width:15%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="ID" style="color: #FFFFFF; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.matricula}"/>
+                        </p:column>
+                        <p:column style="width:50%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="Nome" style="color: #FFFAFA; font-size: 16px;" />
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.nome}"/>
+                        </p:column>
+                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
+                            <f:facet name="header">
+                                <h:outputText value="CPF" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.setor}"/>
+                        </p:column>
+                        <p:column style="width:40%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="RG" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.cargo}"/>
+                        </p:column>
+                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="Email" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.salario}"/>
+                        </p:column>
+                        <p:column style="width:18%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="Telefone" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.vt}"/>
+                        </p:column>
+                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="Endereço" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.dep14}"/>
+                        </p:column>
+                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                            <f:facet name="header">
+                                <h:outputText value="Data de nascimento" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.depir}"/>
+                        </p:column>
+                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
+                            <f:facet name="header">
+                                <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>                     
+                            <p:commandButton id="bEdita" icon="pi pi-pencil" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.edita()}" />
+                            <p:tooltip for="bEdita" value="Alterar dados do cliente" trackMouse="true" />
+                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluir()}" update="cliente" >
+                                <p:confirm header="Confirmação" message="Tem certeza que deseja excluir #{cliente.nome}?" icon="ui-icon-alert" />
+                            </p:commandButton>
+                            <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                            <p:tooltip for="bExclui" value="Excluir funcionário #{cliente.nome}" trackMouse="true" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:fieldset>
+        </div>
+    </h:body>
+</html>

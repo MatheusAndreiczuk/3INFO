@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Controle de clientes</title>
+    </h:head>
+    <h:body style="background-color: #FFFFFF;">         
+        <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
+            <div style="text-align: center;">
+                <h1>Cadastro de usuários</h1>
+                <p:inputText id="itUsuario" value="#{telaLocalizaBean.cliente.nome}" required="true" requiredMessage="É obrigatório um usuário!" placeholder="Nome" style="width: 14%;"/><br/><br/>
+                <p:inputText id="itNome" value="#{telaLocalizaBean.cliente.cpf}" required="true" requiredMessage="É obrigatório informar um nome!" placeholder="CPF" style="width: 14%;"/><br/><br/>
+                <p:inputText id="itRg" value="#{telaLocalizaBean.cliente.rg}" required="true" requiredMessage="É obrigatório um RG!" placeholder="RG" style="width: 14%;"/><br/><br/>
+                <p:inputText id="itEndereco" value="#{telaLocalizaBean.cliente.endereco}" required="true" requiredMessage="É obrigatório informar um endereço!" placeholder="Endereço" style="width: 14%;"/><br/><br/>
+                <p:inputText id="itEmail" value="#{telaLocalizaBean.cliente.email}" required="true" requiredMessage="É obrigatório um email!" placeholder="Email" style="width: 14%;"/><br/><br/>
+                <p:inputText id="itTelefone" value="#{telaLocalizaBean.cliente.telefone}" required="true" requiredMessage="É obrigatório informar um telefone!" placeholder="Telefone" style="width: 14%;"/><br/><br/>
+                <p:inputText id="itDataNasc" value="#{telaLocalizaBean.cliente.datanasc}" required="true" requiredMessage="É obrigatório uma data de nascimento!" placeholder="Data de nascimento" style="width: 14%;"/><br/><br/>
+                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salva()}"/>
+            </div>
+        </h:form> 
+        <h:form>
+            <p:commandButton value="Cancelar" action="cliente.xhtml" ajax="false" style="margin-left: 47%; margin-top: 1%;"/>
+        </h:form>
+    </h:body>
+</html>
