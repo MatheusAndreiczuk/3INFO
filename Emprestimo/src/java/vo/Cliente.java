@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class Cliente implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_cliente;
+    private int id_cliente = 0;
     private String nome, cpf, rg, telefone, email, endereco;
     @Temporal(TemporalType.DATE)
     private Date datanasc;

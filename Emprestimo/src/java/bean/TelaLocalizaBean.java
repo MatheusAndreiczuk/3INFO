@@ -108,7 +108,12 @@ public class TelaLocalizaBean {
     
     public String salva(){
         cd.salva(getCliente());
-        return "index";
+        return "cliente";
+    }
+    
+    public String salvaItem(){
+        id.salva(getItem());
+        return "item";
     }
     
     public String voltar(){

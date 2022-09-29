@@ -6,6 +6,34 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Lista de clientes</title>
+        <script type="text/javascript">PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Data Atual',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo Dia'
+            };</script>
     </h:head>
     <h:body style="background-color: #FFFFFF;">        
         <div class="geral">
@@ -15,61 +43,63 @@
                         <p:commandButton style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80; text-align: left;" icon="pi pi-info-circle" action="manual.pdf" ajax="false"/>
                     </h:form>
                         <div align="center">
+                            <p:commandButton id="bVoltar" icon="pi pi-arrow-left" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.voltar()}"/>
+                        <p:tooltip id="ttVoltar" for="bVoltar" value="Home" trackMouse="true"/>
                             <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.novo()}"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Cadastrar novo funcionário" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #3d5a80;" action="#{telaLocalizaBean.atualizaLista()}" update="cliente" />
                         <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
                     </div><br/>
                     <p:dataTable id="cliente" value="#{telaLocalizaBean.listaCliente}" var="cliente">
-                        <p:column style="width:15%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:10%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="ID" style="color: #FFFFFF; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.matricula}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.id_cliente}"/>
                         </p:column>
-                        <p:column style="width:50%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Nome" style="color: #FFFAFA; font-size: 16px;" />
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.nome}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.nome}"/>
                         </p:column>
-                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
+                        <p:column style="width:25%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
                             <f:facet name="header">
                                 <h:outputText value="CPF" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.setor}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.cpf}"/>
                         </p:column>
-                        <p:column style="width:40%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="RG" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.cargo}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.rg}"/>
                         </p:column>
-                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Email" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.salario}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.email}"/>
                         </p:column>
-                        <p:column style="width:18%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:25%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Telefone" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.vt}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.telefone}"/>
                         </p:column>
-                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
+                        <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Endereço" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.dep14}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.endereco}"/>
                         </p:column>
                         <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Data de nascimento" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{funcionario.depir}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{cliente.datanasc}"/>
                         </p:column>
-                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
+                        <p:column style="width:15%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
                             <f:facet name="header">
                                 <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>                     
@@ -82,7 +112,7 @@
                                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
-                            <p:tooltip for="bExclui" value="Excluir funcionário #{cliente.nome}" trackMouse="true" />
+                            <p:tooltip for="bExclui" value="Excluir cliente #{cliente.nome}" trackMouse="true" />
                         </p:column>
                     </p:dataTable>
                 </h:form>

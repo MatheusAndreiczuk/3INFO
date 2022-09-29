@@ -6,23 +6,52 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Controle de clientes</title>
+        <script type="text/javascript">PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Data Atual',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo Dia'
+            };</script>
     </h:head>
     <h:body style="background-color: #FFFFFF;">         
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
                 <h1>Cadastro de usuários</h1>
-                <p:inputText id="itUsuario" value="#{telaLocalizaBean.cliente.nome}" required="true" requiredMessage="É obrigatório um usuário!" placeholder="Nome" style="width: 14%;"/><br/><br/>
-                <p:inputText id="itNome" value="#{telaLocalizaBean.cliente.cpf}" required="true" requiredMessage="É obrigatório informar um nome!" placeholder="CPF" style="width: 14%;"/><br/><br/>
-                <p:inputText id="itRg" value="#{telaLocalizaBean.cliente.rg}" required="true" requiredMessage="É obrigatório um RG!" placeholder="RG" style="width: 14%;"/><br/><br/>
-                <p:inputText id="itEndereco" value="#{telaLocalizaBean.cliente.endereco}" required="true" requiredMessage="É obrigatório informar um endereço!" placeholder="Endereço" style="width: 14%;"/><br/><br/>
-                <p:inputText id="itEmail" value="#{telaLocalizaBean.cliente.email}" required="true" requiredMessage="É obrigatório um email!" placeholder="Email" style="width: 14%;"/><br/><br/>
-                <p:inputText id="itTelefone" value="#{telaLocalizaBean.cliente.telefone}" required="true" requiredMessage="É obrigatório informar um telefone!" placeholder="Telefone" style="width: 14%;"/><br/><br/>
-                <p:inputText id="itDataNasc" value="#{telaLocalizaBean.cliente.datanasc}" required="true" requiredMessage="É obrigatório uma data de nascimento!" placeholder="Data de nascimento" style="width: 14%;"/><br/><br/>
+                <p:inputText id="itUsuario" value="#{telaLocalizaBean.cliente.nome}" required="true" requiredMessage="É obrigatório um usuário!" placeholder="Nome" style="width: 15%;"/><br/><br/>
+                <p:inputText id="itNome" value="#{telaLocalizaBean.cliente.cpf}" required="true" requiredMessage="É obrigatório informar um nome!" placeholder="CPF" style="width: 15%;"/><br/><br/>
+                <p:inputText id="itRg" value="#{telaLocalizaBean.cliente.rg}" required="true" requiredMessage="É obrigatório um RG!" placeholder="RG" style="width: 15%;"/><br/><br/>
+                <p:inputText id="itEndereco" value="#{telaLocalizaBean.cliente.endereco}" required="true" requiredMessage="É obrigatório informar um endereço!" placeholder="Endereço" style="width: 15%;"/><br/><br/>
+                <p:inputText id="itEmail" value="#{telaLocalizaBean.cliente.email}" required="true" requiredMessage="É obrigatório um email!" placeholder="Email" style="width: 15%;"/><br/><br/>
+                <p:inputText id="itTelefone" value="#{telaLocalizaBean.cliente.telefone}" required="true" requiredMessage="É obrigatório informar um telefone!" placeholder="Telefone" style="width: 15%;"/><br/><br/>
+                 <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.cliente.datanasc}" pattern="dd/MM/yyyy" mask="true"
+                             required="true" requiredMessage="É obrigatório uma data!" showOn="button" placeholder="Data de nascimento"/><br/><br/>
                 <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salva()}"/>
             </div>
         </h:form> 
         <h:form>
-            <p:commandButton value="Cancelar" action="cliente.xhtml" ajax="false" style="margin-left: 47%; margin-top: 1%;"/>
+            <p:commandButton value="Cancelar" action="cliente.xhtml" ajax="false" style="margin-left: 46.8%; margin-top: 1%; width: 6.4%;"/>
         </h:form>
     </h:body>
 </html>
