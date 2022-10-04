@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_item = 0;
+    private int id_item;
     private int num_serie;
     private String nome, descricao, caracteristicas;
     @Temporal(TemporalType.DATE)

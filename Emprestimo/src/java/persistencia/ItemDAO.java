@@ -23,7 +23,7 @@ public class ItemDAO {
     }
 
     public void salva(Item i) {
-        emTransaction();
+        em.getTransaction().begin();
         if (i.getId_item()== 0) {
             em.persist(i);
         }else{

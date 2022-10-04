@@ -13,7 +13,9 @@ import javax.faces.model.ListDataModel;
 import vo.Cliente;
 import vo.Item;
 import persistencia.ClienteDAO;
+import persistencia.EmprestimoDAO;
 import persistencia.ItemDAO;
+import vo.Emprestimo;
 
 /**
  *
@@ -21,14 +23,17 @@ import persistencia.ItemDAO;
  */
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class TelaLocalizaBean {
     private DataModel<Cliente> listaCliente;
     private DataModel<Item> listaItem;
+    private DataModel<Emprestimo> listaEmprestimo;
     private ClienteDAO cd = new ClienteDAO();
     private ItemDAO id = new ItemDAO();
+    private EmprestimoDAO ed = new EmprestimoDAO();
     private Cliente cliente = new Cliente();
     private Item item = new Item();
+    private Emprestimo emprestimo = new Emprestimo();
     
     public TelaLocalizaBean(){
         
@@ -44,6 +49,11 @@ public class TelaLocalizaBean {
         return "item";
     }
     
+    public String atualizaListaEmprestimo(){
+        listaEmprestimo = new ListDataModel(getEd().pesquisa());
+        return "emprestimo";
+    }
+    
     public DataModel<Item> getListaItem(){
         atualizaListaItem();
         return listaItem;
@@ -52,6 +62,11 @@ public class TelaLocalizaBean {
     public DataModel<Cliente> getLista(){
         atualizaLista();
         return listaCliente;
+    }
+    
+    public DataModel<Emprestimo> getListaEmprestimo(){
+        atualizaListaEmprestimo();
+        return listaEmprestimo;
     }
     
     public Cliente clienteSelecionado(){
@@ -107,7 +122,7 @@ public class TelaLocalizaBean {
     }
     
     public String salva(){
-        cd.salva(getCliente());
+        cd.salva(getCliente());      
         return "cliente";
     }
     
@@ -119,7 +134,7 @@ public class TelaLocalizaBean {
     public String voltar(){
         return "index";
     }
-
+    
     /**
      * @return the listaCliente
      */
@@ -195,5 +210,40 @@ public class TelaLocalizaBean {
      */
     public void setItem(Item item) {
         this.item = item;
+    }
+
+    /**
+     * @param listaEmprestimo the listaEmprestimo to set
+     */
+    public void setListaEmprestimo(DataModel<Emprestimo> listaEmprestimo) {
+        this.listaEmprestimo = listaEmprestimo;
+    }
+
+    /**
+     * @return the ed
+     */
+    public EmprestimoDAO getEd() {
+        return ed;
+    }
+
+    /**
+     * @param ed the ed to set
+     */
+    public void setEd(EmprestimoDAO ed) {
+        this.ed = ed;
+    }
+
+    /**
+     * @return the emprestimo
+     */
+    public Emprestimo getEmprestimo() {
+        return emprestimo;
+    }
+
+    /**
+     * @param emprestimo the emprestimo to set
+     */
+    public void setEmprestimo(Emprestimo emprestimo) {
+        this.emprestimo = emprestimo;
     }
 }

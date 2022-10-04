@@ -39,6 +39,7 @@
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
                 <h1>Cadastro de itens</h1>
+                <p:inputText id="itId" value="#{telaLocalizaBean.item.id_item}" required="true" requiredMessage="É obrigatório um número de série!" placeholder="Némero de série" style="width: 20%;" readonly="true"/><br/><br/>
                 <p:inputText id="itNumSerie" value="#{telaLocalizaBean.item.num_serie}" required="true" requiredMessage="É obrigatório um número de série!" placeholder="Némero de série" style="width: 20%;"/><br/><br/>
                 <p:inputText id="itNome" value="#{telaLocalizaBean.item.nome}" required="true" requiredMessage="É obrigatório informar um nome!" placeholder="Nome" style="width: 20%;"/><br/><br/>
                 <p:inputText id="itDescricao" value="#{telaLocalizaBean.item.descricao}" required="true" requiredMessage="É obrigatório uma descrição!" placeholder="Descrição" style="width: 20%;"/><br/><br/>

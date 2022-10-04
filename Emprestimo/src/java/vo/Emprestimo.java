@@ -8,6 +8,8 @@ package vo;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,10 +23,13 @@ import javax.persistence.TemporalType;
 @Entity
 public class Emprestimo implements Serializable{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_emprestimo;
     private int id_cliente, id_item;
     private String nome_item;
     @Temporal(TemporalType.DATE)
     private Date data_emprestimo, data_prevista, data_devolucao;
+    private boolean emprestado;
 
     /**
      * @return the id_cliente
@@ -108,5 +113,32 @@ public class Emprestimo implements Serializable{
      */
     public void setData_devolucao(Date data_devolucao) {
         this.data_devolucao = data_devolucao;
+    }
+    /**
+     * @return the emprestado
+     */
+    public boolean isEmprestado() {
+        return emprestado;
+    }
+
+    /**
+     * @param emprestado the emprestado to set
+     */
+    public void setEmprestado(boolean emprestado) {
+        this.emprestado = emprestado;
+    }
+
+    /**
+     * @return the id_emprestimo
+     */
+    public int getId_emprestimo() {
+        return id_emprestimo;
+    }
+
+    /**
+     * @param id_emprestimo the id_emprestimo to set
+     */
+    public void setId_emprestimo(int id_emprestimo) {
+        this.id_emprestimo = id_emprestimo;
     }
 }

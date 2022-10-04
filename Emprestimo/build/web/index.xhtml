@@ -14,7 +14,7 @@
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/><br/>
             <div id="panel-login" style="text-align: center;">
                 <p:commandButton value="Emprestar" ajax="false" update="panel-login, growl" action="item"/><br/><br/>
-                <p:commandButton value="Clientes" ajax="false" update="panel-login, growl" action="cliente"/>
+                <p:commandButton value="Clientes" ajax="false" update="#{telaLocalizaBean.atualizaLista()}" action="cliente"/>
             </div>
         </h:form> 
     </h:body>

@@ -22,8 +22,8 @@ public class ClienteDAO {
     }
 
     public void salva(Cliente c) {
-        emTransaction();
-        if (c.getId_cliente()== 0) {
+        em.getTransaction().begin();
+        if (c.getId_cliente()==0) {
             em.persist(c);
         }else{
             em.merge(c);
@@ -42,21 +42,8 @@ public class ClienteDAO {
         return listaCliente;
     }
     
-    public void emTransaction(){
-        if(!em.getTransaction().isActive()){
-            em.getTransaction().begin();
-        }
-    }
-    
-    public List<Cliente> pesquisaNome(String nome){
-        Query q = em.createQuery("select c from Cliente c where c.nome like :nome order by c.id_cliente");
-        q.setParameter("nome", "%" + nome + "%");
-        List<Cliente> listaCliente = q.getResultList();
-        return listaCliente;
-    }
-    
     public void exclui(Cliente c){
-        emTransaction();
+        em.getTransaction().begin();
         em.remove(c);
         em.getTransaction().commit();
     }

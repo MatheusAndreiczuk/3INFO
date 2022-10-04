@@ -37,7 +37,6 @@
     </h:head>
     <h:body style="background-color: #FFFFFF;">        
         <div class="geral">
-            <p:fieldset legend="Clientes" style="margin-bottom:20px">
                 <h:form> 
                     <h:form>
                         <p:commandButton style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80; text-align: left;" icon="pi pi-info-circle" action="manual.pdf" ajax="false"/>
@@ -85,7 +84,9 @@
                             <f:facet name="header">
                                 <h:outputText value="Data de fabricação" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{item.fabricacao}"/>
+                            <h:outputText style="color: white; font-size: 16px;"  value="#{item.fabricacao}">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </h:outputText>       
                         </p:column>
                         <p:column style="width:15%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
                             <f:facet name="header">
@@ -93,20 +94,19 @@
                             </f:facet>                     
                             <p:commandButton id="bEdita" icon="pi pi-pencil" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.editaItem()}" />
                             <p:tooltip for="bEdita" value="Alterar dados do item" trackMouse="true" />
-                            <p:commandButton id="bEmpresta" icon="pi pi-shopping-bag" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.editaItem()}" />
-                            <p:tooltip for="bEdita" value="Emprestar item" trackMouse="true" />
+                            <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="item" />
+                            <p:tooltip for="bEmpresta" value="Emprestar item" trackMouse="true" />
                             <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluiItem()}" update="item" >
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja excluir #{item.num_serie}?" icon="ui-icon-alert" />
                             </p:commandButton>
                             <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
                             </p:confirmDialog>
-                            <p:tooltip for="bExclui" value="Excluir cliente #{item.num_serie}" trackMouse="true" />
+                            <p:tooltip for="bExclui" value="Excluir item #{item.num_serie}" trackMouse="true" />
                         </p:column>
                     </p:dataTable>
                 </h:form>
-            </p:fieldset>
         </div>
     </h:body>
 </html>
