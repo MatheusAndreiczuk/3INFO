@@ -38,19 +38,16 @@
     <h:body style="background-color: #FFFFFF;">         
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
-                <p:inputText id="itId" value="#{telaLocalizaBean.emprestimo.id_emprestimo}" readonly="true" style="width: 15%;"/><br/><br/>
+                <p:inputText id="itIdItem" value="#{telaLocalizaBean.emprestimo.id_item}" required="true" readonly="true" requiredMessage="É obrigatório informar um item!" placeholder="ID item" style="width: 15%;"/><br/><br/>
                 <p:inputText id="itIdCliente" value="#{telaLocalizaBean.emprestimo.id_cliente}" required="true" requiredMessage="É obrigatório informar um cliente!" placeholder="ID cliente" style="width: 15%;"/><br/><br/>
-                <p:inputText id="itIdItem" value="#{telaLocalizaBean.emprestimo.id_item}" required="true" requiredMessage="É obrigatório informar um item!" placeholder="ID item" style="width: 15%;"/><br/><br/>
-                <p:inputText id="itEndereco" value="#{telaLocalizaBean.cliente.endereco}" required="true" requiredMessage="É obrigatório informar um endereço!" placeholder="Endereço" style="width: 15%;"/><br/><br/>
-                <p:inputText id="itEmail" value="#{telaLocalizaBean.cliente.email}" required="true" requiredMessage="É obrigatório um email!" placeholder="Email" style="width: 15%;"/><br/><br/>
-                <p:inputText id="itTelefone" value="#{telaLocalizaBean.cliente.telefone}" required="true" requiredMessage="É obrigatório informar um telefone!" placeholder="Telefone" style="width: 15%;"/><br/><br/>
-                <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.cliente.datanasc}" pattern="dd/MM/yyyy" mask="true"
-                            required="true" requiredMessage="É obrigatório uma data!" showOn="button" placeholder="Data de nascimento"/><br/><br/>
-                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salva()}"/>
+                <p:inputText id="itNomeItem" value="#{telaLocalizaBean.emprestimo.nome_item}" required="true" requiredMessage="É obrigatório informar o nome do item!" placeholder="Nome do item" readonly="true" style="width: 15%;"/><br/><br/>
+                <p:calendar id="itDataPrevista" locale="pt" value="#{telaLocalizaBean.emprestimo.data_prevista}" pattern="dd/MM/yyyy" mask="true"
+                            required="true" requiredMessage="É obrigatório uma previsão de devolução!" showOn="button" placeholder="Data prevista para devolução"/><br/><br/>
+                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaEmprestimo()}"/>
             </div>
         </h:form> 
         <h:form>
-            <p:commandButton value="Cancelar" action="cliente.xhtml" ajax="false" style="margin-left: 46.8%; margin-top: 1%; width: 6.4%;"/>
+            <p:commandButton value="Cancelar" action="item.xhtml" ajax="false" style="margin-left: 46.8%; margin-top: 1%; width: 6.4%;"/>
         </h:form>
     </h:body>
 </html>

@@ -94,7 +94,7 @@
                             </f:facet>                     
                             <p:commandButton id="bEdita" icon="pi pi-pencil" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.editaItem()}" />
                             <p:tooltip for="bEdita" value="Alterar dados do item" trackMouse="true" />
-                            <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="item" />
+                            <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.empresta()}" />
                             <p:tooltip for="bEmpresta" value="Emprestar item" trackMouse="true" />
                             <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluiItem()}" update="item" >
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja excluir #{item.num_serie}?" icon="ui-icon-alert" />

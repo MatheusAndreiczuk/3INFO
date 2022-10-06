@@ -42,6 +42,16 @@ public class ClienteDAO {
         return listaCliente;
     }
     
+    public boolean verificaClienteExistente(int id) {
+        Query q = em.createQuery("select c from Cliente c where c.id_cliente like :idcliente");
+        q.setParameter("idcliente", id);
+        if(!q.getResultList().isEmpty()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     public void exclui(Cliente c){
         em.getTransaction().begin();
         em.remove(c);

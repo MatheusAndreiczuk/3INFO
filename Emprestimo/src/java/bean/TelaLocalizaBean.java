@@ -5,6 +5,7 @@
  */
 package bean;
 
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -21,10 +22,10 @@ import vo.Emprestimo;
  *
  * @author 2info2021
  */
-
 @ManagedBean
 @SessionScoped
 public class TelaLocalizaBean {
+
     private DataModel<Cliente> listaCliente;
     private DataModel<Item> listaItem;
     private DataModel<Emprestimo> listaEmprestimo;
@@ -34,107 +35,135 @@ public class TelaLocalizaBean {
     private Cliente cliente = new Cliente();
     private Item item = new Item();
     private Emprestimo emprestimo = new Emprestimo();
-    
-    public TelaLocalizaBean(){
-        
+
+    public TelaLocalizaBean() {
+
     }
-    
-    public String atualizaLista(){
+
+    public String atualizaLista() {
         listaCliente = new ListDataModel(getCd().pesquisa());
         return "cliente";
     }
-    
-    public String atualizaListaItem(){
+
+    public String atualizaListaItem() {
         listaItem = new ListDataModel(getId().pesquisa());
         return "item";
     }
-    
-    public String atualizaListaEmprestimo(){
+
+    public String atualizaListaEmprestimo() {
         listaEmprestimo = new ListDataModel(getEd().pesquisa());
         return "emprestimo";
     }
-    
-    public DataModel<Item> getListaItem(){
+
+    public DataModel<Item> getListaItem() {
         atualizaListaItem();
         return listaItem;
     }
-    
-    public DataModel<Cliente> getLista(){
+
+    public DataModel<Cliente> getLista() {
         atualizaLista();
         return listaCliente;
     }
-    
-    public DataModel<Emprestimo> getListaEmprestimo(){
+
+    public DataModel<Emprestimo> getListaEmprestimo() {
         atualizaListaEmprestimo();
         return listaEmprestimo;
     }
-    
-    public Cliente clienteSelecionado(){
+
+    public Cliente clienteSelecionado() {
         Cliente c = listaCliente.getRowData();
         return c;
     }
-    
-    public String excluir(){
+
+    public String excluir() {
         Cliente c = clienteSelecionado();
         cd.exclui(c);
         return "cliente";
     }
-    
-    public Item itemSelecionado(){
+
+    public Item itemSelecionado() {
         Item i = listaItem.getRowData();
         return i;
     }
-    
-    public String excluiItem(){
+
+    public Emprestimo emprestimoSelecionado() {
+        Emprestimo e = listaEmprestimo.getRowData();
+        return e;
+    }
+
+    public String excluiItem() {
         Item i = itemSelecionado();
         id.exclui(i);
         return "item";
     }
 
-    public String novo(){
+    public String novo() {
         cliente = new Cliente();
         return "cad_cliente";
     }
-    
-    public String novoItem(){
+
+    public String novoItem() {
         item = new Item();
         return "cad_item";
     }
-    
-    public String cancelaCliente(){
+
+    public String cancelaCliente() {
         return "cliente";
     }
-    
-    public String cancelaItem(){
+
+    public String cancelaItem() {
         return "item";
     }
-    
-    public String edita(){
+
+    public String edita() {
         Cliente c = clienteSelecionado();
         setCliente(c);
         return "cad_cliente";
     }
-    
-    public String editaItem(){
+
+    public String editaItem() {
         Item i = itemSelecionado();
         setItem(i);
         return "cad_item";
     }
-    
-    public String salva(){
-        cd.salva(getCliente());      
+
+    public String salva() {
+        cd.salva(getCliente());
         return "cliente";
     }
-    
-    public String salvaItem(){
+
+    public String salvaItem() {
         id.salva(getItem());
         return "item";
     }
-    
-    public String voltar(){
+
+    public String voltar() {
         return "index";
     }
-    
+
+    public String empresta() {
+        Item i = itemSelecionado();
+        emprestimo.setId_item(i.getId_item());
+        emprestimo.setNome_item(i.getNome());
+        return "cad_emprestimo";
+    }
+
+    public String salvaEmprestimo() {
+        emprestimo.setData_emprestimo(new Date());
+        emprestimo.setEmprestado(true);
+        emprestimo.setData_devolucao(new Date(01 / 01 / 1900));
+        ed.salva(getEmprestimo());
+        return "item";
+    }
+
+    public String devolve() {
+        Emprestimo e = emprestimoSelecionado();
+        e.setEmprestado(false);
+        ed.devolve(e);
+        atualizaListaEmprestimo();
+        return "emprestimo";
+    }
+
     /**
      * @return the listaCliente
      */

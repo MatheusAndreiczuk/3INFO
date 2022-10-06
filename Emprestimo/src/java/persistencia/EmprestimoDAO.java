@@ -23,11 +23,13 @@ public class EmprestimoDAO {
 
     public void salva(Emprestimo e) {
         em.getTransaction().begin();
-        if (e.getId_emprestimo()==0) {
             em.persist(e);
-        }else{
+        em.getTransaction().commit();
+    }
+    
+    public void devolve(Emprestimo e){
+        em.getTransaction().begin();
             em.merge(e);
-        }
         em.getTransaction().commit();
     }
  
@@ -37,14 +39,9 @@ public class EmprestimoDAO {
     }
 
     public List<Emprestimo> pesquisa() {
-        Query q = em.createQuery("select e from Emprestimo e order by e.id_emprestimo");
+        Query q = em.createQuery("select e from Emprestimo e where e.emprestado like :parametro order by e.id_emprestimo");
+        q.setParameter("parametro", true);
         List<Emprestimo> listaEmprestimo = q.getResultList();
         return listaEmprestimo;
-    }
-    
-    public void exclui(Emprestimo e){
-        em.getTransaction().begin();
-        em.remove(e);
-        em.getTransaction().commit();
     }
 }
