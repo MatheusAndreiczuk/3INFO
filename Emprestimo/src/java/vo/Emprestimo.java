@@ -25,25 +25,14 @@ public class Emprestimo implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_emprestimo;
-    private int id_cliente, id_item;
+    private int id_item;
+    private String cpf;
     private String nome_item;
     @Temporal(TemporalType.DATE)
     private Date data_emprestimo, data_prevista, data_devolucao;
-    private boolean emprestado;
+    private int emprestado;
 
-    /**
-     * @return the id_cliente
-     */
-    public int getId_cliente() {
-        return id_cliente;
-    }
-
-    /**
-     * @param id_cliente the id_cliente to set
-     */
-    public void setId_cliente(int id_cliente) {
-        this.id_cliente = id_cliente;
-    }
+   
 
     /**
      * @return the id_item
@@ -114,19 +103,6 @@ public class Emprestimo implements Serializable{
     public void setData_devolucao(Date data_devolucao) {
         this.data_devolucao = data_devolucao;
     }
-    /**
-     * @return the emprestado
-     */
-    public boolean isEmprestado() {
-        return emprestado;
-    }
-
-    /**
-     * @param emprestado the emprestado to set
-     */
-    public void setEmprestado(boolean emprestado) {
-        this.emprestado = emprestado;
-    }
 
     /**
      * @return the id_emprestimo
@@ -140,5 +116,33 @@ public class Emprestimo implements Serializable{
      */
     public void setId_emprestimo(int id_emprestimo) {
         this.id_emprestimo = id_emprestimo;
+    }
+
+    /**
+     * @return the cpf
+     */
+    public String getCpf() {
+        return cpf;
+    }
+
+    /**
+     * @param cpf the cpf to set
+     */
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    /**
+     * @return the emprestado
+     */
+    public int getEmprestado() {
+        return emprestado;
+    }
+
+    /**
+     * @param emprestado the emprestado to set
+     */
+    public void setEmprestado(int emprestado) {
+        this.emprestado = emprestado;
     }
 }

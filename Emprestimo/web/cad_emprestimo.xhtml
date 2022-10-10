@@ -38,11 +38,15 @@
     <h:body style="background-color: #FFFFFF;">         
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
+                <h:outputText value="Id item"/><br/>
                 <p:inputText id="itIdItem" value="#{telaLocalizaBean.emprestimo.id_item}" required="true" readonly="true" requiredMessage="É obrigatório informar um item!" placeholder="ID item" style="width: 15%;"/><br/><br/>
-                <p:inputText id="itIdCliente" value="#{telaLocalizaBean.emprestimo.id_cliente}" required="true" requiredMessage="É obrigatório informar um cliente!" placeholder="ID cliente" style="width: 15%;"/><br/><br/>
+                 <h:outputText value="CPF cliente"/><br/>
+                <p:inputText id="itIdCliente" value="#{telaLocalizaBean.emprestimo.cpf}" required="true" requiredMessage="É obrigatório informar um cliente!" placeholder="CPF" style="width: 15%;"/><br/><br/>
+                 <h:outputText value="Nome do item"/><br/>
                 <p:inputText id="itNomeItem" value="#{telaLocalizaBean.emprestimo.nome_item}" required="true" requiredMessage="É obrigatório informar o nome do item!" placeholder="Nome do item" readonly="true" style="width: 15%;"/><br/><br/>
+                 <h:outputText value="Data prevista para entrega"/><br/>
                 <p:calendar id="itDataPrevista" locale="pt" value="#{telaLocalizaBean.emprestimo.data_prevista}" pattern="dd/MM/yyyy" mask="true"
-                            required="true" requiredMessage="É obrigatório uma previsão de devolução!" showOn="button" placeholder="Data prevista para devolução"/><br/><br/>
+                            required="true" requiredMessage="É obrigatório uma previsão de devolução!" showOn="button"/><br/><br/>
                 <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaEmprestimo()}"/>
             </div>
         </h:form> 

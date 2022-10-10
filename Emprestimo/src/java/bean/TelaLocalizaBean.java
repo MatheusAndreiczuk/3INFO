@@ -29,6 +29,7 @@ public class TelaLocalizaBean {
     private DataModel<Cliente> listaCliente;
     private DataModel<Item> listaItem;
     private DataModel<Emprestimo> listaEmprestimo;
+    private DataModel<Emprestimo> listaHistorico;
     private ClienteDAO cd = new ClienteDAO();
     private ItemDAO id = new ItemDAO();
     private EmprestimoDAO ed = new EmprestimoDAO();
@@ -53,6 +54,11 @@ public class TelaLocalizaBean {
     public String atualizaListaEmprestimo() {
         listaEmprestimo = new ListDataModel(getEd().pesquisa());
         return "emprestimo";
+    }
+
+    public String atualizaListaHistoricoEmprestimo() {
+        listaHistorico = new ListDataModel(getEd().pesquisaHistorico());
+        return "historico_emprestimo";
     }
 
     public DataModel<Item> getListaItem() {
@@ -150,7 +156,7 @@ public class TelaLocalizaBean {
 
     public String salvaEmprestimo() {
         emprestimo.setData_emprestimo(new Date());
-        emprestimo.setEmprestado(true);
+        emprestimo.setEmprestado(1);
         emprestimo.setData_devolucao(new Date(01 / 01 / 1900));
         ed.salva(getEmprestimo());
         return "item";
@@ -158,7 +164,8 @@ public class TelaLocalizaBean {
 
     public String devolve() {
         Emprestimo e = emprestimoSelecionado();
-        e.setEmprestado(false);
+        e.setEmprestado(0);
+        e.setData_devolucao(new Date());
         ed.devolve(e);
         atualizaListaEmprestimo();
         return "emprestimo";
@@ -274,5 +281,19 @@ public class TelaLocalizaBean {
      */
     public void setEmprestimo(Emprestimo emprestimo) {
         this.emprestimo = emprestimo;
+    }
+
+    /**
+     * @return the listaHistorico
+     */
+    public DataModel<Emprestimo> getListaHistorico() {
+        return listaHistorico;
+    }
+
+    /**
+     * @param listaHistorico the listaHistorico to set
+     */
+    public void setListaHistorico(DataModel<Emprestimo> listaHistorico) {
+        this.listaHistorico = listaHistorico;
     }
 }

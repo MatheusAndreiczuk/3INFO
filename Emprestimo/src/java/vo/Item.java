@@ -25,7 +25,7 @@ public class Item implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_item;
-    private int num_serie;
+    private String num_serie;
     private String nome, descricao, caracteristicas;
     @Temporal(TemporalType.DATE)
     private Date fabricacao;
@@ -103,14 +103,14 @@ public class Item implements Serializable{
     /**
      * @return the num_serie
      */
-    public int getNum_serie() {
+    public String getNum_serie() {
         return num_serie;
     }
 
     /**
      * @param num_serie the num_serie to set
      */
-    public void setNum_serie(int num_serie) {
+    public void setNum_serie(String num_serie) {
         this.num_serie = num_serie;
     }
 }

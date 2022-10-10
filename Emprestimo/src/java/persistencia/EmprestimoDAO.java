@@ -39,8 +39,15 @@ public class EmprestimoDAO {
     }
 
     public List<Emprestimo> pesquisa() {
-        Query q = em.createQuery("select e from Emprestimo e where e.emprestado like :parametro order by e.id_emprestimo");
-        q.setParameter("parametro", true);
+        Query q = em.createQuery("select e from Emprestimo e where e.emprestado = :emprestado");
+        q.setParameter("emprestado", 1);
+        List<Emprestimo> listaEmprestimo = q.getResultList();
+        return listaEmprestimo;
+    }
+    
+    public List<Emprestimo> pesquisaHistorico() {
+        Query q = em.createQuery("select e from Emprestimo e where e.emprestado = :emprestado");
+        q.setParameter("emprestado", 0);
         List<Emprestimo> listaEmprestimo = q.getResultList();
         return listaEmprestimo;
     }

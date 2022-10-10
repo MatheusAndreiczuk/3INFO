@@ -39,11 +39,17 @@
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
                 <h1>Cadastro de itens</h1>
-                <p:inputText id="itId" value="#{telaLocalizaBean.item.id_item}" required="true" requiredMessage="É obrigatório um número de série!" placeholder="Némero de série" style="width: 20%;" readonly="true"/><br/><br/>
-                <p:inputText id="itNumSerie" value="#{telaLocalizaBean.item.num_serie}" required="true" requiredMessage="É obrigatório um número de série!" placeholder="Némero de série" style="width: 20%;"/><br/><br/>
+                <h:outputText value="Id item"/><br/>
+                <p:inputText id="itId" value="#{telaLocalizaBean.item.id_item}" required="true" requiredMessage="É obrigatório um número de série!" placeholder="Id item" style="width: 20%;" readonly="true"/><br/><br/>
+                 <h:outputText value="Número de série"/><br/>
+                <p:inputText id="itNumSerie" value="#{telaLocalizaBean.item.num_serie}" required="true" requiredMessage="É obrigatório um número de série!" placeholder="Número de série" style="width: 20%;"/><br/><br/>
+                <h:outputText value="Nome do item"/><br/>
                 <p:inputText id="itNome" value="#{telaLocalizaBean.item.nome}" required="true" requiredMessage="É obrigatório informar um nome!" placeholder="Nome" style="width: 20%;"/><br/><br/>
+                <h:outputText value="Descrição"/><br/>
                 <p:inputText id="itDescricao" value="#{telaLocalizaBean.item.descricao}" required="true" requiredMessage="É obrigatório uma descrição!" placeholder="Descrição" style="width: 20%;"/><br/><br/>
+                <h:outputText value="Características"/><br/>
                 <p:inputTextarea cols="50" rows="6" id="itCaracteristicas" value="#{telaLocalizaBean.item.caracteristicas}" required="true" requiredMessage="É obrigatório apresentar características!" placeholder="Digite características aqui (cor, riscos, trincas, estado de conservação, etc)" style="width: 20%"/><br/><br/>
+                <h:outputText value="Data de fabricação"/><br/>
                 <p:calendar id="itData" locale="pt" value="#{telaLocalizaBean.item.fabricacao}" pattern="dd/MM/yyyy" mask="true"
                              required="true" requiredMessage="É obrigatório uma data de fabricação!" showOn="button" placeholder="Data de fabricação"/><br/><br/>
                 <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaItem()}"/>
