@@ -45,7 +45,7 @@
                     <div align="center">
                         <p:commandButton id="bVoltar" icon="pi pi-arrow-left" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.voltar()}"/>
                         <p:tooltip id="ttVoltar" for="bVoltar" value="Home" trackMouse="true"/>
-                        <p:commandButton id="bNovo" icon="pi pi-server" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="item"/>
+                        <p:commandButton id="bNovo" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="item"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Ver itens disponíveis" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #3d5a80;" action="#{telaLocalizaBean.atualizaListaEmprestimo()}" update="emprestimo" />
                         <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
@@ -95,7 +95,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <p:commandButton id="bDevolve" icon="pi pi-history" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.devolve()}" update="emprestimo" >
+                            <p:commandButton id="bDevolve" icon="pi pi-check" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.devolve()}" update="emprestimo" >
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja devolver o item #{emprestimo.nome_item}?" icon="ui-icon-alert" />
                             </p:commandButton>
                             <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">

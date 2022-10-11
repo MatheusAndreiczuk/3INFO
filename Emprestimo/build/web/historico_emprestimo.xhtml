@@ -45,41 +45,41 @@
                     <div align="center">
                         <p:commandButton id="bVoltar" icon="pi pi-arrow-left" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.voltar()}"/>
                         <p:tooltip id="ttVoltar" for="bVoltar" value="Home" trackMouse="true"/>
-                        <p:commandButton id="bNovo" icon="pi pi-server" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="item"/>
+                        <p:commandButton id="bNovo" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="item"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Ver itens disponíveis" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #3d5a80;" action="#{telaLocalizaBean.atualizaListaHistoricoEmprestimo()}" update="historico" />
                         <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
                     </div><br/>
-                    <p:dataTable id="emprestimo" value="#{telaLocalizaBean.listaEmprestimo}" var="historico">
+                    <p:dataTable id="historico" value="#{telaLocalizaBean.listaHistorico}" var="historico">
                         <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="ID empréstimo" style="color: #FFFFFF; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{emprestimo.id_emprestimo}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.id_emprestimo}"/>
                         </p:column>
                         <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="CPF" style="color: #FFFAFA; font-size: 16px;" />
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{emprestimo.cpf}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.cpf}"/>
                         </p:column>
                         <p:column style="width:25%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;" >
                             <f:facet name="header">
                                 <h:outputText value="ID item" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{emprestimo.id_item}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.id_item}"/>
                         </p:column>
                         <p:column style="width:25%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Nome do item" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{emprestimo.nome_item}"/>
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.nome_item}"/>
                         </p:column>
                         <p:column style="width:30%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
                             <f:facet name="header">
                                 <h:outputText value="Data de empréstimo" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{emprestimo.data_emprestimo}">
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.data_emprestimo}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
                         </p:column>
@@ -87,7 +87,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Data prevista" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{emprestimo.data_prevista}">
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.data_prevista}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
                         </p:column>
@@ -95,9 +95,16 @@
                             <f:facet name="header">
                                 <h:outputText value="Data de entrega" style="color: #FFFAFA; font-size: 16px;"/>
                             </f:facet>
-                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{emprestimo.data_devolucao}">
+                            <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.data_devolucao}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
+                        </p:column>
+                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
+                            <f:facet name="header">
+                                <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
+                            </f:facet>                                               
+                            <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.historicoItem()}" />
+                            <p:tooltip for="bEmpresta" value="Histórico de clientes" trackMouse="true" />
                         </p:column>
                     </p:dataTable>
                 </h:form>

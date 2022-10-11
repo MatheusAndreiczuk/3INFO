@@ -6,6 +6,7 @@
 package bean;
 
 import java.util.Date;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
@@ -30,6 +31,7 @@ public class TelaLocalizaBean {
     private DataModel<Item> listaItem;
     private DataModel<Emprestimo> listaEmprestimo;
     private DataModel<Emprestimo> listaHistorico;
+    private DataModel<Emprestimo> listaCpf;
     private ClienteDAO cd = new ClienteDAO();
     private ItemDAO id = new ItemDAO();
     private EmprestimoDAO ed = new EmprestimoDAO();
@@ -53,6 +55,7 @@ public class TelaLocalizaBean {
 
     public String atualizaListaEmprestimo() {
         listaEmprestimo = new ListDataModel(getEd().pesquisa());
+        System.out.println("jhgjgjgj"+listaEmprestimo.getRowCount());
         return "emprestimo";
     }
 
@@ -72,7 +75,6 @@ public class TelaLocalizaBean {
     }
 
     public DataModel<Emprestimo> getListaEmprestimo() {
-        atualizaListaEmprestimo();
         return listaEmprestimo;
     }
 
@@ -167,8 +169,20 @@ public class TelaLocalizaBean {
         e.setEmprestado(0);
         e.setData_devolucao(new Date());
         ed.devolve(e);
-        atualizaListaEmprestimo();
         return "emprestimo";
+    }
+    
+    public String historicoCliente(){
+        Cliente c = clienteSelecionado();
+        listaHistorico = new ListDataModel(getEd().pesquisaHistoricoItens(c.getCpf()));
+        return "historico_cliente";
+    }
+    
+    public String historicoItem(){
+        Emprestimo i = listaHistorico.getRowData();
+        listaCpf = new ListDataModel(getEd().pesquisaCpf(i.getId_item()));
+        listaCliente = new ListDataModel(getCd().pesquisaHistoricoClientes((List) listaCpf));
+        return "historico_item";
     }
 
     /**
@@ -295,5 +309,19 @@ public class TelaLocalizaBean {
      */
     public void setListaHistorico(DataModel<Emprestimo> listaHistorico) {
         this.listaHistorico = listaHistorico;
+    }
+
+    /**
+     * @return the listaCpf
+     */
+    public DataModel<Emprestimo> getListaCpf() {
+        return listaCpf;
+    }
+
+    /**
+     * @param listaCpf the listaCpf to set
+     */
+    public void setListaCpf(DataModel<Emprestimo> listaCpf) {
+        this.listaCpf = listaCpf;
     }
 }

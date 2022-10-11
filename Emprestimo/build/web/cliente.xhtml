@@ -106,7 +106,7 @@
                             </f:facet>                     
                             <p:commandButton id="bEdita" icon="pi pi-pencil" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.edita()}" />
                             <p:tooltip for="bEdita" value="Alterar dados do cliente" trackMouse="true" />
-                            <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="cliente" />
+                            <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.historicoCliente()}" />
                             <p:tooltip for="bEmpresta" value="Empréstimos" trackMouse="true" />
                             <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluir()}" update="cliente" >
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja excluir o cliente#{cliente.nome}?" icon="ui-icon-alert" />

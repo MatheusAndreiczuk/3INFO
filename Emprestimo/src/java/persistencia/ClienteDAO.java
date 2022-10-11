@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import vo.Cliente;
+import vo.Emprestimo;
 
 /**
  *
@@ -56,5 +57,12 @@ public class ClienteDAO {
         em.getTransaction().begin();
         em.remove(c);
         em.getTransaction().commit();
+    }
+    
+    public List<Cliente> pesquisaHistoricoClientes(List cpf) {
+        Query q = em.createQuery("select c from Cliente c where c.cpf like :cpf");
+        q.setParameter("cpf", cpf);
+        List<Cliente> listaCliente = q.getResultList();
+        return listaCliente;
     }
 }

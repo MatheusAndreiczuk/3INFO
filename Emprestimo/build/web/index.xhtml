@@ -14,9 +14,9 @@
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/><br/>
             <div id="panel-login" style="text-align: center;">
                 <p:commandButton value="Emprestar" ajax="false" update="panel-login, growl" action="item"/><br/><br/>
-                <p:commandButton value="Clientes" ajax="false" update="#{telaLocalizaBean.atualizaLista()}" action="cliente"/><br/><br/>
-                <p:commandButton value="Itens emprestados" ajax="false" update="#{telaLocalizaBean.atualizaListaEmprestimo}" action="emprestimo"/><br/><br/>
-                <p:commandButton value="Histórico de empréstimos" ajax="false" update="#{telaLocalizaBean.atualizaListaHistoricoEmprestimo}" action="historico_emprestimo"/>
+                <p:commandButton value="Clientes" ajax="false" action="#{telaLocalizaBean.atualizaLista()}"/><br/><br/>
+                <p:commandButton value="Itens emprestados" ajax="false" action="#{telaLocalizaBean.atualizaListaEmprestimo()}"/><br/><br/>
+                <p:commandButton value="Histórico de empréstimos" ajax="false" action="#{telaLocalizaBean.atualizaListaHistoricoEmprestimo}"/>
             </div>
         </h:form> 
     </h:body>
