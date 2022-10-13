@@ -38,6 +38,13 @@ public class ItemDAO {
         return listaItem;
     }
     
+    public List<Item> pesquisaId(int id) {
+        Query q = em.createQuery("select i from Item i where i.id_item = :id");
+        q.setParameter("id", id);
+        List<Item> listaItem = q.getResultList();
+        return listaItem;
+    }
+    
      public void emTransaction(){
         if(!em.getTransaction().isActive()){
             em.getTransaction().begin();

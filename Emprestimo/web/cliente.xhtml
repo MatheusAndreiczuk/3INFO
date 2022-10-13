@@ -44,7 +44,7 @@
                         <div align="center">
                             <p:commandButton id="bVoltar" icon="pi pi-arrow-left" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.voltar()}"/>
                         <p:tooltip id="ttVoltar" for="bVoltar" value="Home" trackMouse="true"/>
-                            <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.novoItem()}"/>
+                        <p:commandButton id="bNovo" icon="pi pi-file" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.novo()}"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Cadastrar novo cliente" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #3d5a80;" action="#{telaLocalizaBean.atualizaLista()}" update="cliente" />
                         <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
@@ -108,7 +108,7 @@
                             <p:tooltip for="bEdita" value="Alterar dados do cliente" trackMouse="true" />
                             <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.historicoCliente()}" />
                             <p:tooltip for="bEmpresta" value="Empréstimos" trackMouse="true" />
-                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.excluir()}" update="cliente" >
+                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.pesquisaClienteEmprestou()}" update="cliente" >
                                 <p:confirm header="Confirmação" message="Tem certeza que deseja excluir o cliente#{cliente.nome}?" icon="ui-icon-alert" />
                             </p:commandButton>
                             <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">

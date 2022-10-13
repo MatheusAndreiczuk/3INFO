@@ -5,6 +5,7 @@
  */
 package persistencia;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -50,6 +51,13 @@ public class EmprestimoDAO {
         return listaEmprestimo;
     }
     
+    public List<Emprestimo> pesquisaAtrasados(Date data_atual) {
+        Query q = em.createQuery("select e from Emprestimo e where e.data_prevista < :data_atual and e.emprestado = 1 order by e.data_prevista");
+        q.setParameter("data_atual", data_atual);
+        List<Emprestimo> listaEmprestimo = q.getResultList();
+        return listaEmprestimo;
+    }
+    
     public List<Emprestimo> pesquisaHistoricoItens(String cpf) {
         Query q = em.createQuery("select e from Emprestimo e where e.cpf like :cpf");
         q.setParameter("cpf", cpf);
@@ -62,5 +70,22 @@ public class EmprestimoDAO {
         q.setParameter("idItem", idItem);
         List<Emprestimo> listaCpf = q.getResultList();
         return listaCpf;
+    }
+    
+    public List<Emprestimo> pesquisaId(int idItem) {
+        Query q = em.createQuery("select e from Emprestimo e where e.id_item = :idItem");
+        q.setParameter("idItem", idItem);
+        List<Emprestimo> listaId = q.getResultList();
+        return listaId;
+    }
+    
+    public boolean pesquisaClienteEmprestou(String cpf) {
+        Query q = em.createQuery("select e from Emprestimo e where e.cpf = :cpf");
+        q.setParameter("cpf", cpf);
+        if(!q.getResultList().isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

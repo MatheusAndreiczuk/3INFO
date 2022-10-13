@@ -48,7 +48,11 @@
                         <p:commandButton id="bNovo" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #3d5a80;" action="item"/>
                         <p:tooltip id="ttNovo" for="bNovo" value="Ver itens disponíveis" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #3d5a80;" action="#{telaLocalizaBean.atualizaListaHistoricoEmprestimo()}" update="historico" />
-                        <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
+                        <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/><br/><br/>
+                        
+                        <p:inputText id="itId" value="#{telaLocalizaBean.item.id_item}" placeholder="ID item" style="width: 20%;"/>
+                        <p:commandButton id="bFiltro"  icon="pi pi-search" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #3d5a80;" action="#{telaLocalizaBean.pesquisaId()}" update="historico"/>
+                        <p:tooltip id="ttFiltro" for="bFiltro" value="Pesquisar" trackMouse="true"/>
                     </div><br/>
                     <p:dataTable id="historico" value="#{telaLocalizaBean.listaHistorico}" var="historico">
                         <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; border-color: #FFFAFA; border-width: 1px;">
@@ -98,13 +102,6 @@
                             <h:outputText style="color: #FFFFFF; font-size: 16px;" value="#{historico.data_devolucao}">
                                 <f:convertDateTime pattern="dd/MM/yyyy"/>
                             </h:outputText>
-                        </p:column>
-                        <p:column style="width:20%; text-align: center; background-color: #3d5a80; font-weight: normal; ">
-                            <f:facet name="header">
-                                <h:outputText value="Ações" style="color: #FFFAFA; font-size: 16px;"/>
-                            </f:facet>                                               
-                            <p:commandButton id="bEmpresta" icon="pi pi-list" style="font-size: 20px; padding-right:10px; border-color: #3d5a80; margin-right:5px; background-color: #3d5a80;" action="#{telaLocalizaBean.historicoItem()}" />
-                            <p:tooltip for="bEmpresta" value="Histórico de clientes" trackMouse="true" />
                         </p:column>
                     </p:dataTable>
                 </h:form>

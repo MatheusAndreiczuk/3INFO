@@ -30,6 +30,7 @@ public class TelaLocalizaBean {
     private DataModel<Cliente> listaCliente;
     private DataModel<Item> listaItem;
     private DataModel<Emprestimo> listaEmprestimo;
+    private DataModel<Emprestimo> listaAtrasados;
     private DataModel<Emprestimo> listaHistorico;
     private DataModel<Emprestimo> listaCpf;
     private ClienteDAO cd = new ClienteDAO();
@@ -63,6 +64,13 @@ public class TelaLocalizaBean {
         listaHistorico = new ListDataModel(getEd().pesquisaHistorico());
         return "historico_emprestimo";
     }
+    
+    public String atualizaListaAtrasados() {
+        Date data_atual = new Date();
+        listaAtrasados = new ListDataModel(getEd().pesquisaAtrasados(data_atual));
+        return "atrasados";
+    }
+    
 
     public DataModel<Item> getListaItem() {
         atualizaListaItem();
@@ -175,14 +183,31 @@ public class TelaLocalizaBean {
     public String historicoCliente(){
         Cliente c = clienteSelecionado();
         listaHistorico = new ListDataModel(getEd().pesquisaHistoricoItens(c.getCpf()));
+        System.out.println("asasd" + c.getCpf());
         return "historico_cliente";
     }
     
-    public String historicoItem(){
+    public String pesquisaId(){
         Emprestimo i = listaHistorico.getRowData();
-        listaCpf = new ListDataModel(getEd().pesquisaCpf(i.getId_item()));
-        listaCliente = new ListDataModel(getCd().pesquisaHistoricoClientes((List) listaCpf));
-        return "historico_item";
+        listaHistorico = new ListDataModel(getId().pesquisaId(i.getId_item()));
+        System.out.println("asdasd" + item.getId_item());
+        return "historico_emprestimo";
+    }
+    
+    public String pesquisaAtrasados(){
+        Date data_atual = new Date();
+        listaEmprestimo = new ListDataModel(getEd().pesquisaAtrasados(data_atual));
+        return "atrasados";
+    }
+    
+    public String pesquisaClienteEmprestou(){
+        Cliente c = listaCliente.getRowData();
+        if(getEd().pesquisaClienteEmprestou(c.getCpf())){
+            return "cliente";
+        }else{
+            cd.exclui(c);
+            return "cliente";
+        }
     }
 
     /**
@@ -323,5 +348,19 @@ public class TelaLocalizaBean {
      */
     public void setListaCpf(DataModel<Emprestimo> listaCpf) {
         this.listaCpf = listaCpf;
+    }
+
+    /**
+     * @return the listaAtrasados
+     */
+    public DataModel<Emprestimo> getListaAtrasados() {
+        return listaAtrasados;
+    }
+
+    /**
+     * @param listaAtrasados the listaAtrasados to set
+     */
+    public void setListaAtrasados(DataModel<Emprestimo> listaAtrasados) {
+        this.listaAtrasados = listaAtrasados;
     }
 }
