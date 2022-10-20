@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Login Garçom</title>
+        <link rel="stylesheet" href="primeflex.css"/>
+    </h:head>
+    <h:body style="background-color: #FFFFFF;">         
+        <h:form>
+            <p:commandButton icon="pi pi-info-circle" action="manual3.pdf" ajax="false"/></h:form>
+        <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
+            <div id="panel-login" style="text-align: center;">
+                <h1>Login</h1>
+                <p:inputText id="itUsuario" value="#{telaLocalizaBean.garçom.nome}" required="true" requiredMessage="É obrigatório um nome!" placeholder="Nome" style="width: 14%;"/><br/><br/>
+                <p:password toggleMask="true" redisplay="true" id="itSenha" value="#{telaLocalizaBean.garçom.senha}" required="true" requiredMessage="É obrigatório uma senha!" placeholder="Senha"/><br/><br/>                   
+                <p:commandButton value="Entrar" ajax="false" update="panel-login, growl" action="#{telaLocalizaBean.verificaGarçom()}"/><br/><br/>
+            </div>
+        </h:form> 
+    </h:body>
+</html>
