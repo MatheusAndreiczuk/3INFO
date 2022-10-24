@@ -13,7 +13,7 @@
             <p:commandButton icon="pi pi-info-circle" action="manual4.pdf" ajax="false"/></h:form>
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/><br/>
             <div id="panel-login" style="text-align: center;">
-                <p:commandButton value="Garçom" ajax="false" update="panel-login, growl" action="garçom"/><br/><br/>
+                <p:commandButton value="Garçom" ajax="false" update="panel-login, growl" action="#{telaLocalizaBean.botaoGarçom()}"/><br/><br/>
                 <p:commandButton value="Cozinha" ajax="false" action="index"/><br/><br/>
                 <p:commandButton value="Caixa" ajax="false" action="index"/><br/><br/>
             </div>

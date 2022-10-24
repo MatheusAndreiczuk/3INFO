@@ -29,21 +29,21 @@ public class GarçomDAO {
     }
 
     public boolean verificaGarçomExistente(String garçom) {
-        Query q = em.createQuery("select g from Garcom g where g.nome = :nomeGarçom");
+        Query q = em.createQuery("select g from Garcom g where g.usuario = :nomeGarçom");
         q.setParameter("nomeGarçom", garçom);
         List<Garcom> listaGarçom = q.getResultList();
         if (!listaGarçom.isEmpty()) {
-            System.out.println("Tem garçom");
+            System.out.println("Tem funcionário");
             return true;
         } else {
-            System.out.println("Nao tem garçom");
+            System.out.println("Nao tem funcionário");
             return false;
         }
     }
 
     public String pegaSenha(String garçom) {
         if (verificaGarçomExistente(garçom)) {
-            Query verifyPassword = em.createNativeQuery("select senha from garcom where nome = ?");
+            Query verifyPassword = em.createNativeQuery("select senha from garcom where usuario = ?");
             verifyPassword.setParameter(1, garçom);
             String senha = verifyPassword.getSingleResult().toString();
             return senha;
@@ -52,15 +52,22 @@ public class GarçomDAO {
         }
     }
 
-    public List<Garcom> pesquisa() {
-        Query q = em.createQuery("select g from Garcom g order by g.idGarcom");
+    public List<Garcom> pesquisaGarçom() {
+        Query q = em.createQuery("select g from Garcom g where g.tipo = Garcom");
         List<Garcom> listaGarçom = q.getResultList();
         return listaGarçom;
+    }
+    
+    public String pesquisaTipo(String usuario) {
+        Query q = em.createQuery("select g.tipo from Garcom g where g.usuario = :usuario");
+        q.setParameter("usuario", usuario);
+        String tipo = q.getSingleResult().toString();
+        return tipo;
     }
 
     public void salva(Garcom g) {
         transaction();
-        if (g.getIdGarcom() == 0) {
+        if (g.getId() == 0) {
             em.persist(g);
         } else {
             em.merge(g);

@@ -22,7 +22,7 @@ import vo.Garcom;
 @ManagedBean
 @SessionScoped
 public class TelaLocalizaBean {
-
+    private String tipo;
     private DataModel<Garcom> listaGarçom;
     private GarçomDAO gd = new GarçomDAO();
     private String admin = "mts";
@@ -34,7 +34,7 @@ public class TelaLocalizaBean {
     }
 
     public DataModel<Garcom> atualizaListaGarçom() {
-        listaGarçom = new ListDataModel(getGd().pesquisa());
+        listaGarçom = new ListDataModel(getGd().pesquisaGarçom());
         return listaGarçom;
     }
 
@@ -48,19 +48,32 @@ public class TelaLocalizaBean {
         getGarçom().setSenha("");
         return "index";
     }
+    
+    public String loginErrado(){
+        garçom.setUsuario("");
+        garçom.setNome("");
+        garçom.setSenha("");
+        return "garçom";
+    }
 
-    public String verificaGarçom() throws ParseException {
+    public String verificaFuncionario() throws ParseException {
         if (getGarçom().getNome().equals(admin) && getGarçom().getSenha().equals(senhaAdmin)) {
             atualizaListaGarçom();
             return "admin_page";
         } else {
-            if (gd.verificaGarçomExistente(getGarçom().getNome())) {
-                String senhaCerta = gd.pegaSenha(getGarçom().getNome());
-                if (getGarçom().getSenha().equals(senhaCerta)) {
-                    atualizaListaGarçom();
-                    return "tela_garçom";
+            if (gd.verificaGarçomExistente(getGarçom().getUsuario())) {
+                String senhaCerta = gd.pegaSenha(getGarçom().getUsuario());
+                if (getGarçom().getSenha().equals(senhaCerta)) { //verifica login e senha corretos
+                    switch (gd.pesquisaTipo(getGarçom().getUsuario())){
+                        case "Garcom":
+                            return "tela_garçom";
+                        case "Cozinheiro":
+                            return "tela_cozinheiro";
+                        case "Caixa": 
+                            return "tela_caixa";
+                    }
                 } else {
-                    return signOut();
+                    return loginErrado();
                 }
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
@@ -68,20 +81,21 @@ public class TelaLocalizaBean {
                 return signOut();
             }
         }
+        return null;
     }
 
-    public String salvaGarçom() {
-        String garçomDigitado = getGarçom().getNome();
-        if (garçomDigitado.equals("mts")) {
+    public String salvaFuncionario() {
+        String usuarioDigitado = getGarçom().getUsuario();
+        if (usuarioDigitado.equals("mts")) {
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Nome pertence ao administrador do sistema"));
-            return "cad_garçom";
-        } else if (gd.verificaGarçomExistente(garçomDigitado)) {
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário pertence ao administrador do sistema"));
+            return "cad_funcionarios";
+        } else if (gd.verificaGarçomExistente(usuarioDigitado)) {
             System.out.println("Tem garçom");
             FacesContext context = FacesContext.getCurrentInstance();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Garçom já existente"));
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Funcionário já existente"));
             return "admin_page";
-        } else if (!garçomDigitado.equals("")) {
+        } else if (!usuarioDigitado.equals("")) {
             gd.salva(getGarçom());
             atualizaListaGarçom();
             return "admin_page";
@@ -93,22 +107,30 @@ public class TelaLocalizaBean {
     }
 
     public String novoGarçom() {
+        garçom.setUsuario("");
         garçom.setNome("");
         garçom.setSenha("");
-        garçom.setIdGarcom(0);
-        return "cad_garçom";
+        garçom.setId(0);
+        return "cad_funcionarios";
     }
 
     public String editaGarçom() {
         Garcom g = garçomSelecionado();
         setGarçom(g);
-        return "cad_garçom";
+        return "cad_funcionarios";
     }
 
     public String excluiGarçom() {
         Garcom g = garçomSelecionado();
         gd.exclui(g);
         return "admin_page";
+    }
+    
+    public String botaoGarçom(){
+        setTipo("Garcom");
+        getGarçom().setNome("");
+        getGarçom().setSenha("");
+        return "garçom";
     }
 
     /**
@@ -179,5 +201,19 @@ public class TelaLocalizaBean {
      */
     public void setGarçom(Garcom garçom) {
         this.garçom = garçom;
+    }
+
+    /**
+     * @return the tipo
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

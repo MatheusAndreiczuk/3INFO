@@ -19,9 +19,11 @@ import javax.persistence.Id;
 public class Garcom implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idGarcom;
+    private int id;
+    private String usuario;
     private String nome;
     private String senha;
+    private String tipo;
 
     /**
      * @return the nome
@@ -50,17 +52,46 @@ public class Garcom implements Serializable {
     public void setSenha(String senha) {
         this.senha = senha.trim();
     }
+
     /**
-     * @param idGarcom the idGarcom to set
+     * @return the tipo
      */
-    public void setIdGarcom(int idGarcom) {
-        this.idGarcom = idGarcom;
+    public String getTipo() {
+        return tipo;
     }
 
     /**
-     * @return the idGarcom
+     * @param tipo the tipo to set
      */
-    public int getIdGarcom() {
-        return idGarcom;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    /**
+     * @return the usuario
+     */
+    public String getUsuario() {
+        return usuario;
+    }
+
+    /**
+     * @param usuario the usuario to set
+     */
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }
