@@ -34,7 +34,7 @@ public class TelaLocalizaBean {
     }
 
     public DataModel<Garcom> atualizaListaGarçom() {
-        listaGarçom = new ListDataModel(getGd().pesquisaGarçom());
+        listaGarçom = new ListDataModel(getGd().pesquisaGarçom(getGarçom().getTipo()));
         return listaGarçom;
     }
 
@@ -57,7 +57,7 @@ public class TelaLocalizaBean {
     }
 
     public String verificaFuncionario() throws ParseException {
-        if (getGarçom().getNome().equals(admin) && getGarçom().getSenha().equals(senhaAdmin)) {
+        if (getGarçom().getUsuario().equals(admin) && getGarçom().getSenha().equals(senhaAdmin)) {
             atualizaListaGarçom();
             return "admin_page";
         } else {
@@ -129,6 +129,7 @@ public class TelaLocalizaBean {
     public String botaoGarçom(){
         setTipo("Garcom");
         getGarçom().setNome("");
+        getGarçom().setUsuario("");
         getGarçom().setSenha("");
         return "garçom";
     }

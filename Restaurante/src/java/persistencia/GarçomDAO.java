@@ -52,14 +52,15 @@ public class GarçomDAO {
         }
     }
 
-    public List<Garcom> pesquisaGarçom() {
-        Query q = em.createQuery("select g from Garcom g where g.tipo = Garcom");
+    public List<Garcom> pesquisaGarçom(String tipo) {
+        Query q = em.createQuery("select g from Garcom g where g.tipo like :tipo");
+        q.setParameter("tipo", tipo);
         List<Garcom> listaGarçom = q.getResultList();
         return listaGarçom;
     }
     
     public String pesquisaTipo(String usuario) {
-        Query q = em.createQuery("select g.tipo from Garcom g where g.usuario = :usuario");
+        Query q = em.createQuery("select g.tipo from Garcom g where g.usuario like :usuario");
         q.setParameter("usuario", usuario);
         String tipo = q.getSingleResult().toString();
         return tipo;
