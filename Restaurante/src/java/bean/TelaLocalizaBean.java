@@ -13,7 +13,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import persistencia.GarçomDAO;
+import persistencia.PratoDAO;
 import vo.Garcom;
+import vo.Prato;
 
 /**
  *
@@ -22,63 +24,76 @@ import vo.Garcom;
 @ManagedBean
 @SessionScoped
 public class TelaLocalizaBean {
+
     private String tipo;
     private DataModel<Garcom> listaGarçom;
+    private DataModel<Prato> listaPrato;
     private GarçomDAO gd = new GarçomDAO();
+    private PratoDAO pd = new PratoDAO();
     private String admin = "mts";
     private String senhaAdmin = "major";
     private Garcom garçom = new Garcom();
+    private Prato prato = new Prato();
 
     public TelaLocalizaBean() {
 
     }
 
     public DataModel<Garcom> atualizaListaGarçom() {
-        listaGarçom = new ListDataModel(getGd().pesquisaGarçom(getGarçom().getTipo()));
+        listaGarçom = new ListDataModel(getGd().pesquisa());
         return listaGarçom;
     }
 
+    public DataModel<Prato> atualizaListaPrato() {
+        listaPrato = new ListDataModel(getPd().pesquisa());
+        return listaPrato;
+    }
+
     public Garcom garçomSelecionado() {
-        Garcom g = listaGarçom.getRowData();
+        Garcom g = getListaGarçom().getRowData();
         return g;
     }
 
+    public Prato pratoSelecionado() {
+        Prato p = listaPrato.getRowData();
+        return p;
+    }
+
     public String signOut() {
-        getGarçom().setNome("");
+        getGarçom().setUsuario("");
         getGarçom().setSenha("");
         return "index";
     }
-    
-    public String loginErrado(){
-        garçom.setUsuario("");
-        garçom.setNome("");
-        garçom.setSenha("");
+
+    public String loginErrado() {
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Login e/ou senha inválidos"));
+        getGarçom().setUsuario("");
+        getGarçom().setSenha("");
         return "garçom";
     }
 
     public String verificaFuncionario() throws ParseException {
-        if (getGarçom().getUsuario().equals(admin) && getGarçom().getSenha().equals(senhaAdmin)) {
+        if (getGarçom().getUsuario().equals(getAdmin()) && getGarçom().getSenha().equals(getSenhaAdmin())) {
             atualizaListaGarçom();
             return "admin_page";
         } else {
-            if (gd.verificaGarçomExistente(getGarçom().getUsuario())) {
-                String senhaCerta = gd.pegaSenha(getGarçom().getUsuario());
+            if (getGd().verificaGarçomExistente(getGarçom().getUsuario())) {
+                String senhaCerta = getGd().pegaSenha(getGarçom().getUsuario());
                 if (getGarçom().getSenha().equals(senhaCerta)) { //verifica login e senha corretos
-                    switch (gd.pesquisaTipo(getGarçom().getUsuario())){
+                    switch (getGd().pesquisaTipo(getGarçom().getUsuario())) {
                         case "Garcom":
                             return "tela_garçom";
                         case "Cozinheiro":
                             return "tela_cozinheiro";
-                        case "Caixa": 
+                        case "Caixa":
                             return "tela_caixa";
                     }
                 } else {
                     return loginErrado();
                 }
             } else {
-                FacesContext context = FacesContext.getCurrentInstance();
-                context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Login e/ou senha inválidos"));
-                return signOut();
+                return loginErrado();
             }
         }
         return null;
@@ -90,13 +105,13 @@ public class TelaLocalizaBean {
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Usuário pertence ao administrador do sistema"));
             return "cad_funcionarios";
-        } else if (gd.verificaGarçomExistente(usuarioDigitado)) {
-            System.out.println("Tem garçom");
+        } else if (getGd().verificaGarçomExistente(usuarioDigitado)) {
+            System.out.println("Funcionário já existe");
             FacesContext context = FacesContext.getCurrentInstance();
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Funcionário já existente"));
             return "admin_page";
         } else if (!usuarioDigitado.equals("")) {
-            gd.salva(getGarçom());
+            getGd().salva(getGarçom());
             atualizaListaGarçom();
             return "admin_page";
         } else {
@@ -106,33 +121,91 @@ public class TelaLocalizaBean {
         }
     }
 
+    public String salvaPrato() {
+        String nomePrato = getPrato().getNome();
+        if (getPd().verificaPratoExistente(nomePrato)) {
+            System.out.println("Prato já existe");
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Prato já existente"));
+            return "prato";
+        } else if (!nomePrato.equals("")) {
+            getPd().salva(getPrato());
+            atualizaListaPrato();
+            return "prato";
+        } else {
+            FacesContext context = FacesContext.getCurrentInstance();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro", "Tentativa de cadastro inválida"));
+            return "cad_prato";
+        }
+    }
+
+    public String editaFuncionario() {
+        getGd().salva(getGarçom());
+        return "admin_page";
+    }
+
+    public String editaPrato() {
+        getPd().salva(getPrato());
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Prato alterado com sucesso!"));
+        return "prato";
+    }
+
+    public String editarPrato() {
+        Prato p = pratoSelecionado();
+        setPrato(p);
+        return "edita_prato";
+    }
+
     public String novoGarçom() {
-        garçom.setUsuario("");
-        garçom.setNome("");
-        garçom.setSenha("");
-        garçom.setId(0);
+        getGarçom().setUsuario("");
+        getGarçom().setNome("");
+        getGarçom().setSenha("");
         return "cad_funcionarios";
+    }
+
+    public String novoPrato() {
+        getPrato().setNome("");
+        getPrato().setCategoria("");
+        getPrato().setDescricao("");
+        getPrato().setPreco(0.0);
+        return "cad_prato";
     }
 
     public String editaGarçom() {
         Garcom g = garçomSelecionado();
         setGarçom(g);
-        return "cad_funcionarios";
+        return "edita_funcionario";
     }
 
     public String excluiGarçom() {
         Garcom g = garçomSelecionado();
-        gd.exclui(g);
+        getGd().exclui(g);
+        atualizaListaGarçom();
         return "admin_page";
     }
     
-    public String botaoGarçom(){
+    public String excluiPrato() {
+        Prato p = pratoSelecionado();
+        getPd().exclui(p);
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Prato excluido com sucesso!"));
+        atualizaListaPrato();
+        return "prato";
+    }
+    
+     public String botaoGarçom(){
         setTipo("Garcom");
         getGarçom().setNome("");
         getGarçom().setUsuario("");
         getGarçom().setSenha("");
         return "garçom";
     }
+     
+     public String verPrato(){
+         atualizaListaPrato();
+         return "prato";
+     }
 
     /**
      * @return the listaGarçom
@@ -216,5 +289,47 @@ public class TelaLocalizaBean {
      */
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    /**
+     * @return the listaPrato
+     */
+    public DataModel<Prato> getListaPrato() {
+        return listaPrato;
+    }
+
+    /**
+     * @param listaPrato the listaPrato to set
+     */
+    public void setListaPrato(DataModel<Prato> listaPrato) {
+        this.listaPrato = listaPrato;
+    }
+
+    /**
+     * @return the pd
+     */
+    public PratoDAO getPd() {
+        return pd;
+    }
+
+    /**
+     * @param pd the pd to set
+     */
+    public void setPd(PratoDAO pd) {
+        this.pd = pd;
+    }
+
+    /**
+     * @return the prato
+     */
+    public Prato getPrato() {
+        return prato;
+    }
+
+    /**
+     * @param prato the prato to set
+     */
+    public void setPrato(Prato prato) {
+        this.prato = prato;
     }
 }

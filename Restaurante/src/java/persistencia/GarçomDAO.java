@@ -59,6 +59,12 @@ public class GarçomDAO {
         return listaGarçom;
     }
     
+    public List<Garcom> pesquisa() {
+        Query q = em.createQuery("select g from Garcom g order by g.id");
+        List<Garcom> listaGarçom = q.getResultList();
+        return listaGarçom;
+    }
+    
     public String pesquisaTipo(String usuario) {
         Query q = em.createQuery("select g.tipo from Garcom g where g.usuario like :usuario");
         q.setParameter("usuario", usuario);

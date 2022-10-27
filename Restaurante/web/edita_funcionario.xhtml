@@ -10,9 +10,10 @@
     <h:body style="background-color: #FFFFFF;">         
         <h:form><p:growl id="growl" showDetail="true" sticky="true"/>
             <div style="text-align: center;">
-                <h1>Controle/cadastro de funcionários</h1>    
-                <p:inputText id="itUsuario" value="#{telaLocalizaBean.garçom.usuario}" required="true" requiredMessage="É obrigatório informar um usuário!" placeholder="Usuário" style="width: 14%;"/><br/><br/>
+                <h1>Controle/cadastro de funcionários</h1>
+                <h:outputText value="Nome"/><br/>
                 <p:inputText id="itNome" value="#{telaLocalizaBean.garçom.nome}" required="true" requiredMessage="É obrigatório informar um nome!" placeholder="Nome" style="width: 14%;"/><br/><br/>
+                <h:outputText value="Senha"/><br/>
                 <p:password id="itSenha" feedback="true" toggleMask="true" redisplay="true" promptLabel="Insira uma senha" weakLabel="Fraca" goodLabel="Razoável" strongLabel="Forte"
                             value="#{telaLocalizaBean.garçom.senha}" required="true" requiredMessage="É obrigatório uma senha!" placeholder="Senha"/><br/><br/>   
                 <div align="center"><p:selectOneRadio id="itTipo" value="#{telaLocalizaBean.garçom.tipo}" required="true" requiredMessage="É obrigatório um tipo">
@@ -20,7 +21,7 @@
                     <f:selectItem itemLabel="Cozinheiro" itemValue="Cozinheiro"/>
                     <f:selectItem itemLabel="Caixa" itemValue="Caixa"/>
                     </p:selectOneRadio> <br/><br/>   </div>
-                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaFuncionario()}"/>
+                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.editaFuncionario()}"/>
             </div>
         </h:form> 
         <h:form>
