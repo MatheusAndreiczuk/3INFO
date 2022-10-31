@@ -165,10 +165,7 @@ public class TelaLocalizaBean {
     }
 
     public String novoPrato() {
-        getPrato().setNome("");
-        getPrato().setCategoria("");
-        getPrato().setDescricao("");
-        getPrato().setPreco(0.0);
+        setPrato(new Prato());
         return "cad_prato";
     }
 

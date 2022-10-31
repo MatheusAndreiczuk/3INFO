@@ -12,7 +12,7 @@
             <div style="text-align: center;">
                 <h1>Cadastro de pratos</h1>    
                 <p:inputText id="itNome" value="#{telaLocalizaBean.prato.nome}" required="true" requiredMessage="É obrigatório informar um nome para o prato!" placeholder="Nome" style="width: 14%;"/><br/><br/>
-                <p:inputTextarea cols="50" rows="6" id="itDescricao" value="#{telaLocalizaBean.prato.descricao}" required="true" requiredMessage="É obrigatório uma descrição!" placeholder="Digite uma descrição para o prato"/><br/><br/> 
+                <p:inputTextarea cols="26" rows="4" id="itDescricao" value="#{telaLocalizaBean.prato.descricao}" required="true" requiredMessage="É obrigatório uma descrição!" placeholder="Digite uma descrição para o prato"/><br/><br/> 
                 <p:inputText id="itPreco" value="#{telaLocalizaBean.prato.preco}" required="true" requiredMessage="É obrigatório informar um preço para o prato!" placeholder="Preço" style="width: 14%;"/><br/><br/>
                 <div align="center"><p:selectOneRadio id="itCategoria" value="#{telaLocalizaBean.prato.categoria}" required="true" requiredMessage="É obrigatório informar uma categoria!">
                     <f:selectItem itemLabel="Bebida" itemValue="Bebida"/>
@@ -23,7 +23,7 @@
             </div>
         </h:form> 
         <h:form>
-            <p:commandButton value="Cancelar" action="admin_page.xhtml" ajax="false" style="margin-left: 47%; margin-top: 1%;"/>
+            <p:commandButton value="Cancelar" action="prato.xhtml" ajax="false" style="margin-left: 47%; margin-top: 1%;"/>
         </h:form>
     </h:body>
 </html>
