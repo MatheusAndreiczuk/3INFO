@@ -43,9 +43,16 @@ public class TelaLocalizaBean {
         listaGarçom = new ListDataModel(getGd().pesquisa());
         return listaGarçom;
     }
+    
+    
 
     public DataModel<Prato> atualizaListaPrato() {
         listaPrato = new ListDataModel(getPd().pesquisa());
+        return listaPrato;
+    }
+    
+    public DataModel<Prato> atualizaListaPratoTipo(String tipo) {
+        listaPrato = new ListDataModel(getPd().pesquisaTipo(tipo));
         return listaPrato;
     }
 

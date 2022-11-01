@@ -55,6 +55,13 @@ public class PratoDAO {
         return listaPrato;
     }
     
+    public List<Prato> pesquisaTipo(String tipo) {
+        Query q = em.createQuery("select p from Prato p where p.categoria = :tipo");
+        q.setParameter("tipo", tipo);
+        List<Prato> listaPrato = q.getResultList();
+        return listaPrato;
+    }
+    
     public boolean verificaPratoExistente(String nomePrato) {
         Query q = em.createQuery("select p from Prato p where p.nome = :nomePrato");
         q.setParameter("nomePrato", nomePrato);
