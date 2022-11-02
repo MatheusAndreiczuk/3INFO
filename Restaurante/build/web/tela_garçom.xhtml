@@ -5,11 +5,13 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Pratos</title>
+        <title>Garçom</title>
+        <link rel="stylesheet" href="primeflex.css"/>
+        <link rel="stylesheet" href="primeicons.css"/>
     </h:head>
     <h:body style="background-color: #FFFFFF;">        
         <div class="geral">
-            <p:fieldset legend="Pratos" style="margin-bottom:20px">
+            <p:fieldset legend="Garçom" style="margin-bottom:20px">
                 <h:form>
                     <p:growl id="growl" showDetail="true" sticky="true"/>
                     <div align="center">
@@ -19,59 +21,73 @@
                         <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
                     </div><br/><br/>
                     <div class="card" align="center">
-                        <p:tabMenu>
-                            <p:menuitem value="Comida" action="#{telaLocalizaBean.atualizaListaPratoTipo('Comida')}"/>
-                            <p:menuitem value="Bebida" action="#"/>
-                            <p:menuitem value="Sobremesa" action="#"/>
+                        <p:tabMenu activeIndex="#{param.i}">
+                            <p:menuitem value="Todos" action="#{telaLocalizaBean.atualizaListaPrato()}" update="prato"/>
+                            <p:menuitem value="Comida" action="#{telaLocalizaBean.atualizaListaPratoTipo('Comida')}" update="prato"/>
+                            <p:menuitem value="Bebida" action="#{telaLocalizaBean.atualizaListaPratoTipo('Bebida')}" update="prato"/>
+                            <p:menuitem value="Sobremesa" action="#{telaLocalizaBean.atualizaListaPratoTipo('Sobremesa')}" update="prato"/>
                         </p:tabMenu>
-                    </div><br/><br/>
-                    <p:dataTable id="prato" value="#{telaLocalizaBean.listaPrato}" var="prato">
-                        <p:column style="width:15%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
-                            <f:facet name="header">
-                                <h:outputText value="ID" style="color: #343a40; font-size: 16px;"/>
-                            </f:facet>
-                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.idPrato}"/>
-                        </p:column>
-                        <p:column style="width:30%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
-                            <f:facet name="header">
-                                <h:outputText value="Nome" style="color: #343a40; font-size: 16px;" />
-                            </f:facet>
-                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.nome}"/>
-                        </p:column>
-                        <p:column style="width:70%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
-                            <f:facet name="header">
-                                <h:outputText value="Descrição" style="color: #343a40; font-size: 16px;" />
-                            </f:facet>
-                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.descricao}"/>
-                        </p:column>
-                        <p:column style="width:20%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
-                            <f:facet name="header">
-                                <h:outputText value="Categoria" style="color: #343a40; font-size: 16px;" />
-                            </f:facet>
-                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.categoria}"/>
-                        </p:column>
-                        <p:column style="width:30%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;" >
-                            <f:facet name="header">
-                                <h:outputText value="Preço" style="color: #343a40; font-size: 16px;"/>
-                            </f:facet>
-                            <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.preco}"/>
-                        </p:column>            
-                        <p:column style="width:20%; text-align: center; background-color: #e7ecef; font-weight: normal; border-bottom-color: black;">
-                            <f:facet name="header">
-                                <h:outputText value="Ações" style="color: #343a40; font-size: 16px;"/>
-                            </f:facet>                 
-                            <p:commandButton id="bEdita" icon="pi pi-pencil" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.editarPrato()}" />
-                            <p:tooltip for="bEdita" value="Alterar prato" trackMouse="true" />
-                            <p:commandButton id="bExclui" icon="pi pi-trash" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.excluiPrato()}" update="prato" >
-                                <p:confirm header="Confirmação" message="Tem certeza que deseja excluir o prato #{prato.nome}?" icon="pi pi-exclamation-triangle" />
-                            </p:commandButton>
-                            <p:confirmDialog global="true" closable="false" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Sim" update="panel-login, growl" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
-                            </p:confirmDialog>
-                            <p:tooltip for="bExclui" value="Excluir prato #{prato.nome}" trackMouse="true" />
-                        </p:column>
-                    </p:dataTable>
+                    </div><br/>
+                    <div class="grid" style="font-family: Helvetica;">
+                        <div class="col-7">
+                            <p:dataTable id="prato" value="#{telaLocalizaBean.listaPrato}" var="prato" style="width: 100%;">
+                                <p:column style="width:15%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
+                                    <f:facet name="header">
+                                        <h:outputText value="ID" style="color: #343a40; font-size: 16px;"/>
+                                    </f:facet>
+                                    <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.idPrato}"/>
+                                </p:column>
+                                <p:column style="width:30%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Nome" style="color: #343a40; font-size: 16px;" />
+                                    </f:facet>
+                                    <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.nome}"/>
+                                </p:column>
+                                <p:column style="width:70%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Descrição" style="color: #343a40; font-size: 16px;" />
+                                    </f:facet>
+                                    <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.descricao}"/>
+                                </p:column>
+                                <p:column style="width:20%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Categoria" style="color: #343a40; font-size: 16px;" />
+                                    </f:facet>
+                                    <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.categoria}"/>
+                                </p:column>
+                                <p:column style="width:30%; text-align: center; background-color: #e7ecef; font-weight: normal; border-color: #FFFAFA; border-bottom-color: black; border-width: 1px;" >
+                                    <f:facet name="header">
+                                        <h:outputText value="Preço" style="color: #343a40; font-size: 16px;"/>
+                                    </f:facet>
+                                    <h:outputText style="color: #343a40; font-size: 16px;" value="#{prato.preco}"/>
+                                </p:column>            
+                                <p:column style="width:20%; text-align: center; background-color: #e7ecef; font-weight: normal; border-bottom-color: black;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Ações" style="color: #343a40; font-size: 16px;"/>
+                                    </f:facet>                 
+                                    <p:commandButton id="bPedido" icon="pi pi-tag" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.editarPrato()}" />
+                                    <p:tooltip for="bPedido" value="Pedir" trackMouse="true" />
+                                </p:column>
+                            </p:dataTable>
+                        </div>
+                        <div class="col-5">
+                            <h2 align="center" style="margin-top: -2%">Pedido</h2>
+                            <div style="text-align: center;">  
+                                <h:outputText value="ID Prato"/><br/>
+                                <p:inputText id="itIdPrato" value="#{telaLocalizaBean.pedido.idPrato}" required="true" requiredMessage="É obrigatório informar um id para o prato!" placeholder="ID prato"/><br/><br/>
+                                <h:outputText value="ID Mesa"/><br/>
+                                <p:inputText id="itIdMesa" value="#{telaLocalizaBean.pedido.idMesa}" required="true" requiredMessage="É obrigatório uma mesa!" placeholder="Mesa"/><br/><br/> 
+                                <h:outputText value="Quantidade"/><br/>
+                                <p:inputText id="itQuantidade" value="#{telaLocalizaBean.pedido.quantidade}" required="true" requiredMessage="É obrigatório informar uma quantidade!" placeholder="Quantidade" /><br/><br/> 
+                                <h:outputText value="ID Garçom"/><br/>
+                                <p:inputText id="itIdGarcom" value="#{telaLocalizaBean.pedido.idGarcom}" required="true" requiredMessage="É obrigatório informar um garçom!" placeholder="ID Garçom" /> <br/><br/>
+                                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaPedido()}"/>
+                                <h:form>
+                                    <p:commandButton value="Cancelar" ajax="false" action="#{telaLocalizaBean.novoPedido()}"/>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
                 </h:form>
             </p:fieldset>
         </div>

@@ -24,5 +24,19 @@
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Restaurante/web/prato.xhtml</file>
             <file>file:/C:/Users/2info2021/Documents/NetBeansProjects/Restaurante/web/cad_prato.xhtml</file>
         </group>
+        <group name="Projetos">
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/java/vo/Pedido.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/java/vo/Prato.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/web/tela_garçom.xhtml</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/java/vo/Caixa.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/web/cad_funcionarios.xhtml</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/java/bean/TelaLocalizaBean.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/java/vo/Garcom.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/web/admin_page.xhtml</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/web/cad_prato.xhtml</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/java/vo/Cozinha.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/java/persistencia/PedidoDAO.java</file>
+            <file>file:/C:/Users/mathe/OneDrive/Documentos/NetBeansProjects/Restaurante/src/conf/persistence.xml</file>
+        </group>
     </open-files>
 </project-private>

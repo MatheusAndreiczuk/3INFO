@@ -13,8 +13,10 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import persistencia.GarçomDAO;
+import persistencia.PedidoDAO;
 import persistencia.PratoDAO;
 import vo.Garcom;
+import vo.Pedido;
 import vo.Prato;
 
 /**
@@ -30,10 +32,12 @@ public class TelaLocalizaBean {
     private DataModel<Prato> listaPrato;
     private GarçomDAO gd = new GarçomDAO();
     private PratoDAO pd = new PratoDAO();
+    private PedidoDAO pedidoDao = new PedidoDAO();
     private String admin = "mts";
     private String senhaAdmin = "major";
     private Garcom garçom = new Garcom();
     private Prato prato = new Prato();
+    private Pedido pedido = new Pedido();
 
     public TelaLocalizaBean() {
 
@@ -42,9 +46,7 @@ public class TelaLocalizaBean {
     public DataModel<Garcom> atualizaListaGarçom() {
         listaGarçom = new ListDataModel(getGd().pesquisa());
         return listaGarçom;
-    }
-    
-    
+    }    
 
     public DataModel<Prato> atualizaListaPrato() {
         listaPrato = new ListDataModel(getPd().pesquisa());
@@ -165,15 +167,18 @@ public class TelaLocalizaBean {
     }
 
     public String novoGarçom() {
-        getGarçom().setUsuario("");
-        getGarçom().setNome("");
-        getGarçom().setSenha("");
+        setGarçom(new Garcom());
         return "cad_funcionarios";
     }
 
     public String novoPrato() {
         setPrato(new Prato());
         return "cad_prato";
+    }
+    
+    public String novoPedido(){
+        setPedido(new Pedido());
+        return "tela_garçom";
     }
 
     public String editaGarçom() {
@@ -335,5 +340,33 @@ public class TelaLocalizaBean {
      */
     public void setPrato(Prato prato) {
         this.prato = prato;
+    }
+
+    /**
+     * @return the pedidoDao
+     */
+    public PedidoDAO getPedidoDao() {
+        return pedidoDao;
+    }
+
+    /**
+     * @param pedidoDao the pedidoDao to set
+     */
+    public void setPedidoDao(PedidoDAO pedidoDao) {
+        this.pedidoDao = pedidoDao;
+    }
+
+    /**
+     * @return the pedido
+     */
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    /**
+     * @param pedido the pedido to set
+     */
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 }

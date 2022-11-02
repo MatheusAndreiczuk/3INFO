@@ -24,6 +24,7 @@ public class Pedido implements Serializable {
     private int idPrato;
     private int idMesa;
     private String situacao;
+    private int quantidade;
 
     /**
      * @return the idPedido
@@ -93,5 +94,19 @@ public class Pedido implements Serializable {
      */
     public void setSituacao(String situacao) {
         this.situacao = situacao;
+    }
+
+    /**
+     * @return the quantidade
+     */
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    /**
+     * @param quantidade the quantidade to set
+     */
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 }
