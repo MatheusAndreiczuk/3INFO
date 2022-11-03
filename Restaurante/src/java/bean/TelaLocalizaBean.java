@@ -30,9 +30,10 @@ public class TelaLocalizaBean {
     private String tipo;
     private DataModel<Garcom> listaGarçom;
     private DataModel<Prato> listaPrato;
+    private DataModel<Pedido> listaPedido;
     private GarçomDAO gd = new GarçomDAO();
     private PratoDAO pd = new PratoDAO();
-    private PedidoDAO pedidoDao = new PedidoDAO();
+    private PedidoDAO pedidoDAO = new PedidoDAO();
     private String admin = "mts";
     private String senhaAdmin = "major";
     private Garcom garçom = new Garcom();
@@ -46,16 +47,21 @@ public class TelaLocalizaBean {
     public DataModel<Garcom> atualizaListaGarçom() {
         listaGarçom = new ListDataModel(getGd().pesquisa());
         return listaGarçom;
-    }    
+    }
 
     public DataModel<Prato> atualizaListaPrato() {
         listaPrato = new ListDataModel(getPd().pesquisa());
         return listaPrato;
     }
-    
+
     public DataModel<Prato> atualizaListaPratoTipo(String tipo) {
         listaPrato = new ListDataModel(getPd().pesquisaTipo(tipo));
         return listaPrato;
+    }
+    
+    public DataModel<Pedido> atualizaListaPedido(){
+        setListaPedido((DataModel<Pedido>) new ListDataModel(getPedidoDAO().pesquisa()));
+        return listaPedido;
     }
 
     public Garcom garçomSelecionado() {
@@ -65,6 +71,11 @@ public class TelaLocalizaBean {
 
     public Prato pratoSelecionado() {
         Prato p = listaPrato.getRowData();
+        return p;
+    }
+    
+    public Pedido pedidoSelecionado(){
+        Pedido p = listaPedido.getRowData();
         return p;
     }
 
@@ -92,8 +103,11 @@ public class TelaLocalizaBean {
                 if (getGarçom().getSenha().equals(senhaCerta)) { //verifica login e senha corretos
                     switch (getGd().pesquisaTipo(getGarçom().getUsuario())) {
                         case "Garcom":
+                            atualizaListaPrato();
+                            setPedido(new Pedido());
                             return "tela_garçom";
                         case "Cozinheiro":
+                            atualizaListaPedido();
                             return "tela_cozinheiro";
                         case "Caixa":
                             return "tela_caixa";
@@ -148,6 +162,15 @@ public class TelaLocalizaBean {
         }
     }
 
+    public String salvaPedido() {
+        getPedido().setSituacao("Aguardando");
+        getPedidoDAO().salva(getPedido());
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Pedido realizado!"));
+        setPedido(new Pedido());
+        return "tela_garçom";
+    }
+
     public String editaFuncionario() {
         getGd().salva(getGarçom());
         return "admin_page";
@@ -165,6 +188,21 @@ public class TelaLocalizaBean {
         setPrato(p);
         return "edita_prato";
     }
+    
+    public String editaSituacao(){
+        Pedido p = pedidoSelecionado();
+        if (p.getSituacao().equals("Aguardando")){
+            setPedido(p);
+            getPedido().setSituacao("Preparando");
+            getPedidoDAO().salva(getPedido());
+        } else if (p.getSituacao().equals("Preparando")){
+            setPedido(p);
+            getPedido().setSituacao("Pronto");
+            getPedidoDAO().salva(getPedido());
+        }
+        atualizaListaPedido();
+        return "tela_cozinheiro";
+    }
 
     public String novoGarçom() {
         setGarçom(new Garcom());
@@ -175,9 +213,12 @@ public class TelaLocalizaBean {
         setPrato(new Prato());
         return "cad_prato";
     }
-    
-    public String novoPedido(){
-        setPedido(new Pedido());
+
+    public String novoPedido() {
+        Prato p = pratoSelecionado();
+        pedido.setIdPrato(p.getIdPrato());
+        pedido.setIdGarcom(gd.pesquisaIdGarçom(garçom.getUsuario()));
+        System.out.println("Id prato:" + pedido.getIdPrato() + "Id Garçom" + pedido.getIdGarcom());
         return "tela_garçom";
     }
 
@@ -193,7 +234,7 @@ public class TelaLocalizaBean {
         atualizaListaGarçom();
         return "admin_page";
     }
-    
+
     public String excluiPrato() {
         Prato p = pratoSelecionado();
         getPd().exclui(p);
@@ -202,19 +243,24 @@ public class TelaLocalizaBean {
         atualizaListaPrato();
         return "prato";
     }
-    
-     public String botaoGarçom(){
+
+    public String botaoGarçom() {
         setTipo("Garcom");
         getGarçom().setNome("");
         getGarçom().setUsuario("");
         getGarçom().setSenha("");
         return "garçom";
     }
-     
-     public String verPrato(){
-         atualizaListaPrato();
-         return "prato";
-     }
+
+    public String verPrato() {
+        atualizaListaPrato();
+        return "prato";
+    }
+
+    public String cancelaPedido() {
+        setPedido(new Pedido());
+        return "tela_garçom";
+    }
 
     /**
      * @return the listaGarçom
@@ -343,20 +389,6 @@ public class TelaLocalizaBean {
     }
 
     /**
-     * @return the pedidoDao
-     */
-    public PedidoDAO getPedidoDao() {
-        return pedidoDao;
-    }
-
-    /**
-     * @param pedidoDao the pedidoDao to set
-     */
-    public void setPedidoDao(PedidoDAO pedidoDao) {
-        this.pedidoDao = pedidoDao;
-    }
-
-    /**
      * @return the pedido
      */
     public Pedido getPedido() {
@@ -368,5 +400,33 @@ public class TelaLocalizaBean {
      */
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    /**
+     * @return the pedidoDAO
+     */
+    public PedidoDAO getPedidoDAO() {
+        return pedidoDAO;
+    }
+
+    /**
+     * @param pedidoDAO the pedidoDAO to set
+     */
+    public void setPedidoDAO(PedidoDAO pedidoDAO) {
+        this.pedidoDAO = pedidoDAO;
+    }
+
+    /**
+     * @return the listaPedido
+     */
+    public DataModel<Pedido> getListaPedido() {
+        return listaPedido;
+    }
+
+    /**
+     * @param listaPedido the listaPedido to set
+     */
+    public void setListaPedido(DataModel<Pedido> listaPedido) {
+        this.listaPedido = listaPedido;
     }
 }

@@ -71,6 +71,13 @@ public class GarçomDAO {
         String tipo = q.getSingleResult().toString();
         return tipo;
     }
+    
+    public int pesquisaIdGarçom(String usuario){
+        Query q = em.createQuery("select g.id from Garcom g where g.usuario like :usuario");
+        q.setParameter("usuario", usuario);
+        int id = (int) q.getSingleResult();
+        return id;
+    }
 
     public void salva(Garcom g) {
         transaction();

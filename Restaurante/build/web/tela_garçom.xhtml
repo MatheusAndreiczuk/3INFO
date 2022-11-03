@@ -15,7 +15,7 @@
                 <h:form>
                     <p:growl id="growl" showDetail="true" sticky="true"/>
                     <div align="center">
-                        <p:commandButton id="bVoltar" icon="pi pi-sign-out" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #343a40;" action="admin_page"/>
+                        <p:commandButton id="bVoltar" icon="pi pi-sign-out" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #343a40;" action="#{telaLocalizaBean.signOut()}"/>
                         <p:tooltip id="ttTabela" for="bVoltar" value="Voltar" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #343a40;" action="#{telaLocalizaBean.atualizaListaPrato()}" update="prato" />
                         <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
@@ -65,7 +65,7 @@
                                     <f:facet name="header">
                                         <h:outputText value="Ações" style="color: #343a40; font-size: 16px;"/>
                                     </f:facet>                 
-                                    <p:commandButton id="bPedido" icon="pi pi-tag" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.editarPrato()}" />
+                                    <p:commandButton id="bPedido" ajax="false" icon="pi pi-tag" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.novoPedido()}"/>
                                     <p:tooltip for="bPedido" value="Pedir" trackMouse="true" />
                                 </p:column>
                             </p:dataTable>
@@ -74,16 +74,14 @@
                             <h2 align="center" style="margin-top: -2%">Pedido</h2>
                             <div style="text-align: center;">  
                                 <h:outputText value="ID Prato"/><br/>
-                                <p:inputText id="itIdPrato" value="#{telaLocalizaBean.pedido.idPrato}" required="true" requiredMessage="É obrigatório informar um id para o prato!" placeholder="ID prato"/><br/><br/>
+                                <p:inputText id="itIdPrato" value="#{telaLocalizaBean.pedido.idPrato}" required="true" requiredMessage="É obrigatório informar um id para o prato!" placeholder="ID prato" readonly="true"/><br/><br/>
                                 <h:outputText value="ID Mesa"/><br/>
                                 <p:inputText id="itIdMesa" value="#{telaLocalizaBean.pedido.idMesa}" required="true" requiredMessage="É obrigatório uma mesa!" placeholder="Mesa"/><br/><br/> 
                                 <h:outputText value="Quantidade"/><br/>
                                 <p:inputText id="itQuantidade" value="#{telaLocalizaBean.pedido.quantidade}" required="true" requiredMessage="É obrigatório informar uma quantidade!" placeholder="Quantidade" /><br/><br/> 
-                                <h:outputText value="ID Garçom"/><br/>
-                                <p:inputText id="itIdGarcom" value="#{telaLocalizaBean.pedido.idGarcom}" required="true" requiredMessage="É obrigatório informar um garçom!" placeholder="ID Garçom" /> <br/><br/>
                                 <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.salvaPedido()}"/>
                                 <h:form>
-                                    <p:commandButton value="Cancelar" ajax="false" action="#{telaLocalizaBean.novoPedido()}"/>
+                                    <p:commandButton value="Cancelar" ajax="false" action="#{telaLocalizaBean.cancelaPedido()}"/>
                                 </h:form>
                             </div>
                         </div>
