@@ -63,6 +63,11 @@ public class TelaLocalizaBean {
         setListaPedido((DataModel<Pedido>) new ListDataModel(getPedidoDAO().pesquisa()));
         return listaPedido;
     }
+    
+    public DataModel<Pedido> atualizaListaPedidoPronto(){
+        setListaPedido ((DataModel<Pedido>) new ListDataModel(getPedidoDAO().pesquisaPedidoPronto()));
+        return listaPedido;
+    }
 
     public Garcom garçomSelecionado() {
         Garcom g = getListaGarçom().getRowData();
@@ -104,6 +109,7 @@ public class TelaLocalizaBean {
                     switch (getGd().pesquisaTipo(getGarçom().getUsuario())) {
                         case "Garcom":
                             atualizaListaPrato();
+                            atualizaListaPedidoPronto();
                             setPedido(new Pedido());
                             return "tela_garçom";
                         case "Cozinheiro":
@@ -220,6 +226,19 @@ public class TelaLocalizaBean {
         pedido.setIdGarcom(gd.pesquisaIdGarçom(garçom.getUsuario()));
         System.out.println("Id prato:" + pedido.getIdPrato() + "Id Garçom" + pedido.getIdGarcom());
         return "tela_garçom";
+    }
+    
+    public String pedidoPronto(){
+        atualizaListaPedidoPronto();
+        return "tela_pedido_pronto";
+    }
+    
+    public String entregaPedido(){
+        Pedido p = pedidoSelecionado();
+        p.setSituacao("Entregue");
+        pedidoDAO.salva(p);
+        atualizaListaPedidoPronto();
+        return "tela_pedido_pronto";
     }
 
     public String editaGarçom() {

@@ -19,6 +19,8 @@
                         <p:tooltip id="ttTabela" for="bVoltar" value="Voltar" trackMouse="true"/>
                         <p:commandButton id="bAtualiza"  icon="pi pi-undo" style="font-size: 20px; padding-right:10px; margin-right:5px; border-color: black; background-color: #343a40;" action="#{telaLocalizaBean.atualizaListaPrato()}" update="prato" />
                         <p:tooltip id="ttAtualiza" for="bAtualiza" value="Atualiza lista" trackMouse="true"/>
+                        <p:commandButton id="bPedidoPronto" value="Pedidos prontos" style="font-size: 20px; padding-right:10px; border-color: black; margin-right:5px; background-color: #343a40;" action="#{telaLocalizaBean.pedidoPronto()}"/>
+                        <p:tooltip id="ttPedidoPronto" for="bPedidoPronto" value="Ver pedidos prontos" trackMouse="true"/>
                     </div><br/><br/>
                     <div class="card" align="center">
                         <p:tabMenu activeIndex="#{param.i}">
@@ -87,7 +89,7 @@
                         </div>
                     </div>
                 </h:form>
-            </p:fieldset>
+            </p:fieldset><br/><br/>
         </div>
     </h:body>
 </html>

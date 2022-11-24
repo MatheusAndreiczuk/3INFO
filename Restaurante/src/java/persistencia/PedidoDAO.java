@@ -48,4 +48,12 @@ public class PedidoDAO {
         List<Pedido> listaPedido = q.getResultList();
         return listaPedido;
     }
+    
+    public List<Pedido> pesquisaPedidoPronto(){
+        String situacao = "Pronto";
+        Query q = em.createQuery("select p from Pedido p where p.situacao = :situacao order by p.idPedido");
+        q.setParameter("situacao", situacao);
+        List<Pedido> listaPedido = q.getResultList();
+        return listaPedido;
+    }
 }
