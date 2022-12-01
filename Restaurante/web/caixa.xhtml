@@ -22,8 +22,8 @@
                         <div class="col-3">
                             <h2 align="center" style="margin-top: -2%">Digite o id da mesa</h2>
                             <div style="text-align: center;">  
-                                <p:inputText id="itIdMesa" value="#{telaLocalizaBean.caixa.idMesa}" placeholder="ID Mesa"/><br/><br/>
-                                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.reload()}"/>
+                                <p:inputText id="itIdMesa" value="#{telaLocalizaBean.caixa.idMesa}" required="true" requiredMessage="É obrigatório informar o id da mesa!" placeholder="ID Mesa"/><br/><br/>
+                                <p:commandButton value="Confirmar" ajax="false" action="#{telaLocalizaBean.atualizaListaPagamento()}"/>
                             </div>
                         </div>
                         <div class="col-9">
@@ -57,15 +57,17 @@
                                         <h:outputText value="Valor pendente" style="color: #343a40; font-size: 16px;"/>
                                     </f:facet>
                                     <h:outputText style="color: #343a40; font-size: 16px;" value="#{pedido.valor}"/>
+                                </p:column>            
+                                <p:column style="width:20%; text-align: center; background-color: #e7ecef; font-weight: normal; border-bottom-color: black;">
+                                    <f:facet name="header">
+                                        <h:outputText value="Ações" style="color: #343a40; font-size: 16px;"/>
+                                    </f:facet>                 
+                                    <p:commandButton id="bPedido" ajax="false" icon="pi pi-tag" style="font-size: 20px; padding-right:10px; border-color: #e7ecef; margin-right:5px; background-color: #e7ecef; color: black;" action="#{telaLocalizaBean.novoPedido()}"/>
+                                    <p:tooltip for="bPedido" value="Pedir" trackMouse="true" />
                                 </p:column>
                             </p:dataTable>
                         </div>
-                    </div><br/><br/>
-                    <p:outputLabel value="Valor a pagar:" style="margin-left: 60%; font-size: 20px; font-weight: bold;"/><br/>
-                    <p:outputLabel value="R$#{telaLocalizaBean.caixa.valor}" style="margin-left: 60%; font-size: 20px; font-weight: bold;"/><br/><br/>
-                    <h:form>
-                        <p:commandButton value="Finalizar pagamento" action="#{telaLocalizaBean.finalizaPagamento()}" update="pedido" ajax="false" style="margin-left: 60%"/>
-                    </h:form>
+                    </div>
                 </h:form>
             </p:fieldset><br/><br/>
         </div>

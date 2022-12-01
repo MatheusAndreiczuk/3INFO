@@ -56,4 +56,10 @@ public class PedidoDAO {
         List<Pedido> listaPedido = q.getResultList();
         return listaPedido;
     }
+    
+    public double valorTotal(int idMesa){
+        Query q = em.createNativeQuery("select SUM(valor) from pedido where idMesa = ?");
+        q.setParameter(1, idMesa);
+        return (double) q.getSingleResult();
+    }
 }

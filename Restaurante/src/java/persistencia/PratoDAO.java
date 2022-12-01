@@ -74,4 +74,16 @@ public class PratoDAO {
             return false;
         }
     }
+    
+    public double pesquisaValor(int idPrato){
+        Query q = em.createQuery("select p.preco from Prato p where p.idPrato = :idPrato");
+        q.setParameter("idPrato", idPrato);
+        return (double) q.getSingleResult();
+    }
+    
+    public String pesquisaNomePrato(int idPrato){
+        Query q = em.createQuery("select p.nome from Prato p where p.idPrato = :idPrato");
+        q.setParameter("idPrato", idPrato);
+        return q.getSingleResult().toString();
+    }
 }

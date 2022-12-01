@@ -12,12 +12,14 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
+import persistencia.CaixaDAO;
 import persistencia.GarçomDAO;
 import persistencia.PedidoDAO;
 import persistencia.PratoDAO;
 import vo.Garcom;
 import vo.Pedido;
 import vo.Prato;
+import vo.Caixa;
 
 /**
  *
@@ -31,14 +33,17 @@ public class TelaLocalizaBean {
     private DataModel<Garcom> listaGarçom;
     private DataModel<Prato> listaPrato;
     private DataModel<Pedido> listaPedido;
+    private DataModel<Caixa> listaCaixa;
     private GarçomDAO gd = new GarçomDAO();
     private PratoDAO pd = new PratoDAO();
+    private CaixaDAO cd = new CaixaDAO();
     private PedidoDAO pedidoDAO = new PedidoDAO();
     private String admin = "mts";
     private String senhaAdmin = "major";
     private Garcom garçom = new Garcom();
     private Prato prato = new Prato();
     private Pedido pedido = new Pedido();
+    private Caixa caixa = new Caixa();
 
     public TelaLocalizaBean() {
 
@@ -67,6 +72,29 @@ public class TelaLocalizaBean {
     public DataModel<Pedido> atualizaListaPedidoPronto(){
         setListaPedido ((DataModel<Pedido>) new ListDataModel(getPedidoDAO().pesquisaPedidoPronto()));
         return listaPedido;
+    }
+    
+    public DataModel<Pedido> atualizaListaPagamento(){
+        listaPedido = new ListDataModel(getCd().pesquisaIdMesa(getCaixa().getIdMesa()));
+        return listaPedido;
+    }
+    
+    public String reload(){
+        atualizaListaPagamento();
+        caixa.setValor(getPedidoDAO().valorTotal(getCaixa().getIdMesa()));
+        System.out.println("Id mesa" + getCaixa().getIdMesa());
+        System.out.println("Valor total" + getPedidoDAO().valorTotal(getCaixa().getIdMesa()));
+        caixa.setIdMesa(getCaixa().getIdMesa());
+        return "tela_caixa";
+    }
+    
+    public String finalizaPagamento(){
+        caixa.setSituacao("Pago");
+        getCd().salva(caixa);
+        caixa.setIdMesa(0);
+        caixa.setValor(0.0);
+        atualizaListaPagamento();
+        return "tela_caixa";
     }
 
     public Garcom garçomSelecionado() {
@@ -170,6 +198,8 @@ public class TelaLocalizaBean {
 
     public String salvaPedido() {
         getPedido().setSituacao("Aguardando");
+        getPedido().setValor(getPd().pesquisaValor(getPedido().getIdPrato()) * getPedido().getQuantidade());
+        getPedido().setNomePrato("" + getPd().pesquisaNomePrato(getPedido().getIdPrato()) + "");
         getPedidoDAO().salva(getPedido());
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Pedido realizado!"));
@@ -280,6 +310,7 @@ public class TelaLocalizaBean {
         setPedido(new Pedido());
         return "tela_garçom";
     }
+    
 
     /**
      * @return the listaGarçom
@@ -447,5 +478,47 @@ public class TelaLocalizaBean {
      */
     public void setListaPedido(DataModel<Pedido> listaPedido) {
         this.listaPedido = listaPedido;
+    }
+
+    /**
+     * @return the cd
+     */
+    public CaixaDAO getCd() {
+        return cd;
+    }
+
+    /**
+     * @param cd the cd to set
+     */
+    public void setCd(CaixaDAO cd) {
+        this.cd = cd;
+    }
+
+    /**
+     * @return the caixa
+     */
+    public Caixa getCaixa() {
+        return caixa;
+    }
+
+    /**
+     * @param caixa the caixa to set
+     */
+    public void setCaixa(Caixa caixa) {
+        this.caixa = caixa;
+    }
+
+    /**
+     * @return the listaCaixa
+     */
+    public DataModel<Caixa> getListaCaixa() {
+        return listaCaixa;
+    }
+
+    /**
+     * @param listaCaixa the listaCaixa to set
+     */
+    public void setListaCaixa(DataModel<Caixa> listaCaixa) {
+        this.listaCaixa = listaCaixa;
     }
 }
