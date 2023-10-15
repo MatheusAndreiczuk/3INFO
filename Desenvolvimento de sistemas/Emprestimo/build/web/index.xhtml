@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Home</title>
+        <link rel="stylesheet" href="primeflex.css"/>
+    </h:head>
+    <h:body style="background-color: #FFFFFF;">         
+        <h:form>
+            <p:commandButton icon="pi pi-info-circle" action="manual4.pdf" ajax="false"/></h:form>
+        <h:form><p:growl id="growl" showDetail="true" sticky="true"/><br/>
+            <div id="panel-login" style="text-align: center;">
+                <p:commandButton value="Emprestar" ajax="false" update="panel-login, growl" action="item"/><br/><br/>
+                <p:commandButton value="Clientes" ajax="false" action="#{telaLocalizaBean.atualizaLista()}"/><br/><br/>
+                <p:commandButton value="Itens emprestados" ajax="false" action="#{telaLocalizaBean.atualizaListaEmprestimo()}"/><br/><br/>
+                <p:commandButton value="Histórico de empréstimos" ajax="false" action="#{telaLocalizaBean.atualizaListaHistoricoEmprestimo}"/><br/><br/>
+                <p:commandButton value="Empréstimos atrasados" ajax="false" action="#{telaLocalizaBean.atualizaListaAtrasados()}"/>
+            </div>
+        </h:form> 
+    </h:body>
+</html>
